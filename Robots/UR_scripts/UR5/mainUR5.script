@@ -4,9 +4,9 @@ def mainUR5():
   global blend_radius_m = 0.001
   
   #Global parameters  between cam and tcp
-  dx_tcp = 1.64
-  dy_tcp = 108.57
-  dz_tcp = 63.37
+  dx = 1.64
+  dy = 108.57
+  dz = 63.37
 
   ##############################################################################################################################
   ##############################################################################################################################
@@ -32,7 +32,7 @@ def mainUR5():
 
   def write_state_int(register, value):
     write_output_integer_register(register, value)
-    sleep(1)
+    sleep(0.1)
   end
 
   #######################################################
@@ -83,26 +83,26 @@ def mainUR5():
   ######## FOO_7 CHECK STATUS RECEIVED FROM PLC #########
   #######################################################
 
-  def CheckStatus(state):
+	def CheckStatus(state):
 
-    if (status0==state and status1==state and status2==state or status0==state and status1==state and status2!=state or status0==state and status1!=state and
-     status2==state or status0!=state and status1==state and status2==state):
-      return True
-    else:
-      return False
-    end
-    
-  end
+	if (status0==state and status1==state and status2==state or status0==state and status1==state and status2!=state or status0==state and status1!=state and
+	 status2==state or status0!=state and status1==state and status2==state):
+	  return True
+	else:
+	  return False
+	end
+
+	end
 
   #######################################################
-  ############# FOO_8 WRITE IN REGISTER BOOL #############
+  ############# FOO_8 WRITE IN REGISTER BOOL ############
   #######################################################
 
-  def write_state_bool(register, value):
-    write_output_boolean_register(register, True)
-    sleep(0.1)
-	write_output_boolean_register(register, False)
-  end
+	def write_state_bool(register):
+	  write_output_boolean_register(register, True)
+  	sleep(0.1)
+  	write_output_boolean_register(register, False)
+	end
 
 
   
@@ -110,163 +110,162 @@ def mainUR5():
   ############### STATE_0 HOMING ###############
   ##############################################
 
-  def UR5Home():
-        
-    init_register(3,4,5,2)
-    #gripkit_easy_enable()  #ESTO DEBERIA IR EN LA MARCHA DE PREPARACIÓN
-    movej([0.000000, -0.174533, -2.775074, -0.349066, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-    reset_register(3,4,5,1)
+	def UR5Home():
+		
+	  init_register(3,4,5,500)
+  	#gripkit_easy_enable()  #ESTO DEBERIA IR EN LA MARCHA DE PREPARACIÓN
+	  movej([0.000000, -0.174533, -2.775074, -0.349066, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
+  	reset_register(3,4,5,501)
 
-  end
+	end
 
   #########################################################################
   ############### STATE_1 PLACE THE CAMERA ON THE FIRST HEAD ##############
   #########################################################################
 
-  def UR5Camera1():
+	def UR5Camera1():
 
-    init_register(3,4,5,12)
-    movej([0.180484, -1.614237, -2.019210, -1.097497, 1.576100, 3.328193],accel_radss,speed_rads,0,blend_radius_m)
-	movel([480.49/1000, -145.25/1000, 239.41/1000,2.229, 2.216, -0.004], accel_mss, speed_ms, 0, blend_radius_m)
-    reset_register(3,4,5,11)
-        
-  end
+	  init_register(3,4,5,510)
+	  movej([0.180484, -1.614237, -2.019210, -1.097497, 1.576100, 3.328193],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[480.49/1000, -145.25/1000, 239.41/1000, 2.229, 2.216, -0.004], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,511)
+		
+	end
   
 
   ########################################################################
   ####################### STATE_2 GO TO THE BUFFER #######################
   ########################################################################
 
-  def UR5DropHead():
-  
-    init_register(3,4,5,20)
-    movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
-    movej([-0.382430, -1.654966, -2.063825, -1.011365, 1.578471, 2.765253],accel_radss,speed_rads,0,blend_radius_m)
-	movel([377.91/1000, -384.22/1000, 87.47/1000,2.238, 2.229, -0.007], accel_mss, speed_ms, 0, blend_radius_m)
-    reset_register(3,4,5,21)
-        
-  end
+	def UR5DropHead():
+
+	  init_register(3,4,5,520)
+  	movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
+	  movej([-0.382430, -1.654966, -2.063825, -1.011365, 1.578471, 2.765253],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[377.91/1000, -384.22/1000, 87.47/1000, 2.238, 2.229, -0.007], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,521)
+		
+	end
   
   ###################################################################
   ########## STATE_3 PLACE THE CAMERA ON THE SECOND HEAD  ###########
   ###################################################################
 
-  def UR5Camera2():
-    
-    init_register(3,4,5,30)
-    movej([-0.181619, -1.411765, -2.033627, -1.039257, 1.538940, 1.678820],accel_radss,speed_rads,0,blend_radius_m)
-    movej([0.063264, -1.634060, -2.003714, -1.074618, 1.570793, 0.063264],accel_radss,speed_rads,0,blend_radius_m)
-	movel([480.49/1000, -9.68/1000, 239.41/1000, 2.239, -2.204, 0], accel_mss, speed_ms, 0, blend_radius_m)
-    reset_register(3,4,5,31)
+	def UR5Camera2():
 
-  end
+  	init_register(3,4,5,530)
+  	movej([-0.181619, -1.411765, -2.033627, -1.039257, 1.538940, 1.678820],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.063264, -1.634060, -2.003714, -1.074618, 1.570793, 0.063264],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[480.49/1000, -9.68/1000, 239.41/1000, 2.239, -2.204, 0], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,531)
+
+	end
 
   ###########################################################################################
   ################ STATE_4 PLACE THE CAMERA ON THE FIRS HEAD TO BE SCREWED  #################
   ###########################################################################################
 
-  def UR5UpCamera1():
+	def UR5UpCamera1():
 
-    init_register(3,4,5,40)
-    UR5Home()
-    movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-    movej([0.098088, -1.956085, -0.058950, -2.697358, 1.570793, 0.098088],accel_radss,speed_rads,0,blend_radius_m)
-	movel([429.86/1000, -10.03/1000, 740.66/1000, 2.206, -2.235, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
-    reset_register(3,4,5,41)
-    
-  end
+  	init_register(3,4,5,540)
+  	UR5Home()
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.098088, -1.956085, -0.058950, -2.697358, 1.570793, 0.098088],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[429.86/1000, -10.03/1000, 740.66/1000, 2.206, -2.235, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,541)
+
+	end
 
   ###########################################################################################
   ############## STATE_5 GOES DOWN FROM THE SCREWING TO THE BUFFER POSITION  ################
   ###########################################################################################
 
-  def UR5TakeBuffer():
-    
-    init_register(3,4,5,50)
-    movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-    movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
-    UR5DropHead()
-    reset_register(3,4,5,51)
-   
-  end
+	def UR5TakeBuffer():
+
+  	init_register(3,4,5,550)
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	UR5DropHead()
+  	reset_register(3,4,5,551)
+
+	end
   
   ###########################################################################################
   ################ STATE_6 PLACE THE CAMERA ON THE FIRS HEAD TO BE SCREWED  #################
   ###########################################################################################
 
-  def UR5UpCamera2():
+	def UR5UpCamera2():
 
-    init_register(3,4,5,60)
-    movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
-    movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-    movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
-    movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-    movej([0.211928, -1.884634, -0.221391, -2.621276, 1.594272, 3.353305],accel_radss,speed_rads,0,blend_radius_m)
-	movel([435.17/1000, -146.59/1000, 741.93/1000, 2.202, 2.240, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
-    reset_register(3,4,5,61)
-    
-  end
+  	init_register(3,4,5,560)
+  	movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.211928, -1.884634, -0.221391, -2.621276, 1.594272, 3.353305],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[435.17/1000, -146.59/1000, 741.93/1000, 2.202, 2.240, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,561)
+
+	end
 
   ###########################################################################################
   ########## STATE_7 FROM THE INSTALLATION AREA IT RETURNS TO HOME. END OF CICLE  ###########
   ###########################################################################################
 
-  def UR5Return():
+	def UR5Return():
 
-    init_register(3,4,5,70)
-    movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-    movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
-    movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-    UR5Home()
-    reset_register(3,4,5,71)
+  	init_register(3,4,5,570)
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
+  	UR5Home()
+  	reset_register(3,4,5,571)
 
-  end
-  
-  
+	end
+
   #######################################################
-  ######## STATE_8 CONTROL TO CENTER CAM OVER NUT #########
+  ####### STATE_8 CONTROL TO CENTER CAM OVER NUT ########
   #######################################################
 
-  def CtrCamPos(x_s,y_s):
+	def CtrCamPos(x_s,y_s):
 		
-	init_register(3,4,5,80)
+		init_register(3,4,5,580)
 
-	#dx: direction of tool movement x-axis 
-	#dy: direction of tool movement x-axis 
+		#dx: direction of tool movement x-axis 
+		#dy: direction of tool movement x-axis 
 
-	center_ok = True
-	while(center_ok):
+		center_ok = True
+		while(center_ok):
 
-		#wait for the variable script calculated by the vision system
-		while (not(read_input_boolean_register(2) ==   True  )):
+			#wait for the variable script calculated by the vision system
+			while (not(read_input_boolean_register(2) ==   True  )):
+				sync()
+			end
+
+			center_ok =  not  read_input_boolean_register(3)
+			cx = read_input_float_register(0) # x-axis deviation
+			cy = read_input_float_register(1) # y-axis deviation
+			turn_head = read_input_float_register(2) # picth  deviation
+
+			data_vision = p[ x_s*(cx/1000),y_s*(cy/1000),0,0,0,0] # trasform to position variable in base coordinates
+			tcp_inst= get_actual_tcp_pose () # get the actual tcp positions.
+			pos_calculate = pose_add (tcp_inst, data_vision )
+			movel(pos_calculate, accel_mss, speed_ms, 0, blend_radius_m)
+
+			write_state_bool(2) #write finish operation
+
 			sync()
 		end
+		reset_register(3,4,5,581)
 
-		center_ok =  not  read_input_boolean_register(3)
-		cx = read_input_float_register(0) # x-axis deviation
-		cy = read_input_float_register(1) # y-axis deviation
-		turn_head = read_input_float_register(2) # picth  deviation
+	end 
 
-		data_vision = p[ x_s*(cx/1000),y_s*(cy/1000),0,0,0,0] # trasform to position variable in base coordinates
-		tcp_inst= get_actual_tcp_pose () # get the actual tcp positions.
-		pos_calculate = pose_add (tcp_inst, data_vision )
-		movel(pos_calculate, accel_mss, speed_ms, 0, blend_radius_m)
-
-		write_state_bool(2) #write finish operation
-
-		sync()
-	end
-	reset_register(3,4,5,81)
-  end
-  
-  
-    #######################################################
-  ######## STATE_9 MOVE TO NUT AND DOWN #########
+  #######################################################
+  ########### STATE_9 MOVE TO NUT AND DOWN ##############
   #######################################################
   
 	def MoveToNut(dx,dy,dz):
 
-		init_register(3,4,5,90)
+		init_register(3,4,5,590)
 		#dx,dy,dz, distance between optical cam center and nut center
 		
 		tcp_inst = get_actual_tcp_pose()
@@ -292,18 +291,18 @@ def mainUR5():
 		sleep(3.0)
 
 		write_state_bool(2) #write finish movement
-		reset_register(3,4,5,91)
+		reset_register(3,4,5,591)
 	end
-
-    #######################################################
-  ######## STATE_10 UNSCREW AND UP TOOL #########
+	
+  #######################################################
+  ############ STATE_10 UNSCREW AND UP TOOL #############
   #######################################################
   
 	def UnScrew():
-		init_register(3,4,5,100)
+		init_register(3,4,5,5100)
 
 		#Apply force in z axis to up robot
-		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34]) #limits or move velocity
+		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
 		frame = [0,0,0,0,0,0] #tool or base frame
 		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
 		wrench = [0, 0, 1, 0, 0, 0] # force to apply
@@ -324,23 +323,23 @@ def mainUR5():
 		tcp_inst = get_actual_tcp_pose()
 		up_distance = p[0,0,40/1000,0,0,0]
 		pos_up = pose_add (tcp_inst, up_distance)
-		movel(pos_calculada, accel_mss, speed_ms, 0, blend_radius_m)
+    set_payload(3.89,[-102/1000,6/1000,-17/1000]) #adjust new weight of the tool
+		movel(pos_up, accel_mss, speed_ms, 0, blend_radius_m)
 		
 		write_state_bool(2) #write finish movement
 		
-		reset_register(3,4,5,101)
+		reset_register(3,4,5,5101)
 	end
-  
-  
+	
 	#######################################################
-	######## STATE_11 MOVE TO NUT AND DOWN #########
+	############ STATE_11 MOVE TO NUT AND DOWN ############
 	#######################################################  
 
 	def Screw():
-		init_register(3,4,5,110)
+		init_register(3,4,5,5110)
 
 		#Apply force in z axis to down robot
-		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34]) #limits or move velocity
+		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
 		frame = [0,0,0,0,0,0] #tool or base frame
 		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
 		wrench = [0, 0, -5, 0, 0, 0] # force to apply
@@ -360,18 +359,17 @@ def mainUR5():
 		end_force_mode()
 		
 		
-		reset_register(3,4,5,111)
+		reset_register(3,4,5,5111)
 	end  
 	
-	
 	#######################################################
-	######## STATE_12 UP ROBOT AFTER TO SCREW #########
+	########## STATE_12 UP ROBOT AFTER TO SCREW ###########
 	#######################################################  	
 	def UpRobotAs():
 	
-		init_register(3,4,5,120)
+		init_register(3,4,5,5120)
 		#Apply force in z axis to up robot
-		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34]) #limits or move velocity
+		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
 		frame = [0,0,0,0,0,0] #tool or base frame
 		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
 		wrench = [0, 0, 20, 0, 0, 0] # force to apply
@@ -384,17 +382,19 @@ def mainUR5():
 		tcp_inst = get_actual_tcp_pose()
 		up_distance = p[0,0,40/1000,0,0,0]
 		pos_up = pose_add (tcp_inst, up_distance)
-		movel(pos_calculada, accel_mss, speed_ms, 0, blend_radius_m)
+    #set_payload(,[,,]) #back to normal tool weight
+		movel(pos_up, accel_mss, speed_ms, 0, blend_radius_m)
 		
 		# kill force mode
 		end_force_mode()
 
 		write_state_bool(2) #write finish movement
 
-		reset_register(3,4,5,121)
-	
+		reset_register(3,4,5,5121)
 	
 	end	
+
+
   ##############################################################################################################################
   ##############################################################################################################################
   ##################################################### MAIN PROGRAMME #########################################################
@@ -402,36 +402,58 @@ def mainUR5():
   ##############################################################################################################################
 
   set_tcp(p[-0.082500, -0.001000, 0.071500, 0.000000, 0.000000, 0.000000])
+  #set_payload(,[,,])
   #set_Speed(0.3, 0.75, 3, 1.2)
-
+  #vel_ms, vel_rads, acel_ms, acel_rads
+  
   #State-Machine
   while(True):
     init_status(0,1,2)
-
-   if (CheckStatus(0)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
+   
+   if (CheckStatus(50)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
     UR5Home()
-   elif (CheckStatus(1)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
+   elif (CheckStatus(51)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
     UR5Camera1()
-   elif (CheckStatus(2)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
+   elif (CheckStatus(52)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
     UR5DropHead()
-   elif (CheckStatus(3)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
+   elif (CheckStatus(53)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
     UR5Camera2()
-   elif (CheckStatus(4)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
+   elif (CheckStatus(54)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
     UR5UpCamera1()
-   elif (CheckStatus(5)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
+   elif (CheckStatus(55)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
     UR5TakeBuffer()
-   elif (CheckStatus(6)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
+   elif (CheckStatus(56)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
     UR5UpCamera2()
-   elif (CheckStatus(7)==True):
-    set_Speed(0.3, 0.75, 3, 1.2)
-    UR5Return()   
+   elif (CheckStatus(57)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
+    UR5Return()
+    
+   elif (CheckStatus(58)==True || CheckStatus(64)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
+    CtrCamPos(-1,-1) #58==Camera1 position & 64==UpCamera2 position
+   elif (CheckStatus(59)==True || CheckStatus(61)==True || CheckStatus(63)==True || CheckStatus(65)==True ): #59==Camera1 position  61==Camera2 position
+    set_Speed(0.1, 0.75, 3, 1.2)                                                                             #63==UpCamera1 position 65==UpCamera2 position
+    MoveToNut(dx,dy,dz)  
+   elif (CheckStatus(60)==True || CheckStatus(62)==True ):
+    set_Speed(0.1, 0.75, 3, 1.2)
+    CtrCamPos(1,1) #60==Camera2 position & 62==UpCamera1 position
+   
+   elif (CheckStatus(66)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
+    UnScrew()
+   elif (CheckStatus(67)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
+    Screw()
+   elif (CheckStatus(68)==True):
+    set_Speed(0.1, 0.75, 3, 1.2)
+    UpRobotAs()     
    end
   end
 end

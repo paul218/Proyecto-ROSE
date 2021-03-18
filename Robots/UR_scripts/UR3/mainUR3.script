@@ -95,10 +95,10 @@ def mainUR3():
 
   def UR3Home():
         
-    init_register(3,4,5,2)
+    init_register(3,4,5,300)
     gripkit_easy_enable() #ESTO SE DEBE REALIZAR EN LA MARCHA DE PREPARACIÓN (ESTADO_10)
     movej([3.054326, -2.000864, 1.487369, -1.057302, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
-    reset_register(3,4,5,1)
+    reset_register(3,4,5,301)
 
   end
 
@@ -137,6 +137,13 @@ def mainUR3():
     
   #Select based on the column the reference point
   def GripSeparator(p1, p2, p3, vertical_dist, column, row):
+
+    #Check Grip Status
+    #If Grip is closed then open
+    if (gripkit_easy_get_state()==2):
+      gripkit_easy_release()      
+    end
+
     if(column==0):
       movej(pose_add(p1,p[ 0.0, 0.0, 0.07378, 0.0, 0.0, 0.0]), accel_radss,speed_rads,0,blend_radius_m) #maximum Z high is 0.224970
       movel(pose_add(p1, p[ 0.0, 0.0, -(row*vertical_dist), 0.0, 0.0, 0.0]),accel_mss,speed_ms,0,blend_radius_m)
@@ -148,6 +155,7 @@ def mainUR3():
       movel(pose_add(p3, p[ 0.0, 0.0, -(row*vertical_dist), 0.0, 0.0, 0.0]),accel_mss,speed_ms,0,blend_radius_m)
     end
     gripkit_easy_grip()
+    set_payload(2.25, [-3/1000,-2/1000,70/1000]) #adjust payload to new weight
   end
       
   #Separator lift function
@@ -162,7 +170,7 @@ def mainUR3():
   end
 
   #function that checks if the separator has been taken by the gripper
-  def CheckState():
+  def CheckGripState():
     if(gripkit_easy_get_state()==3):
       return True
     else:
@@ -173,7 +181,7 @@ def mainUR3():
   ##### STATE_1 MAIN #####
   def SeparatorLoop(n_separator):
 
-    init_register(3,4,5,12)
+    init_register(3,4,5,310)
     vertical_dist = 0.048
       
     p1=p[ 430.64/1000, 150.43/1000,  154.75/1000, 2.3, -2.141, 0.0]
@@ -187,7 +195,7 @@ def mainUR3():
     column=CheckColumn(n_separator, column)
     row=CheckRow(n_separator, row)
     GripSeparator(p1, p2, p3, vertical_dist, column, row)  
-    var=CheckState()   #check if the tool has gripped the separator correctly
+    var=CheckGripState()   #check if the tool has gripped the separator correctly
         
     while var!=True: #loop that is carried out as long as it is not possible to take out a separator. If the value of the maximum number of separators that we have is
     #exceeded, the loop ends regardless of whether we have removed a separator or not and returns to Home (the separator buffer is empty)
@@ -200,7 +208,7 @@ def mainUR3():
       column=CheckColumn(n_separator, column)
       row=CheckRow(n_separator, row)
       GripSeparator(p1, p2, p3, vertical_dist, column, row)
-      var=CheckState()
+      var=CheckGripState()
     end
   
     LiftSeparator(p1, p2, p3, column)
@@ -208,7 +216,7 @@ def mainUR3():
       n_separator=1
       UR3Home()
     end
-    reset_register(3,4,5,11)
+    reset_register(3,4,5,311)
     return n_separator
        
     #This function call has to be:
@@ -225,7 +233,7 @@ def mainUR3():
 
   def UR3Move():
   
-    init_register(3,4,5,20)
+    init_register(3,4,5,320)
     movej([2.998650, -1.021017, 0.738274, -1.714088, -1.478468, -0.036128],accel_radss,speed_rads,0,blend_radius_m)
     movej([2.978753, -1.229933, 0.856782, -1.866280, -1.470963, -0.054454],accel_radss,speed_rads,0,blend_radius_m)
     movej([2.589497, -1.708628, 1.653841, -3.255535, -0.958561, 0.164599],accel_radss,speed_rads,0,blend_radius_m)
@@ -233,7 +241,7 @@ def mainUR3():
     movej([3.258313, -1.062730, -1.256914, -3.325443, -1.636010, -0.055664],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.278513, -0.904607, -2.248904, -3.021830, -1.492790, -0.008363],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.262023, -0.967804, -2.228526, -2.979129, -1.509191, 1.564254],accel_radss,speed_rads,0,blend_radius_m)
-    reset_register(3,4,5,21)
+    reset_register(3,4,5,321)
         
   end
   
@@ -243,11 +251,11 @@ def mainUR3():
 
   def UR3DropBench():
     
-    init_register(3,4,5,30)
+    init_register(3,4,5,330)
     movej([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_radss,speed_rads,0,blend_radius_m)
     #movel([3.876904, -2.012729, -2.493867, -1.776589, -0.835485, 1.570796],accel_mss,speed_ms,0,blend_radius_m)
     movel(p[-395.48/1000, -18.43/1000,77.61/1000 , 0.058, -1.522, 0.020],accel_mss,speed_ms,0,blend_radius_m)
-    reset_register(3,4,5,31)
+    reset_register(3,4,5,331)
 
   end
 
@@ -257,14 +265,14 @@ def mainUR3():
 
   def UR3RotateSeparator():
 
-    init_register(3,4,5,40)
+    init_register(3,4,5,340)
     movel([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_mss,speed_ms,0,blend_radius_m)
     movej([3.262021, -0.967785, -2.228611, -3.054326, -1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.248407, -1.027916, -2.205811, -3.016994, -1.584413, 4.712848],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.885666, -1.409790, -2.235272, -2.656978, -0.822123, 4.713486],accel_radss,speed_rads,0,blend_radius_m)
-     movel(p[-395.48/1000,-17.31/1000 ,78.71/1000 , 2.178,0.052 ,-2.249 ],accel_mss,speed_ms,0,blend_radius_m)
+    movel(p[-395.48/1000,-17.31/1000 ,78.71/1000 , 2.178,0.052 ,-2.249 ],accel_mss,speed_ms,0,blend_radius_m)
     #movel([3.891802, -1.959047, -2.485370, -1.857349, -0.807927, 4.712484],accel_mss,speed_ms,0,blend_radius_m)
-    reset_register(3,4,5,41)
+    reset_register(3,4,5,341)
     
   end
 
@@ -274,12 +282,12 @@ def mainUR3():
 
   def UR3RotateDropCable():
     
-    init_register(3,4,5,50)
+    init_register(3,4,5,350)
     movel([3.885666, -1.409790, -2.235272, -2.656978, -0.822123, 4.713486],accel_mss,speed_ms,0,blend_radius_m)
     movej([3.726487, -1.486412, -1.655221, 0.000506, 0.960078, 1.557563],accel_radss,speed_rads,0,blend_radius_m)
     #movel([3.725871, -1.589132, -1.063358, -0.488654, 0.961430, 1.558304],accel_mss,speed_ms,0,blend_radius_m)
     movel(p[-430.61/1000,-6.48/1000 ,595.35/1000 ,2.211 ,0.056 ,-2.205 ],accel_mss,speed_ms,0,blend_radius_m)    
-reset_register(3,4,5,51)
+    reset_register(3,4,5,351)
    
   end
   
@@ -289,12 +297,12 @@ reset_register(3,4,5,51)
 
   def UR3DropCable():
 
-    init_register(3,4,5,60)
+    init_register(3,4,5,360)
     movel([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_mss,speed_ms,0,blend_radius_m)
     movej([3.754317, -1.506105, -1.849585, 0.214141, 0.945161, -1.583733],accel_radss,speed_rads,0,blend_radius_m)
     #movel([3.690388, -1.599182, -1.031013, -0.511643, 1.022000, -1.570668],accel_mss,speed_ms,0,blend_radius_m)
-   movel(p[-430.31/1000,-15.18/1000 ,591.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
-    reset_register(3,4,5,61)
+    movel(p[-430.31/1000,-15.18/1000 ,591.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
+    reset_register(3,4,5,361)
     
   end
 
@@ -304,7 +312,7 @@ reset_register(3,4,5,51)
 
   def UR3Return():
 
-    init_register(3,4,5,70)
+    init_register(3,4,5,370)
     gripkit_easy_release()
     movel(p[-362.18/1000,-15.18/1000 ,591.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
     movel(p[-362.18/1000,-15.18/1000 ,451.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
@@ -313,7 +321,7 @@ reset_register(3,4,5,51)
     movej([3.816511, -1.409004, -2.225469, -0.257611, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.054325, -2.211856, 1.125563, -1.308996, -1.570795, -0.000001],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.054326, -2.000864, 1.487369, -1.057302, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
-    reset_register(3,4,5,71)
+    reset_register(3,4,5,371)
 
   end
   
@@ -325,34 +333,38 @@ reset_register(3,4,5,51)
   ##############################################################################################################################
 
   set_tcp(p[0.000000, 0.000000, 0.105000, 0.000000, 0.000000, 0.000000])
+  set_payload(0.87, [-6/1000,-3/1000,48/1000])
   set_Speed(0.05, 0.75, 3, 1.2)
   #vel_ms, vel_rads, acel_ms, acel_rads
   #State-Machine
   while(True):
     init_status(0,1,2)
 
-   if (CheckStatus(0)==True):
-      set_Speed(0.05, 0.75, 3, 1.2)
-      UR3Home()
-   elif (CheckStatus(1)==True):
+   if (CheckStatus(30)==True):
+     set_Speed(0.05, 0.75, 3, 1.2)
+     UR3Home()
+   elif (CheckStatus(31)==True):
      separator_count = SeparatorLoop(separator_count)
-   elif (CheckStatus(2)==True):
+   elif (CheckStatus(32)==True):
      set_Speed(0.05, 1.5,3 , 2)
      UR3Move()
-   elif (CheckStatus(3)==True):
+   elif (CheckStatus(33)==True):
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3DropBench()
-   elif (CheckStatus(4)==True):
+   elif (CheckStatus(34)==True):
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3RotateSeparator()
-   elif (CheckStatus(5)==True):
+   elif (CheckStatus(35)==True):
+     set_payload(1.54, [4/1000,0,70/1000]) #adjust payload to new weight
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3RotateDropCable()
-   elif (CheckStatus(6)==True):
+   elif (CheckStatus(36)==True):
+     set_payload(1.54, [4/1000,0,70/1000]) #adjust payload to new weight
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3DropCable()
-   elif (CheckStatus(7)==True):
-    set_Speed(0.05, 2, 3, 2.4)
+   elif (CheckStatus(37)==True):
+     set_payload(0.87, [-6/1000,-3/1000,48/1000])
+     set_Speed(0.05, 2, 3, 2.4)
      UR3Return()
      separator_count=separator_count+1    
    end
