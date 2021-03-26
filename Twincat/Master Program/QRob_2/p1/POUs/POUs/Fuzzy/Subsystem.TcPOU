@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="Subsystem" Id="{11e07b10-1104-4cb7-bdae-08b9e3597918}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Subsystem
+VAR_INPUT
+	in: LREAL;
+	state : BOOL;
+END_VAR
+VAR_OUTPUT
+	out: LREAL;
+	set_move  : BOOL := TRUE;
+	
+END_VAR
+VAR
+	
+  	state_aux : BOOL := FALSE;	
+	before_out : INT;
+	aux : INT := 0;
+out_int : INT;
+
+
+	ruleID: DINT;
+	y1: LREAL;
+	y2: LREAL;
+	outputMFCache: ARRAY[0..302] OF LREAL;
+	sampleID: DINT;
+	rtb_antecedentOutputs: ARRAY[0..2] OF LREAL;
+	rtb_aggregatedOutputs: ARRAY[0..100] OF LREAL;
+	tmp: ARRAY[0..100] OF LREAL;
+	tmp_0: ARRAY[0..100] OF LREAL;
+	tmp_1: ARRAY[0..100] OF LREAL;
+	inputMFCache_idx_1: LREAL;
+	inputMFCache_idx_2: LREAL;
+	i0_trimf_l: trimf_l;
+	OutputSamplePoints_Value: ARRAY[0..100] OF LREAL := [0.0, 1.5, 3.0, 4.5, 6.0, 7.5, 9.0, 10.5, 12.0, 13.5, 15.0, 16.5, 18.0, 19.5, 21.0, 22.5, 24.0, 25.5, 27.0, 28.5, 30.0, 31.5, 33.0, 34.5, 36.0, 37.5, 39.0, 40.5, 42.0, 43.5, 45.0, 46.5, 48.0, 49.5, 51.0, 52.5, 54.0, 55.5, 57.0, 58.5, 60.0, 61.5, 63.0, 64.5, 66.0, 67.5, 69.0, 70.5, 72.0, 73.5, 75.0, 76.5, 78.0, 79.5, 81.0, 82.5, 84.0, 85.5, 87.0, 88.5, 90.0, 91.5, 93.0, 94.5, 96.0, 97.5, 99.0, 100.5, 102.0, 103.5, 105.0, 106.5, 108.0, 109.5, 111.0, 112.5, 114.0, 115.5, 117.0, 118.5, 120.0, 121.5, 123.0, 124.5, 126.0, 127.5, 129.0, 130.5, 132.0, 133.5, 135.0, 136.5, 138.0, 139.5, 141.0, 142.5, 144.0, 145.5, 147.0, 148.5, 150.0];
+	c: ARRAY[0..2] OF LREAL := [21.73, 73.97, 122.6];
+	b: ARRAY[0..2] OF LREAL := [54.58, 118.2, 170.8];
+	b_c: ARRAY[0..2] OF LREAL := [-66.3, -24.7, 15.5325443786982];
+	b_d: ARRAY[0..2] OF LREAL := [4.2869822485207, 56.4869822485207, 90.1869822485207];
+	e: ARRAY[0..2] OF LREAL := [73.88, 114.1, 158.0];
+	b_b: ARRAY[0..2] OF SINT := [3, 3, 1];
+	
+	
+	
+
+END_VAR
+
+
+VAR RETAIN
+    nRem1 : INT :=0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+(* Outputs for Atomic SubSystem: '<Root>/Subsystem' *)
+(* Outputs for Atomic SubSystem: '<S1>/FuzzzyCtr' *)
+(* MATLAB Function: '<S2>/Evaluate Rule Antecedents' *)
+(* MATLAB Function 'Evaluate Rule Antecedents': '<S4>:1' *)
+(* '<S4>:1:4' if SimulateUsing==1 &amp;&amp; coder.internal.canUseExtrinsic ... *)
+(* '<S4>:1:5'         &amp;&amp; (isa(inputs,'double') || isa(inputs,'single')) *)
+(* '<S4>:1:32' else *)
+(* '<S4>:1:33' if fis.inputFuzzySetType==1 *)
+(* '<S4>:1:34' [antecedentOutputs,sumAntecedentOutputs] = ... *)
+(* '<S4>:1:35'             fuzzy.internal.codegen.evaluateRuleAntecedent(... *)
+(* '<S4>:1:36'             inputs,fis,diagnostics); *)
+y1 := 0.0;
+y2 := 0.0;
+
+IF in >= -17.61 THEN 
+    y1 := 1.0;
+END_IF;
+
+
+IF in < -77.61 THEN 
+    y1 := 0.0;
+END_IF;
+
+
+IF (-77.61 <= in) AND (in < -17.61) THEN 
+    y1 := (in - -77.61) * 0.016666666666666666;
+END_IF;
+
+
+IF in <= 4.584 THEN 
+    y2 := 1.0;
+END_IF;
+
+
+IF in > 31.8 THEN 
+    y2 := 0.0;
+END_IF;
+
+
+IF (4.584 < in) AND (in <= 31.8) THEN 
+    y2 := (31.8 - in) * 0.036743092298647854;
+END_IF;
+
+y1 := MIN(y1, y2);
+inputMFCache_idx_1 := trimf(x := in, params1 := c);
+inputMFCache_idx_2 := trimf(x := in, params1 := b);
+
+IF 1.0 <= y1 THEN 
+    y1 := 1.0;
+END_IF;
+
+y2 := y1;
+rtb_antecedentOutputs[0] := y1;
+
+IF 1.0 > inputMFCache_idx_1 THEN 
+    y1 := inputMFCache_idx_1;
+ELSE 
+    y1 := 1.0;
+END_IF;
+
+y2 := y2 + y1;
+rtb_antecedentOutputs[1] := y1;
+
+IF 1.0 > inputMFCache_idx_2 THEN 
+    y1 := inputMFCache_idx_2;
+ELSE 
+    y1 := 1.0;
+END_IF;
+
+y2 := y2 + y1;
+rtb_antecedentOutputs[2] := y1;
+(* MATLAB Function: '<S2>/Evaluate Rule Consequents' incorporates:
+ *  Constant: '<S2>/Output Sample Points' *)
+(* MATLAB Function 'Evaluate Rule Consequents': '<S5>:1' *)
+(* '<S5>:1:4' if SimulateUsing==1 &amp;&amp; coder.internal.canUseExtrinsic ... *)
+(* '<S5>:1:5'         &amp;&amp; (isa(inputs,'double') || isa(inputs,'single')) *)
+(* '<S5>:1:55' else *)
+(* '<S5>:1:56' if fis.inputFuzzySetType==1 *)
+(* '<S5>:1:57' if strcmp(char(fis.type),'mamdani') *)
+(* '<S5>:1:58' aggregatedOutputs = ... *)
+(* '<S5>:1:59'                 fuzzy.internal.codegen.evaluateRuleConsequentForMamdaniFIS(... *)
+(* '<S5>:1:60'                 antecedentOutputs,fis,samplePoints); *)
+i0_trimf_l(x := OutputSamplePoints_Value, params1 := b_c);
+tmp := i0_trimf_l.y;
+i0_trimf_l(x := OutputSamplePoints_Value, params1 := b_d);
+tmp_0 := i0_trimf_l.y;
+i0_trimf_l(x := OutputSamplePoints_Value, params1 := e);
+tmp_1 := i0_trimf_l.y;
+(* End of Outputs for SubSystem: '<S1>/FuzzzyCtr' *)
+(* End of Outputs for SubSystem: '<Root>/Subsystem' *)
+(* Outputs for Atomic SubSystem: '<Root>/Subsystem' *)
+(* Outputs for Atomic SubSystem: '<S1>/FuzzzyCtr' *)
+(* MATLAB Function: '<S2>/Evaluate Rule Consequents' *)
+
+FOR ruleID := 0 TO 100 DO 
+    rtb_aggregatedOutputs[ruleID] := 0.0;
+    outputMFCache[3 * ruleID] := tmp[ruleID];
+    outputMFCache[(3 * ruleID) + 1] := tmp_0[ruleID];
+    outputMFCache[(3 * ruleID) + 2] := tmp_1[ruleID];
+END_FOR;
+
+
+FOR ruleID := 0 TO 2 DO 
+    inputMFCache_idx_1 := rtb_antecedentOutputs[ruleID];
+
+    FOR sampleID := 0 TO 100 DO 
+        inputMFCache_idx_2 := rtb_aggregatedOutputs[sampleID];
+        y1 := outputMFCache[((3 * sampleID) + SINT_TO_DINT(b_b[ruleID])) - 1];
+
+        IF y1 > inputMFCache_idx_1 THEN 
+            y1 := inputMFCache_idx_1;
+        END_IF;
+
+
+        IF inputMFCache_idx_2 < y1 THEN 
+            inputMFCache_idx_2 := y1;
+        END_IF;
+
+        rtb_aggregatedOutputs[sampleID] := inputMFCache_idx_2;
+    END_FOR;
+
+END_FOR;
+
+(* MATLAB Function: '<S2>/Defuzzify Outputs' incorporates:
+ *  Constant: '<S2>/Output Sample Points'
+ *  MATLAB Function: '<S2>/Evaluate Rule Antecedents' *)
+(* MATLAB Function 'Defuzzify Outputs': '<S3>:1' *)
+(* '<S3>:1:4' if SimulateUsing==1 &amp;&amp; coder.internal.canUseExtrinsic ... *)
+(* '<S3>:1:5'         &amp;&amp; (isa(aggregatedOutputs,'double') || isa(aggregatedOutputs,'single')) *)
+(* '<S3>:1:63' else *)
+(* '<S3>:1:64' if fis.inputFuzzySetType==1 *)
+(* '<S3>:1:65' if isequal(fis.type,uint8('mamdani')) *)
+(* '<S3>:1:66' defuzzifiedOutputs = ... *)
+(* '<S3>:1:67'                 fuzzy.internal.codegen.applyMamdaniDefuzzificationMethod(... *)
+(* '<S3>:1:68'                 samplePoints,sumAntecedentOutputs,aggregatedOutputs, ... *)
+(* '<S3>:1:69'                 fis,diagnostics); *)
+
+IF y2 = 0.0 THEN 
+    (* Outport: '<Root>/out' *)
+    out := 75.0;
+ELSE 
+    y2 := 0.0;
+    y1 := 0.0;
+
+    FOR ruleID := 0 TO 100 DO 
+        y1 := y1 + rtb_aggregatedOutputs[ruleID];
+    END_FOR;
+
+
+    IF y1 = 0.0 THEN 
+        (* Outport: '<Root>/out' *)
+        out := 75.0;
+    ELSE 
+
+        FOR ruleID := 0 TO 100 DO 
+            y2 := (OutputSamplePoints_Value[ruleID] * rtb_aggregatedOutputs[ruleID]) + y2;
+        END_FOR;
+
+        (* Outport: '<Root>/out' incorporates:
+         *  Constant: '<S2>/Output Sample Points' *)
+        out := (1.0 / y1) * y2;
+    END_IF;
+
+END_IF;
+
+out_int := LREAL_TO_INT(out);
+
+IF in>= Qrob_control.limite_corriente THEN 
+ out := 0;	
+ state_aux := TRUE;
+END_IF
+
+IF state_aux THEN
+	//out := 0;
+	//state_aux := FALSE;
+END_IF
+
+set_move := TRUE;
+IF state THEN 
+	set_move := FALSE;
+END_IF
+	
+	
+
+
+
+nRem1 := out_int;
+(* End of MATLAB Function: '<S2>/Defuzzify Outputs' *)
+(* End of Outputs for SubSystem: '<S1>/FuzzzyCtr' *)
+(* End of Outputs for SubSystem: '<Root>/Subsystem' *)
+]]></ST>
+    </Implementation>
+    <LineIds Name="Subsystem">
+      <LineId Id="3" Count="164" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="206" Count="1" />
+      <LineId Id="209" Count="1" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="373" Count="2" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="263" Count="0" />
+      <LineId Id="225" Count="0" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="323" Count="1" />
+      <LineId Id="321" Count="0" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="264" Count="0" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="168" Count="3" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

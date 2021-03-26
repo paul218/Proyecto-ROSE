@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="data_to_robot" Id="{449cc3ce-83c8-40ed-b25c-c6c0939fd523}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	head_roll_right : REAL;
+	head_roll_left : REAL;
+	
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

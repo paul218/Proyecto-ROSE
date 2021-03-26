@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="Vision_data" Id="{1ac6612f-a1ba-404b-91e8-f3bbfabc2ce7}">
+    <Declaration><![CDATA[//struct to save vision real values system
+TYPE Vision_data :
+STRUCT
+Val1 : REAL:= -1;
+Val2 : REAL:= -1;
+Val3 : REAL:= -1;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

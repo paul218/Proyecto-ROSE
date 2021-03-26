@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="UR_O2T_bits" Id="{1601fd2b-b235-4a9c-983d-478731b6d4ce}">
+    <Declaration><![CDATA[TYPE UR_O2T_bits :
+   STRUCT
+	B0:BIT;
+	B1:BIT;
+	B2:BIT;
+	B3:BIT;
+	B4:BIT;
+	B5:BIT;
+	B6:BIT;
+	B7:BIT;
+	B8:BIT;
+	B9:BIT;
+	B10:BIT;
+	B11:BIT;
+	B12:BIT;
+	B13:BIT;
+	B14:BIT;
+	B15:BIT;
+	B16:BIT;
+	B17:BIT;
+	B18:BIT;
+	B19:BIT;
+	B20:BIT;
+	B21:BIT;
+	B22:BIT;
+	B23:BIT;
+	B24:BIT;
+	B25:BIT;
+	B26:BIT;
+	B27:BIT;
+	B28:BIT;
+	B29:BIT;
+	B30:BIT;
+	B31:BIT;
+   END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="UR_3_T2O_Joints" Id="{2d619689-f7e7-41ad-b3c2-0e820bd32337}">
+    <Declaration><![CDATA[TYPE UR_3_T2O_Joints :
+STRUCT
+FLOAT0:ARRAY[0..3] OF BYTE;
+FLOAT1:ARRAY[0..3] OF BYTE;
+FLOAT2:ARRAY[0..3] OF BYTE;
+FLOAT3:ARRAY[0..3] OF BYTE;
+FLOAT4:ARRAY[0..3] OF BYTE;
+FLOAT5:ARRAY[0..3] OF BYTE;
+END_STRUCT
+END_TYPE
+
+
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

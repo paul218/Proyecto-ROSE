@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="UR_O2T_floats" Id="{faeccaf6-461d-4961-946b-319ab8f416d7}">
+    <Declaration><![CDATA[TYPE UR_O2T_floats :
+STRUCT
+FLOAT0:ARRAY[0..3] OF BYTE;
+FLOAT1:ARRAY[0..3] OF BYTE;
+FLOAT2:ARRAY[0..3] OF BYTE;
+FLOAT3:ARRAY[0..3] OF BYTE;
+FLOAT4:ARRAY[0..3] OF BYTE;
+FLOAT5:ARRAY[0..3] OF BYTE;
+FLOAT6:ARRAY[0..3] OF BYTE;
+FLOAT7:ARRAY[0..3] OF BYTE;
+FLOAT8:ARRAY[0..3] OF BYTE;
+FLOAT9:ARRAY[0..3] OF BYTE;
+FLOAT10:ARRAY[0..3] OF BYTE;
+FLOAT11:ARRAY[0..3] OF BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

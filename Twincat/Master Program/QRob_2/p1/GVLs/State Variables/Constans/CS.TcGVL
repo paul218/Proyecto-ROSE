@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="CS" Id="{624bf368-2092-4345-a641-ad9b8f497ab4}" ParameterList="True">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+
+//############### CS.UR3 CONSTANTS STATES ###################
+//########################################################
+	RESET_STATE:INT:=-1;
+	//CS.UR3 states
+	UR3:INT:=3;
+	UR3Home:INT := 30;
+	UR3Home_I :INT:= 300;
+	UR3Home_F :INT:= 301;
+	
+    UR3CatchSeparator:INT := 31;
+	UR3CatchSeparator_I:INT := 310;
+	UR3CatchSeparator_F:INT := 311;
+	
+	UR3Move:INT := 32;
+	UR3Move_I:INT := 320;	
+	UR3Move_F:INT := 321;
+	
+	UR3DropBench:INT := 33;
+	UR3DropBench_I:INT := 330;
+	UR3DropBench_F:INT := 331;
+	
+	UR3RotateSeparator:INT := 34;
+	UR3RotateSeparator_I:INT := 340;
+	UR3RotateSeparator_F:INT := 341;
+	
+	UR3RotateDropCable:INT := 35;
+	UR3RotateDropCable_I:INT := 350;
+	UR3RotateDropCable_F:INT := 351;
+	
+	UR3DropCable:INT := 36;
+	UR3DropCable_I:INT := 360;
+	UR3DropCable_F:INT := 361;
+	
+	UR3Return:INT := 37;
+	UR3Return_I:INT := 370;
+	UR3Return_F:INT := 371;
+	
+//############### CS.UR5 CONSTANTS STATES ###################
+//########################################################
+ 
+	UR5:INT:=5;
+	
+	UR5Home:INT := 50;
+	UR5Home_I :INT:= 500;
+	UR5Home_F :INT:= 501;
+	
+    UR5Camera1:INT := 51;
+	UR5Camera1_I:INT := 510;
+	UR5Camera1_F:INT := 511;
+	
+	UR5DropHead:INT := 52;
+	UR5DropHead_I:INT := 520;	
+	UR5DropHead_F:INT := 521;
+	
+	UR5Camera2:INT := 53;
+	UR5Camera2_I:INT := 530;
+	UR5Camera2_F:INT := 531;
+	
+	UR5UpCamera1:INT := 54;
+	UR5UpCamera1_I:INT := 540;
+	UR5UpCamera1_F:INT := 541;
+	
+	UR5TakeBuffer:INT := 55;
+	UR5TakeBuffer_I:INT := 550;
+	UR5TakeBuffer_F:INT := 551;
+	
+	UR5UpCamera2:INT := 56;
+	UR5UpCamera2_I:INT := 560;
+	UR5UpCamera2_F:INT := 561;
+	
+	UR5Return:INT := 57;
+	UR5Return_I:INT := 570;
+	UR5Return_F:INT := 571;
+
+	/// to ck new values
+	
+	UR5CtrCamPos1:INT:=58;
+	UR5CtrCamPos2:INT:=60;
+	UR5CtrCamPos3:INT:=62;
+	UR5CtrCamPos4:INT:=64;
+	
+	UR5CtrCamPos:INT:=582;
+	UR5CtrCamPos_I:INT:=580;
+	UR5CtrCamPos_F:INT:=581;
+	
+	UR5MoveToNut1:INT:=59;
+	UR5MoveToNut2:INT:=61;
+	UR5MoveToNut3:INT:=63;
+	UR5MoveToNut4:INT:=65;
+	UR5MoveToNut_I:INT:=590;
+	UR5MoveToNut_F:INT:=591;
+	
+	UR5UnScrew:INT:=66;
+	UR5UnScrew_I:INT:=5100;
+	UR5UnScrew_F:INT:=5101;
+	
+	UR5Screw:INT:=67;
+	UR5Screw_I:INT:=5110;
+	UR5Screw_F:INT:=5111;
+	
+	UR5UpRobotAs:INT:=68;
+	UR5UpRobotAs_I:INT:=5120;
+	UR5UpRobotAs_F:INT:=5121;
+	
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

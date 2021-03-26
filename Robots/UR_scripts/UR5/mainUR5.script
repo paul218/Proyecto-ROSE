@@ -435,13 +435,13 @@ def mainUR5():
     set_Speed(0.1, 0.75, 3, 1.2)
     UR5Return()
     
-   elif (CheckStatus(58)==True || CheckStatus(64)==True):
+   elif (CheckStatus(58)==True or CheckStatus(64)==True):
     set_Speed(0.1, 0.75, 3, 1.2)
     CtrCamPos(-1,-1) #58==Camera1 position & 64==UpCamera2 position
-   elif (CheckStatus(59)==True || CheckStatus(61)==True || CheckStatus(63)==True || CheckStatus(65)==True ): #59==Camera1 position  61==Camera2 position
+   elif (CheckStatus(59)==True or CheckStatus(61)==True or CheckStatus(63)==True or CheckStatus(65)==True ): #59==Camera1 position  61==Camera2 position
     set_Speed(0.1, 0.75, 3, 1.2)                                                                             #63==UpCamera1 position 65==UpCamera2 position
     MoveToNut(dx,dy,dz)  
-   elif (CheckStatus(60)==True || CheckStatus(62)==True ):
+   elif (CheckStatus(60)==True or CheckStatus(62)==True ):
     set_Speed(0.1, 0.75, 3, 1.2)
     CtrCamPos(1,1) #60==Camera2 position & 62==UpCamera1 position
    

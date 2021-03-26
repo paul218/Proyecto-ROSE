@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="_FUNCTION" Id="{1ca56cf5-66a7-469a-9641-0a9d1dc2fcf9}" ParameterList="True">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+	 	
+	TEST:INT := 1; //test state one by one
+	NORM:INT := 2; // normal functionality
+	MOVEMENTS:INT := 3; // test just movements
+	CK_COMUNICATIONS:INT := 4; // test all comunication
+	POWEROFF:INT := 5; // prepare to poweroff the system
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

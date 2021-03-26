@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="read_bool_flag" Id="{4e9c11b2-cc43-48a5-a877-f4ce718a033a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION read_bool_flag : BOOL
+VAR_INPUT
+	ck0 : BOOL;
+	ck1 : BOOL;
+	ck2 : BOOL;
+	state : BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (ck0=state AND ck1=state AND ck2=state) OR (ck0<>state AND ck1=state AND ck2=state) OR (ck0=state AND ck1<>state AND ck2=state) OR (ck0=state AND ck1=state AND ck2<>state) THEN
+read_bool_flag := TRUE;
+ELSE 
+read_bool_flag := FALSE;	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="read_bool_flag">
+      <LineId Id="25" Count="3" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

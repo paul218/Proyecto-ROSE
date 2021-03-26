@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="ck_real_value" Id="{78e4faa4-d0aa-4612-956f-b10eebb1f419}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION ck_real_value :ck_real_flag_data
+//return ck_real_flag_data struct
+VAR_INPUT
+	//imput Vision_data struct 
+	data: Vision_data;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+//check if two of tree values are the same, to avoid bad variables intercahnages between vision system and plc
+//return flag ck_real_flag_data[0] to indicate is correct, and one real value ck_real_value[1] 
+IF data.Val2=data.Val3 THEN
+	ck_real_value.Flag:=TRUE;
+	ck_real_value.Value:=data.Val2;
+ELSIF data.Val1=data.Val3 THEN
+	ck_real_value.Flag:=TRUE;
+	ck_real_value.Value:=data.Val3;
+ELSIF data.Val1=data.Val2 THEN
+	ck_real_value.Flag:=TRUE;
+	ck_real_value.Value:=data.Val2;
+ELSIF (data.Val1=data.Val2 AND data.Val1=data.Val3 AND data.Val2=data.Val3) THEN	
+	ck_real_value.Flag:=TRUE;
+	ck_real_value.Value:=data.Val1;
+ELSE	
+	ck_real_value.Flag:=FALSE;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="ck_real_value">
+      <LineId Id="36" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

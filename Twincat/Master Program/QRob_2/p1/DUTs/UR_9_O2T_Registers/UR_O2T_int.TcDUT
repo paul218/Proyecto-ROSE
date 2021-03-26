@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="UR_O2T_int" Id="{c25e619c-2910-48d6-91d1-38cd3fdd6d01}">
+    <Declaration><![CDATA[TYPE UR_O2T_int :
+STRUCT
+INT0:ARRAY[0..3] OF BYTE;
+INT1:ARRAY[0..3] OF BYTE;
+INT2:ARRAY[0..3] OF BYTE;
+INT3:ARRAY[0..3] OF BYTE;
+INT4:ARRAY[0..3] OF BYTE;
+INT5:ARRAY[0..3] OF BYTE;
+INT6:ARRAY[0..3] OF BYTE;
+INT7:ARRAY[0..3] OF BYTE;
+INT8:ARRAY[0..3] OF BYTE;
+INT9:ARRAY[0..3] OF BYTE;
+INT10:ARRAY[0..3] OF BYTE;
+INT11:ARRAY[0..3] OF BYTE;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

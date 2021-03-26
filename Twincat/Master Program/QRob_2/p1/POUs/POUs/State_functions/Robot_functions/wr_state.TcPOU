@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="wr_state" Id="{146e836a-3235-4988-838a-109e745c3821}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION wr_state : BOOL
+VAR_INPUT
+	function_state : INT;
+	state : INT;
+END_VAR
+VAR
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[wr_state := FALSE;
+//WRITE FLAGS STATE-MACHINE #################(PLC->ROBOT)
+//write the UR3 robot integer register to set flag states
+IF function_state= CS.UR3 THEN
+Robot_S_ur3.UR_inputs.Ints.INT0 := flip_int(state);
+Robot_S_ur3.UR_inputs.Ints.INT1 := flip_int(state);
+Robot_S_ur3.UR_inputs.Ints.INT2 := flip_int(state);
+wr_state := TRUE;
+//write the CS.UR5 robot integer register to set flag states
+ELSIF  function_state= CS.UR5 THEN 
+Robot_A.UR_inputs.Ints.INT0 := flip_int(state);
+Robot_A.UR_inputs.Ints.INT1 := flip_int(state);
+Robot_A.UR_inputs.Ints.INT2 := flip_int(state);
+wr_state := TRUE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="wr_state">
+      <LineId Id="21" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="10" Count="4" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="15" Count="3" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

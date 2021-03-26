@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="limit_current" Id="{335740a6-22d3-4689-88d6-e65890298b56}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK limit_current
+VAR_INPUT
+	actual_current : REAL;
+	limit_current : REAL;
+	th : REAL;
+	Enable : BOOL;	
+	
+	//relief_turn : BOOL := FALSE;	
+   
+	
+END_VAR
+VAR_OUTPUT
+	Limit_ok :BOOL;
+	current : REAL;
+END_VAR
+VAR
+	A : REAL;
+	B : REAL;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF Enable = TRUE THEN 
+	A := limit_current-th;
+	B := limit_current +th;
+	
+	IF (A <= actual_current) AND (actual_current <= B) THEN 
+		current := actual_current;
+		IF current >= limit_current THEN
+		  Limit_ok := TRUE;			 
+		END_IF
+
+	END_IF
+ELSE
+	 Limit_ok := FALSE;
+	
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="limit_current">
+      <LineId Id="30" Count="1" />
+      <LineId Id="35" Count="7" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

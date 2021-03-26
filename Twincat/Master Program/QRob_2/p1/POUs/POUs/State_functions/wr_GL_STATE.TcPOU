@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="wr_GL_STATE" Id="{5c999248-76cb-4324-99a7-6c0d4b978838}" SpecialFunc="None">
+    <Declaration><![CDATA[// this script check the state functions and assigns the respective state value 
+
+FUNCTION wr_GL_STATE : INT
+VAR_INPUT
+	TypeFunction : INT; // function
+	State: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+//see folder state variables into GVLS folder for more details 
+// -1 means that the robots just execute one specific state
+
+//CASE TypeFunction OF
+//	FUNCTION_PRG.TEST:
+//	  	wr_GL_STATE:= -1;
+//	FUNCTION_PRG.NORM:
+//      	wr_GL_STATE:= State;
+//	FUNCTION_PRG.MOVEMENTS:
+//		wr_GL_STATE:= State;
+//    FUNCTION_PRG.CK_COMUNICATIONS:
+//		wr_GL_STATE:= -1;
+//	FUNCTION_PRG.POWEROFF:
+//		wr_GL_STATE:= State;
+//END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="wr_GL_STATE">
+      <LineId Id="55" Count="1" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="46" Count="8" />
+      <LineId Id="45" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

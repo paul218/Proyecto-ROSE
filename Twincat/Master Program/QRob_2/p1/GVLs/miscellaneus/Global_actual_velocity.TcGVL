@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="Global_actual_velocity" Id="{81e71619-22bd-4359-83b2-3e624603b444}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	actual_velocity AT%I*: DINT;
+
+	
+	
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

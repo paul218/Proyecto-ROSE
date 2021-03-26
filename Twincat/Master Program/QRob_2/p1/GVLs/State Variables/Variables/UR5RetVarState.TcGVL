@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="UR5RetVarState" Id="{2bca91f8-31f9-46cd-93ee-53d3365266ab}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL RETAIN
+	Actual_GLV_State :INT:=-1;
+	Actual_In_State: INT:=-1;
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

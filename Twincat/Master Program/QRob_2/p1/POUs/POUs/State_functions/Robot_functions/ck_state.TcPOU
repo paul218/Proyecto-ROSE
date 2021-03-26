@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="ck_state" Id="{307e6feb-d312-4255-ab59-f2ec387640a3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION ck_state : BOOL
+VAR_INPUT
+	robot : INT;
+	state : INT;
+
+END_VAR
+VAR
+	ck0 : INT;
+	ck1 : INT;
+	ck2 : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//leer del robot al plc
+IF robot=3 THEN
+ck0 := flip_byte_int(Robot_S_ur3.UR_outputs_int.INT3);
+ck1 := flip_byte_int(Robot_S_ur3.UR_outputs_int.INT4);
+ck2 := flip_byte_int(Robot_S_ur3.UR_outputs_int.INT5);
+ELSIF robot=5 THEN
+ck0 := flip_byte_int(Robot_A.UR_outputs_int.INT3);
+ck1 := flip_byte_int(Robot_A.UR_outputs_int.INT4);
+ck2 := flip_byte_int(Robot_A.UR_outputs_int.INT5);
+END_IF
+
+IF (ck0=state AND ck1=state AND ck2=state) OR (ck0<>state AND ck1=state AND ck2=state) OR (ck0=state AND ck1<>state AND ck2=state) OR (ck0=state AND ck1=state AND ck2<>state) THEN
+ck_state := TRUE;
+ELSE 
+ck_state := FALSE;	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="ck_state">
+      <LineId Id="8" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="48" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

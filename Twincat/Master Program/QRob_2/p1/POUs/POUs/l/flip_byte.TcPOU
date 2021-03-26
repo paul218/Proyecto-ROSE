@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="flip_byte" Id="{9d098dce-4aa6-4ce4-9e2f-278a2ced4d6c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION flip_byte :  REAL
+VAR_INPUT
+	
+	byte_array : ARRAY[0..3] OF BYTE;
+END_VAR
+
+VAR
+		valor_flip : ARRAY[0..3] OF BYTE;
+		pt: POINTER TO REAL;
+		
+
+		
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+//direcciones
+
+
+valor_flip[0] := byte_array[3];
+valor_flip[1] := byte_array[2];
+valor_flip[2] := byte_array[1];
+valor_flip[3] := byte_array[0];
+
+pt := ADR(valor_flip);
+flip_byte := pt^;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="flip_byte">
+      <LineId Id="52" Count="1" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="Vision_struct" Id="{2952d660-b5c7-4780-a99f-64862564cdd8}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+//variables to start head rigth roll vision process (PLC->vision)
+Get_img_head_rigth_rot : Vision_flags;
+//variables to start head left roll vision process (PLC->vision)
+Get_img_head_left_rot : Vision_flags;
+//variables to start nut vision process (PLC->vision)
+Get_img_nut :Vision_flags;	
+//variables to start orifice vision process (PLC->vision)
+Get_img_orifice :Vision_flags;	
+//variables to start check separator position
+Get_img_sep_pos :Vision_flags;	
+
+
+//variables to ck  vision process (vision->PLC)  
+Ck_finish_procees :Vision_flags;
+// variables to get position of separator from vision system
+Pos_sep : Vision_data;
+// variables to get cx value from vision system
+Cx_value : Vision_data;
+// variables to get cy value from vision system
+Cy_value : Vision_data;
+// variables to get turn_nut value from vision system
+Nut_turn_value :Vision_data;
+// variables to get head_rigth value from vision system
+Head_rigth_value	:Vision_data;
+// variables to get head_left value from vision system
+Head_left_value	:Vision_data;
+END_VAR
+
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

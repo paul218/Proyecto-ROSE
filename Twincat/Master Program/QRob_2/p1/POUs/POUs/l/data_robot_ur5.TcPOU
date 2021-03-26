@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="data_robot_ur5" Id="{3c1b22bc-7162-43ee-87e4-ac5123c95402}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM data_robot_UR5
+VAR
+	
+join_pos_1 : REAL;
+join_pos_2 : REAL;
+join_pos_3 : REAL;
+join_pos_4 : REAL;
+join_pos_5 : REAL;
+join_pos_6 : REAL;
+
+join_torque_1: REAL;
+join_torque_2: REAL;
+join_torque_3: REAL;
+join_torque_4: REAL;
+join_torque_5: REAL;
+join_torque_6: REAL;
+
+TCP_pos_x : REAL;
+TCP_pos_y : REAL;
+TCP_pos_z : REAL;
+TCP_pos_rx : REAL;
+TCP_pos_ry : REAL;
+TCP_pos_rz : REAL;
+
+
+TCP_force_x : REAL;
+TCP_force_y : REAL;
+TCP_force_z : REAL;
+TCP_torque_x : REAL;
+TCP_torque_y : REAL;
+TCP_torque_z : REAL;
+
+TCP_force : REAL;
+velocity :INT;
+
+velo : REAL;
+
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+
+TCP_pos_x := flip_byte(Robot_A.UR_TCP.FLOAT0)*1000;
+TCP_pos_y := flip_byte(Robot_A.UR_TCP.FLOAT1)*1000;
+TCP_pos_z := flip_byte(Robot_A.UR_TCP.FLOAT2)*1000;
+TCP_pos_rx := (flip_byte(Robot_A.UR_TCP.FLOAT3)*180)/3.1415;
+TCP_pos_ry := (flip_byte(Robot_A.UR_TCP.FLOAT4)*180)/3.1415;
+TCP_pos_rz := (flip_byte(Robot_A.UR_TCP.FLOAT5)*180)/3.1415;
+
+
+TCP_force  := flip_byte(Robot_A.UR_TCP.FLOAT18);
+
+TCP_force_x := flip_byte(Robot_A.UR_TCP.FLOAT12);
+TCP_force_y := flip_byte(Robot_A.UR_TCP.FLOAT13);
+TCP_force_z := flip_byte(Robot_A.UR_TCP.FLOAT14);
+TCP_torque_x := flip_byte(Robot_A.UR_TCP.FLOAT15);
+TCP_torque_y := flip_byte(Robot_A.UR_TCP.FLOAT16);
+TCP_torque_z := flip_byte(Robot_A.UR_TCP.FLOAT17);
+
+join_pos_1 := (flip_byte(Robot_A.UR_JOINS.FLOAT0)*180)/3.1415;
+join_pos_2 := (flip_byte(Robot_A.UR_JOINS.FLOAT1)*180)/3.1415;
+join_pos_3 := (flip_byte(Robot_A.UR_JOINS.FLOAT2)*180)/3.1415;
+join_pos_4 := (flip_byte(Robot_A.UR_JOINS.FLOAT3)*180)/3.1415;
+join_pos_5 := (flip_byte(Robot_A.UR_JOINS.FLOAT4)*180)/3.1415;
+join_pos_6 := (flip_byte(Robot_A.UR_JOINS.FLOAT5)*180)/3.1415;
+ 
+join_torque_1 := flip_byte(Robot_A.UR_float_out.FLOAT0);
+join_torque_2 := flip_byte(Robot_A.UR_float_out.FLOAT1);
+join_torque_3 := flip_byte(Robot_A.UR_float_out.FLOAT2);
+join_torque_4 := flip_byte(Robot_A.UR_float_out.FLOAT3);
+join_torque_5 := flip_byte(Robot_A.UR_float_out.FLOAT4);
+join_torque_6 := flip_byte(Robot_A.UR_float_out.FLOAT5);
+]]></ST>
+    </Implementation>
+    <LineIds Name="data_robot_ur5">
+      <LineId Id="242" Count="2" />
+      <LineId Id="178" Count="28" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="35" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

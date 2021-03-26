@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="UR_5_T2O_BitRegisters" Id="{ac5c9c72-3f83-40f2-903d-e83086d26356}">
+    <Declaration><![CDATA[TYPE UR_5_T2O_BitRegisters :
+STRUCT
+	B0:BIT;
+	B1:BIT;
+	B2:BIT;
+	B3:BIT;
+	B4:BIT;
+	B5:BIT;
+	B6:BIT;
+	B7:BIT;
+	B8:BIT;
+	B9:BIT;
+	B10:BIT;
+	B11:BIT;
+	B12:BIT;
+	B13:BIT;
+	B14:BIT;
+	B15:BIT;
+	B16:BIT;
+	B17:BIT;
+	B18:BIT;
+	B19:BIT;
+	B20:BIT;
+	B21:BIT;
+	B22:BIT;
+	B23:BIT;
+	B24:BIT;
+	B25:BIT;
+	B26:BIT;
+	B27:BIT;
+	B28:BIT;
+	B29:BIT;
+	B30:BIT;
+	B31:BIT;
+	B32:BIT;
+	B33:BIT;
+	B34:BIT;
+	B35:BIT;
+	B36:BIT;
+	B37:BIT;
+	B38:BIT;
+	B39:BIT;
+	B40:BIT;
+	B41:BIT;
+	B42:BIT;
+	B43:BIT;
+	B44:BIT;
+	B45:BIT;
+	B46:BIT;
+	B47:BIT;
+	B48:BIT;
+	B49:BIT;
+	B50:BIT;
+	B51:BIT;
+	B52:BIT;
+	B53:BIT;
+	B54:BIT;
+	B55:BIT;
+	B56:BIT;
+	B57:BIT;
+	B58:BIT;
+	B59:BIT;
+	B60:BIT;
+	B61:BIT;
+	B62:BIT;
+	B63:BIT;
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

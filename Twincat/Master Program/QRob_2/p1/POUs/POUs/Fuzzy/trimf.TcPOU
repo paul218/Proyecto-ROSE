@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="trimf" Id="{aa19cf05-d337-487c-9db8-5d1c12f99207}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION trimf : LREAL
+VAR_INPUT
+	x: LREAL;
+	params1: ARRAY[0..2] OF LREAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+trimf := 0.0;
+
+IF params1[0] <> params1[1] THEN 
+
+    IF params1[0] < x THEN 
+
+        IF x < params1[1] THEN 
+            trimf := (1.0 / (params1[1] - params1[0])) * (x - params1[0]);
+        END_IF;
+
+    END_IF;
+
+END_IF;
+
+
+IF params1[1] <> params1[2] THEN 
+
+    IF params1[1] < x THEN 
+
+        IF x < params1[2] THEN 
+            trimf := (1.0 / (params1[2] - params1[1])) * (params1[2] - x);
+        END_IF;
+
+    END_IF;
+
+END_IF;
+
+
+IF x = params1[1] THEN 
+    trimf := 1.0;
+END_IF;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="trimf">
+      <LineId Id="3" Count="32" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
