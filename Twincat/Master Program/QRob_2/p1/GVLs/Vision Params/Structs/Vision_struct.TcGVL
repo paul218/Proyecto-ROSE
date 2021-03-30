@@ -5,31 +5,39 @@
 VAR_GLOBAL
 
 //variables to start head rigth roll vision process (PLC->vision)
-Get_img_head_rigth_rot : Vision_flags;
+//Get_img_head_rigth_rot : Vision_flags;
 //variables to start head left roll vision process (PLC->vision)
-Get_img_head_left_rot : Vision_flags;
+//Get_img_head_left_rot : Vision_flags;
 //variables to start nut vision process (PLC->vision)
-Get_img_nut :Vision_flags;	
+//Get_img_nut :Vision_flags;	
 //variables to start orifice vision process (PLC->vision)
-Get_img_orifice :Vision_flags;	
+//Get_img_orifice :Vision_flags;	
 //variables to start check separator position
-Get_img_sep_pos :Vision_flags;	
+//Get_img_sep_pos :Vision_flags;	
+
+//variables to read global and internal state from vision system
+States : Vision_int_state;
 
 
 //variables to ck  vision process (vision->PLC)  
-Ck_finish_procees :Vision_flags;
+//Ck_finish_procees :Vision_flags;
 // variables to get position of separator from vision system
 Pos_sep : Vision_data;
 // variables to get cx value from vision system
-Cx_value : Vision_data;
+Cx_value_nut : Vision_data;
 // variables to get cy value from vision system
-Cy_value : Vision_data;
+Cy_value_nut : Vision_data;
+// variables to get cx value from vision system
+Cx_value_hole : Vision_data;
+// variables to get cy value from vision system
+Cy_value_hole : Vision_data;
 // variables to get turn_nut value from vision system
 Nut_turn_value :Vision_data;
 // variables to get head_rigth value from vision system
 Head_rigth_value	:Vision_data;
 // variables to get head_left value from vision system
 Head_left_value	:Vision_data;
+	Get_img_sep_pos: INT;
 END_VAR
 
 ]]></Declaration>

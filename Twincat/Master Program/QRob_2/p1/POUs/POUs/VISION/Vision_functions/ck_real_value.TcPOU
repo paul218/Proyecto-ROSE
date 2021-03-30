@@ -28,6 +28,7 @@ ELSIF (data.Val1=data.Val2 AND data.Val1=data.Val3 AND data.Val2=data.Val3) THEN
 	ck_real_value.Value:=data.Val1;
 ELSE	
 	ck_real_value.Flag:=FALSE;
+	ck_real_value.Value:=-1;
 END_IF
 
 ]]></ST>
@@ -49,6 +50,7 @@ END_IF
       <LineId Id="35" Count="0" />
       <LineId Id="18" Count="0" />
       <LineId Id="20" Count="0" />
+      <LineId Id="49" Count="0" />
       <LineId Id="10" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="11" Count="0" />

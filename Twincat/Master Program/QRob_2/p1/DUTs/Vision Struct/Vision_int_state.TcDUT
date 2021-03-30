@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="Vision_int_state" Id="{386519c3-9865-4b34-90f6-9afeb487bd3b}">
+    <Declaration><![CDATA[TYPE Vision_int_state :
+STRUCT
+	Val1 : INT:= -1;
+	Val2 : INT:= -1;
+	Val3 : INT:= -1;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

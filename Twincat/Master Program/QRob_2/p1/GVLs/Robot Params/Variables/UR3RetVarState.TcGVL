@@ -5,7 +5,6 @@
 VAR_GLOBAL RETAIN
 	Actual_GLV_State :INT:=-1;
 	Actual_In_State: INT:=-1;
-
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

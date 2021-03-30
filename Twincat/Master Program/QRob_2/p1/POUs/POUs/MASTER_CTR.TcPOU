@@ -12,9 +12,14 @@ VAR
 	//instance of sub state machines
 	UR3_StateMachine :UR3_StateMachine;
 	UR5_StateMachine :UR5_StateMachine;
+	Vision_StateMachine : Vision_StateMachine;
+	
+	//instance of Qrob
+	//QRob_StateMachine : QRob_StateMachine;
 END_VAR
 
 VAR_INPUT
+	//vars to control the main stata machine
 	  user_select_state : INT:=-1;
 	  user_init: BOOL:=FALSE;
       User_Test_Sate :INT:=-1;
@@ -2286,7 +2291,35 @@ END_VAR
                                                 </o>
                                               </l2>
                                             </o>
-                                            <l2 n="Attributes" />
+                                            <l2 n="Attributes" cet="SFCAttribute">
+                                              <o>
+                                                <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                                <o n="Value" t="StringValue">
+                                                  <v n="Value">""</v>
+                                                  <v n="DefaultValue">""</v>
+                                                </o>
+                                                <v n="Id">3928L</v>
+                                                <v n="IdParent">3882L</v>
+                                              </o>
+                                              <o>
+                                                <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                                <o n="Value" t="StringValue">
+                                                  <v n="Value">""</v>
+                                                  <v n="DefaultValue">""</v>
+                                                </o>
+                                                <v n="Id">3929L</v>
+                                                <v n="IdParent">3882L</v>
+                                              </o>
+                                              <o>
+                                                <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                                <o n="Value" t="BoolValue">
+                                                  <v n="Value">"FALSE"</v>
+                                                  <v n="DefaultValue">"FALSE"</v>
+                                                </o>
+                                                <v n="Id">3930L</v>
+                                                <v n="IdParent">3882L</v>
+                                              </o>
+                                            </l2>
                                             <v n="Id">3882L</v>
                                             <v n="IdParent">3878L</v>
                                           </o>
@@ -2589,7 +2622,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"True and Wrt_FState.t &gt; T#100ms"</v>
+                            <v n="Value">"Wrt_FState.t &gt; T#100ms"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">3374L</v>
@@ -3008,11 +3041,29 @@ END_VAR
         <ST><![CDATA[//cal UR3 state Machine
 //UR3(init, state_to_exec,out_proces,out_global_state, out_internal_state
 //IF User_Test_Sate <30 THEN
-IF User_Test_Sate >=30 AND User_Test_Sate<50 THEN
+IF User_Test_Sate >0 and User_Test_Sate <30 THEN
+Vision_StateMachine(init_:=TRUE, G_STATE:=User_Test_Sate, State_complete=>finish_state,Act_Gl_State=>VisionRetVarState.Actual_GLV_State,Act_In_State=>VisionRetVarState.Actual_In_State);
+//Vision_StateMachine(init_:=TRUE, G_STATE:=User_Test_Sate);
+//finish_state:=Vision_StateMachine.State_complete;
+//VisionRetVarState.Actual_GLV_State:=Vision_StateMachine.Act_Gl_State;
+//VisionRetVarState.Actual_In_State:=Vision_StateMachine.Act_In_State;
+ELSIF User_Test_Sate >=30 AND User_Test_Sate<50 THEN
 UR3_StateMachine(init_:=TRUE, G_STATE:=User_Test_Sate, State_complete=>finish_state,Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);	
-ELSIF User_Test_Sate >=30 THEN	
+//UR3_StateMachine(init_:=TRUE, G_STATE:=User_Test_Sate);
+//finish_state:= UR3_StateMachine.State_complete;
+//UR3RetVarState.Actual_GLV_State:=UR3_StateMachine.Act_Gl_State;
+//UR3RetVarState.Actual_In_State:=UR3_StateMachine.Act_In_State;
+ELSIF User_Test_Sate >=50 AND User_Test_Sate < 100THEN	
 UR5_StateMachine(init_:=TRUE, G_STATE:=User_Test_Sate, Num_Ctr_Cam:=-1,State_complete=>finish_state, Act_Gl_State=>UR5RetVarState.Actual_GLV_State,Act_In_State=>UR5RetVarState.Actual_In_State);	
+//UR5_StateMachine(init_:=TRUE, G_STATE:=User_Test_Sate);
+//finish_state:= UR5_StateMachine.State_complete;
+//UR5RetVarState.Actual_GLV_State:=UR5_StateMachine.Act_Gl_State;
+//UR5RetVarState.Actual_In_State:=UR5_StateMachine.Act_In_State;
+
+ELSIF User_Test_Sate >=50 AND User_Test_Sate < 100THEN	
+	//QRob_StateMachine(init_:=TRUE);
 END_IF
+
 
 //UR3_StateMachine(TRUE,User_Test_Sate);]]></ST>
       </Implementation>
@@ -3027,7 +3078,7 @@ finish_state := False;]]></ST>
     <Action Name="Catch_active" Id="{10b672cc-7c6e-4fd0-ad71-256cf62a1524}">
       <Implementation>
         <ST><![CDATA[//call respective state to ur3 robot
-UR3_StateMachine(init_:=TRUE, G_STATE:=CS.UR3CatchSeparator, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
+UR3_StateMachine(init_:=TRUE, G_STATE:=RCts.UR3CatchSeparator, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
 ]]></ST>
       </Implementation>
     </Action>
@@ -3044,54 +3095,54 @@ UR3_StateMachine(init_:=TRUE, G_STATE:=CS.UR3CatchSeparator, State_complete=>UR3
     <Action Name="DropBench_active" Id="{06657ecd-2b56-47ec-b5ab-6c22c5fb61b3}">
       <Implementation>
         <ST><![CDATA[//call respective state to ur3 robot
-UR3_StateMachine(init_:=TRUE, G_STATE:=CS.UR3DropBench, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
+UR3_StateMachine(init_:=TRUE, G_STATE:=RCts.UR3DropBench, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
 ]]></ST>
       </Implementation>
     </Action>
     <Action Name="Home2Robot_exit" Id="{ff592298-6852-48b6-b1bd-0c1841237dbe}">
       <Implementation>
         <ST><![CDATA[//reset the global state into instance state machine
-UR3_StateMachine(init_:=FALSE, G_STATE:=CS.RESET_STATE, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
+UR3_StateMachine(init_:=FALSE, G_STATE:=RCts.RESET_STATE, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
 ]]></ST>
       </Implementation>
     </Action>
     <Action Name="HomeUR5_active" Id="{ac8a5ef3-1ef2-468b-a2cf-4c4b6b64b5e6}">
       <Implementation>
         <ST><![CDATA[//call respective state to ur5 robot
-UR5_StateMachine(init_:=TRUE, G_STATE:=Cs.UR5Home, Num_Ctr_Cam:=-1,State_complete=>UR5FinishState, Act_Gl_State=>UR5RetVarState.Actual_GLV_State,Act_In_State=>UR5RetVarState.Actual_In_State);]]></ST>
+UR5_StateMachine(init_:=TRUE, G_STATE:=RCts.UR5Home, Num_Ctr_Cam:=-1,State_complete=>UR5FinishState, Act_Gl_State=>UR5RetVarState.Actual_GLV_State,Act_In_State=>UR5RetVarState.Actual_In_State);]]></ST>
       </Implementation>
     </Action>
     <Action Name="HomeUR5_exit" Id="{03e10426-8f90-440a-9f4e-82654e36d729}">
       <Implementation>
         <ST><![CDATA[//reset the global state into instance state machine
-UR5_StateMachine(init_:=FALSE, G_STATE:=CS.RESET_STATE, State_complete=>UR5FinishState, Act_Gl_State=>UR5RetVarState.Actual_GLV_State,Act_In_State=>UR5RetVarState.Actual_In_State);
+UR5_StateMachine(init_:=FALSE, G_STATE:=RCts.RESET_STATE, State_complete=>UR5FinishState, Act_Gl_State=>UR5RetVarState.Actual_GLV_State,Act_In_State=>UR5RetVarState.Actual_In_State);
 ]]></ST>
       </Implementation>
     </Action>
     <Action Name="MoveS_active" Id="{b75d9cc2-2934-4189-a49a-16e64e3be012}">
       <Implementation>
         <ST><![CDATA[//call respective state to ur3 robot
-UR3_StateMachine(init_:=TRUE, G_STATE:=CS.UR3Move, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
+UR3_StateMachine(init_:=TRUE, G_STATE:=RCts.UR3Move, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
 ]]></ST>
       </Implementation>
     </Action>
     <Action Name="MOVESEP_exit" Id="{e5175d0e-cfca-436d-a2c5-6737c3f81b7b}">
       <Implementation>
         <ST><![CDATA[//changet the state to exec
-STATE := CS.UR3CatchSeparator;]]></ST>
+STATE := RCts.UR3CatchSeparator;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Prog_active" Id="{f18f4223-866c-41ea-9aff-f8bce9bd7968}">
       <Implementation>
         <ST><![CDATA[//call respective state to ur3 robot
-UR3_StateMachine(init_:=TRUE, G_STATE:=CS.UR3Home, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
+UR3_StateMachine(init_:=TRUE, G_STATE:=RCts.UR3Home, State_complete=>UR3FinishState, Act_Gl_State=>UR3RetVarState.Actual_GLV_State,Act_In_State=>UR3RetVarState.Actual_In_State);
 ]]></ST>
       </Implementation>
     </Action>
     <Action Name="Wrt_FState_exit" Id="{840b7518-2748-496f-bf4c-3516d5943755}">
       <Implementation>
         <ST><![CDATA[//reset the main var to init all process
-user_init:= FALSE;]]></ST>
+//user_init:= FALSE;]]></ST>
       </Implementation>
     </Action>
     <ObjectProperties>
@@ -3190,7 +3241,13 @@ user_init:= FALSE;]]></ST>
       </XmlArchive>
     </ObjectProperties>
     <LineIds Name="MASTER_CTR.Call_MaSta_active">
-      <LineId Id="2" Count="8" />
+      <LineId Id="2" Count="20" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="MASTER_CTR.Call_MaSta_exit">

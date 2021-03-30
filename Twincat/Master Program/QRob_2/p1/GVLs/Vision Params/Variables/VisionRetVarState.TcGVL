@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="VisionRetVarState" Id="{0d07f9db-0f08-43b7-a198-f8058725978e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL RETAIN
+	Actual_GLV_State :INT:=-1;
+	Actual_In_State: INT:=-1;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -15,37 +15,37 @@ END_VAR
 
 //#####################	WRITE VISION VARIABLES #################(PLC->ROBOT)
 //write the CS.UR5 robot float register to send CX position
-IF  function_state= Vision_const.CX_VALUE THEN
+IF  function_state= VCts.CX_VALUE THEN
 Robot_A.UR_inputs.Floats.FLOAT0 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT1 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT2 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send CY position
-ELSIF  function_state= Vision_const.CY_VALUE THEN
+ELSIF  function_state= VCts.CY_VALUE THEN
 Robot_A.UR_inputs.Floats.FLOAT3 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT4 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT5 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send NUT_TURN position
-ELSIF  function_state= Vision_const.NUT_VALUE THEN
+ELSIF  function_state= VCts.NUT_VALUE THEN
 Robot_A.UR_inputs.Floats.FLOAT6 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT7 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT8 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send HEAD_RIGTH_VALUE position
-ELSIF  function_state= Vision_const.HEAD_RIGTH_VALUE THEN
+ELSIF  function_state= VCts.HEAD_RIGTH_VALUE THEN
 Robot_A.UR_inputs.Floats.FLOAT9 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT10 := flip_real(value);
 Robot_A.UR_inputs.Floats.FLOAT11 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send HEAD_LEFT_VALUE position
-ELSIF  function_state = Vision_const.HEAD_LEFT_VALUE THEN
+ELSIF  function_state = VCts.HEAD_LEFT_VALUE THEN
 Robot_A.UR_inputs_2.Floats.FLOAT12 := flip_real(value);
 Robot_A.UR_inputs_2.Floats.FLOAT13 := flip_real(value);
 Robot_A.UR_inputs_2.Floats.FLOAT14:= flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send NUT_POS_VALUE position
-ELSIF  function_state = Vision_const.SEP_POS_VALUE THEN
+ELSIF  function_state = VCts.SEP_POS_VALUE THEN
 Robot_A.UR_inputs_2.Floats.FLOAT12 := flip_real(value);
 Robot_A.UR_inputs_2.Floats.FLOAT13 := flip_real(value);
 Robot_A.UR_inputs_2.Floats.FLOAT14:= flip_real(value);

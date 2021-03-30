@@ -7,6 +7,9 @@
     <PouCall>
       <Name>MASTER_CTR</Name>
     </PouCall>
+    <PouCall>
+      <Name>QRob_StateMachine</Name>
+    </PouCall>
     <TaskFBGuid>{a447d856-05de-4838-b2d2-92af43dedf70}</TaskFBGuid>
     <Fb_init>{ccc79dc1-96b8-403e-85f7-b9213b3b3f1a}</Fb_init>
     <Fb_exit>{fac8b0f3-0fd3-428c-a279-cd08feec2d02}</Fb_exit>

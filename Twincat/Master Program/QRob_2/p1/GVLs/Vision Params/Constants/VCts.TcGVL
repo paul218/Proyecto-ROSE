@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="VCts" Id="{cde48509-e620-481a-8a42-dd603d905dfa}" ParameterList="True">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+	
+	//constans to exec respective function into vision system
+	CX_VALUE:INT:=1;
+	CY_VALUE:INT:=2;
+	NUT_VALUE:INT:=3;
+	HEAD_RIGTH_VALUE : INT:= 4;
+	HEAD_LEFT_VALUE : INT:= 5;
+	SEP_POS_VALUE: INT:= 6;
+	
+	//separator variables 
+	Separador_correct:INT:=7;
+	Separador_turned:INT:=8;
+	
+	//constans to state machine
+	SeparatorPos:INT := 10;
+	SeparatorPos_I:INT := 100;
+	SeparatorPos_F:INT := 101;
+	
+	SeparatorRot_R:INT:= 11;
+	SeparatorRot_R_I:INT:= 110;
+	SeparatorRot_R_F:INT:= 111;
+	
+	SeparatorRot_L:INT:= 12;
+	SeparatorRot_L_I:INT:= 120;
+	SeparatorRot_L_F:INT:= 121;
+	
+	SeparatorNut:INT:=13;
+	SeparatorNut_I:INT:=130;
+	SeparatorNut_F:INT:=131;
+	
+	SeparatorHole:INT:=14;
+	SeparatorHole_I:INT:=140;
+	SeparatorHole_F:INT:=141;
+	
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

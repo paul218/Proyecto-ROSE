@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="wr_state_v" Id="{a566cb6c-9f01-43fe-80a0-d336ca04a601}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION wr_state_v : BOOL
+VAR_INPUT
+	state : INT;
+END_VAR
+VAR
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[wr_state_v := FALSE;
+//WRITE FLAGS STATE-MACHINE #################(PLC->VISION SYSTEM)
+Vision_struct.States.Val1:=state;
+Vision_struct.States.Val2:=state;
+Vision_struct.States.Val3:=state;
+wr_state_v := TRUE;
+]]></ST>
+    </Implementation>
+    <LineIds Name="wr_state_v">
+      <LineId Id="21" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

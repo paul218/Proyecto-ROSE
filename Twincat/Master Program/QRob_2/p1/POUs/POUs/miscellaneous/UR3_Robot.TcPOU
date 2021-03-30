@@ -2621,12 +2621,12 @@ data_to_robot.head_roll_right := turn;]]></ST>
     </Action>
     <Action Name="Init_UR5_entry" Id="{1e8f29fe-fc49-4c67-9e0f-db1c1848fa7f}">
       <Implementation>
-        <ST><![CDATA[CS.CS.UR5_robot.iniciar := True;]]></ST>
+        <ST><![CDATA[RCts.RCts.UR5_robot.iniciar := True;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Init_UR5_exit" Id="{544214e9-6f93-4ebd-8905-83c236daf4db}">
       <Implementation>
-        <ST><![CDATA[CS.CS.UR5_robot.iniciar := False;]]></ST>
+        <ST><![CDATA[RCts.RCts.UR5_robot.iniciar := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Pos_subir_ok_entry" Id="{cd034212-a1b0-4d5f-b99d-ca0c1afbf9de}">

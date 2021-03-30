@@ -65,15 +65,26 @@
     <Compile Include="DUTs\Vision Struct\Vision_flags.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\Vision Struct\Vision_int_state.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GVLs\MainProg Params\Constans\VFUNCTION.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\MainProg Params\Constans\_FUNCTION.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\MainProg Params\Variables\GLV_USER_FUN.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="GVLs\miscellaneus\data_to_robot.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\miscellaneus\Global_actual_velocity.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="GVLs\miscellaneus\Global_Servo.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -85,35 +96,35 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\State Variables\Constans\CS.TcGVL">
+    <Compile Include="GVLs\QRob\QrCts.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\State Variables\Constans\VFUNCTION.TcGVL">
+    <Compile Include="GVLs\QRob\Variables\Global_Servo.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\State Variables\Variables\GLV_USER_FUN.TcGVL">
+    <Compile Include="GVLs\Robot Params\Constans\RCts.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\State Variables\Variables\UR3RetVarState.TcGVL">
+    <Compile Include="GVLs\Robot Params\Variables\UR3RetVarState.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\State Variables\Variables\UR5RetVarState.TcGVL">
+    <Compile Include="GVLs\Robot Params\Variables\UR5RetVarState.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\State Variables\_FUNCTION.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="GVLs\Vision Params\Constants\Vision_const.TcGVL">
+    <Compile Include="GVLs\Vision Params\Constants\VCts.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\Vision Params\Structs\Vision_struct.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\Vision Params\Variables\VisionRetVarState.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -177,37 +188,43 @@
     <Compile Include="POUs\POUs\Qrob\Qrob_control.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\State_functions\Robot_functions\ck_state.TcPOU">
+    <Compile Include="POUs\POUs\Qrob\QRob_StateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\State_functions\Robot_functions\read_bool_flag.TcPOU">
+    <Compile Include="POUs\POUs\ROBOTS\Robot_functions\ck_state.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\State_functions\Robot_functions\wr_state.TcPOU">
+    <Compile Include="POUs\POUs\ROBOTS\Robot_functions\read_bool_flag.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\State_functions\UR3_StateMachine.TcPOU">
+    <Compile Include="POUs\POUs\ROBOTS\Robot_functions\wr_GL_STATE.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\State_functions\UR5_StateMachine.TcPOU">
+    <Compile Include="POUs\POUs\ROBOTS\Robot_functions\wr_state.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\State_functions\wr_GL_STATE.TcPOU">
+    <Compile Include="POUs\POUs\ROBOTS\Robot_machine_state\UR3_StateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\Vision_functions\ck_bool_value.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\POUs\Vision_functions\ck_real_value.TcPOU">
+    <Compile Include="POUs\POUs\ROBOTS\Robot_machine_state\UR5_StateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\POUs\l\limit_current.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\Vision_functions\Vision_StateMachine.TcPOU">
+    <Compile Include="POUs\POUs\VISION\Vision_functions\ck_state_v.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\Vision_functions\wr_real_value.TcPOU">
+    <Compile Include="POUs\POUs\VISION\Vision_functions\ck_real_value.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\POUs\VISION\Vision_functions\wr_real_value.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\POUs\VISION\Vision_functions\wr_state_v.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\POUs\VISION\Vision_machines_states\Vision_StateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -222,12 +239,18 @@
     <Folder Include="DUTs\UR_5_T2O_BitRegisters" />
     <Folder Include="DUTs\UR_9_O2T_Registers" />
     <Folder Include="GVLs" />
+    <Folder Include="GVLs\MainProg Params\Constans" />
+    <Folder Include="GVLs\MainProg Params\Variables" />
     <Folder Include="GVLs\miscellaneus" />
-    <Folder Include="GVLs\State Variables\Constans" />
-    <Folder Include="GVLs\State Variables\Variables" />
+    <Folder Include="GVLs\MainProg Params" />
+    <Folder Include="GVLs\QRob" />
+    <Folder Include="GVLs\QRob\Variables" />
+    <Folder Include="GVLs\Robot Params\Constans" />
+    <Folder Include="GVLs\Robot Params\Variables" />
     <Folder Include="GVLs\Vision Params" />
-    <Folder Include="GVLs\State Variables" />
+    <Folder Include="GVLs\Robot Params" />
     <Folder Include="GVLs\Vision Params\Constants" />
+    <Folder Include="GVLs\Vision Params\Variables" />
     <Folder Include="GVLs\Vision Params\Structs" />
     <Folder Include="POUs\POUs" />
     <Folder Include="POUs\POUs\Fuzzy" />
@@ -235,9 +258,12 @@
     <Folder Include="POUs\POUs\IR_take_img" />
     <Folder Include="POUs\POUs\miscellaneous" />
     <Folder Include="POUs\POUs\Qrob" />
-    <Folder Include="POUs\POUs\State_functions" />
-    <Folder Include="POUs\POUs\State_functions\Robot_functions" />
-    <Folder Include="POUs\POUs\Vision_functions" />
+    <Folder Include="POUs\POUs\ROBOTS" />
+    <Folder Include="POUs\POUs\ROBOTS\Robot_machine_state" />
+    <Folder Include="POUs\POUs\ROBOTS\Robot_functions" />
+    <Folder Include="POUs\POUs\VISION" />
+    <Folder Include="POUs\POUs\VISION\Vision_machines_states" />
+    <Folder Include="POUs\POUs\VISION\Vision_functions" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
