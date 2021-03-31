@@ -15,7 +15,7 @@ VAR_OUTPUT
 	State_complete : BOOL := FALSE;
 	Act_Gl_State : INT := -1;
 	Act_In_State : INT := -1;
-	Act_Pos : REAL := -1;
+	Act_Pos : LREAL := -1;
 END_VAR
 VAR
 	
@@ -23,7 +23,7 @@ VAR
 Axis_state :BOOL:=FALSE;
 	//internal aux state
 I_STATE : INT:=-1;
-
+Aux_error :INT:=-1;
 //blocks to activate axis of qrob
 Reset : MC_Reset;
 ResetOut: ST_McOutputs;
@@ -38,13 +38,9 @@ MC_Stop: MC_Stop;
 MoveAbsAxis1 :MC_MoveAbsolute;
 MoveAbsoluteOut1: ST_McOutputs;
 
-MC_MoveVelocity : MC_MoveVelocity;
-
-//blocks to read paraemtres
-MC_ReadActualPosition: MC_ReadActualPosition;
-
-
-
+//block to set home position
+Home : MC_Home;
+HomeOut: ST_McOutputs;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -838,7 +834,7 @@ END_VAR
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"True"</v>
+                                        <v n="Value">"I_STATE=QrCts.MOVESTATE_ENABLE_F"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">4047L</v>
@@ -1125,7 +1121,7 @@ END_VAR
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"True"</v>
+                                        <v n="Value">"I_STATE = QrCts.MOVESTATE_ERROR_F"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">4119L</v>
@@ -1412,7 +1408,7 @@ END_VAR
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"True"</v>
+                                        <v n="Value">"I_STATE = QrCts.MOVESTATE_RESET_F"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">4089L</v>
@@ -1509,7 +1505,294 @@ END_VAR
                             <o n="ElementList" t="SFCElementList">
                               <l2 n="InnerList">
                                 <o t="SFCTransition">
-                                  <v n="VariableName">"Branch4__WaitChange__to__MoveABS"</v>
+                                  <v n="VariableName">"Branch4__WaitChange__to__HomeQr"</v>
+                                  <n n="EmbeddedTransition" />
+                                  <l2 n="EmbeddedTransitionProperties" />
+                                  <l2 n="Attributes" cet="SFCAttribute">
+                                    <o>
+                                      <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">"G_STATE=QrCts.MOVESTATE_HOME"</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4209L</v>
+                                      <v n="IdParent">4208L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">""</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4210L</v>
+                                      <v n="IdParent">4208L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                      <o n="Value" t="BoolValue">
+                                        <v n="Value">"FALSE"</v>
+                                        <v n="DefaultValue">"FALSE"</v>
+                                      </o>
+                                      <v n="Id">4211L</v>
+                                      <v n="IdParent">4208L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{bc882c11-1e91-4dd8-a6b8-2075724ed18b}</v>
+                                      <o n="Value" t="EnumValue">
+                                        <v n="TemplateGuid">{79a4fdd5-c859-4de4-aa8d-c03372c880c2}</v>
+                                        <n n="BaseType" />
+                                        <v n="Value">"0"</v>
+                                        <v n="DefaultValue">"0"</v>
+                                      </o>
+                                      <v n="Id">4212L</v>
+                                      <v n="IdParent">4208L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{62e1754b-7629-4e63-9cec-10ae0c536f1f}</v>
+                                      <o n="Value" t="BoolValue">
+                                        <v n="Value">"FALSE"</v>
+                                        <v n="DefaultValue">"FALSE"</v>
+                                      </o>
+                                      <v n="Id">4213L</v>
+                                      <v n="IdParent">4208L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{8294df19-5962-4dee-a874-1051dabb0e3e}</v>
+                                      <o n="Value" t="EnumValue">
+                                        <v n="TemplateGuid">{6ecff51c-9b8f-4338-aab0-67c2b31b07e9}</v>
+                                        <n n="BaseType" />
+                                        <v n="Value">"0"</v>
+                                        <v n="DefaultValue">"0"</v>
+                                      </o>
+                                      <v n="Id">4214L</v>
+                                      <v n="IdParent">4208L</v>
+                                    </o>
+                                  </l2>
+                                  <v n="Id">4208L</v>
+                                  <v n="IdParent">4204L</v>
+                                </o>
+                                <o t="SFCStep">
+                                  <n n="EmbeddedMainAction" />
+                                  <n n="EmbeddedEntryAction" />
+                                  <n n="EmbeddedExitAction" />
+                                  <l2 n="EmbeddedMainActionProperties" />
+                                  <l2 n="EmbeddedEntryActionProperties" />
+                                  <l2 n="EmbeddedExitActionProperties" />
+                                  <o n="ElementList" t="SFCElementList">
+                                    <l2 n="InnerList" />
+                                  </o>
+                                  <l2 n="Attributes" cet="SFCAttribute">
+                                    <o>
+                                      <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">"HomeQr"</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4216L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">""</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4217L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                      <o n="Value" t="BoolValue">
+                                        <v n="Value">"FALSE"</v>
+                                        <v n="DefaultValue">"FALSE"</v>
+                                      </o>
+                                      <v n="Id">4218L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{bc882c11-1e91-4dd8-a6b8-2075724ed18b}</v>
+                                      <o n="Value" t="EnumValue">
+                                        <v n="TemplateGuid">{79a4fdd5-c859-4de4-aa8d-c03372c880c2}</v>
+                                        <n n="BaseType" />
+                                        <v n="Value">"0"</v>
+                                        <v n="DefaultValue">"0"</v>
+                                      </o>
+                                      <v n="Id">4219L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{6844a48e-46c2-4cc8-a185-a478f3b99cc0}</v>
+                                      <o n="Value" t="BoolValue">
+                                        <v n="Value">"FALSE"</v>
+                                        <v n="DefaultValue">"FALSE"</v>
+                                      </o>
+                                      <v n="Id">4220L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{62e1754b-7629-4e63-9cec-10ae0c536f1f}</v>
+                                      <o n="Value" t="BoolValue">
+                                        <v n="Value">"FALSE"</v>
+                                        <v n="DefaultValue">"FALSE"</v>
+                                      </o>
+                                      <v n="Id">4221L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{cacf1a68-236e-47c2-b7b1-1cf9199718cb}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">""</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4222L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{b693554c-1b01-4a8d-afde-9e3a46f7465d}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">""</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4223L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{700a583f-b4d4-43e4-8c14-629c7cd3bec8}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">"HomeQr_active"</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4224L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{a6b08bd8-b696-47e3-9cbf-7408b61c9ff8}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">"Home_entry"</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4225L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{a2621e18-7de3-4ea6-ae6d-89e9e0b7befd}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">"HomeQr_exit"</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4226L</v>
+                                      <v n="IdParent">4215L</v>
+                                    </o>
+                                  </l2>
+                                  <v n="Id">4215L</v>
+                                  <v n="IdParent">4204L</v>
+                                </o>
+                                <o t="SFCTransition">
+                                  <v n="VariableName">"HomeQr__to__Wrt_FState"</v>
+                                  <n n="EmbeddedTransition" />
+                                  <l2 n="EmbeddedTransitionProperties" />
+                                  <l2 n="Attributes" cet="SFCAttribute">
+                                    <o>
+                                      <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">"I_STATE= QrCts.MOVESTATE_HOME_F OR I_STATE= QrCts.MOVESTATE_ERROR"</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4228L</v>
+                                      <v n="IdParent">4227L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                      <o n="Value" t="StringValue">
+                                        <v n="Value">""</v>
+                                        <v n="DefaultValue">""</v>
+                                      </o>
+                                      <v n="Id">4229L</v>
+                                      <v n="IdParent">4227L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                      <o n="Value" t="BoolValue">
+                                        <v n="Value">"FALSE"</v>
+                                        <v n="DefaultValue">"FALSE"</v>
+                                      </o>
+                                      <v n="Id">4230L</v>
+                                      <v n="IdParent">4227L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{bc882c11-1e91-4dd8-a6b8-2075724ed18b}</v>
+                                      <o n="Value" t="EnumValue">
+                                        <v n="TemplateGuid">{79a4fdd5-c859-4de4-aa8d-c03372c880c2}</v>
+                                        <n n="BaseType" />
+                                        <v n="Value">"0"</v>
+                                        <v n="DefaultValue">"0"</v>
+                                      </o>
+                                      <v n="Id">4231L</v>
+                                      <v n="IdParent">4227L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{62e1754b-7629-4e63-9cec-10ae0c536f1f}</v>
+                                      <o n="Value" t="BoolValue">
+                                        <v n="Value">"FALSE"</v>
+                                        <v n="DefaultValue">"FALSE"</v>
+                                      </o>
+                                      <v n="Id">4232L</v>
+                                      <v n="IdParent">4227L</v>
+                                    </o>
+                                    <o>
+                                      <v n="AttributeId">{8294df19-5962-4dee-a874-1051dabb0e3e}</v>
+                                      <o n="Value" t="EnumValue">
+                                        <v n="TemplateGuid">{6ecff51c-9b8f-4338-aab0-67c2b31b07e9}</v>
+                                        <n n="BaseType" />
+                                        <v n="Value">"0"</v>
+                                        <v n="DefaultValue">"0"</v>
+                                      </o>
+                                      <v n="Id">4233L</v>
+                                      <v n="IdParent">4227L</v>
+                                    </o>
+                                  </l2>
+                                  <v n="Id">4227L</v>
+                                  <v n="IdParent">4204L</v>
+                                </o>
+                              </l2>
+                            </o>
+                            <l2 n="Attributes" cet="SFCAttribute">
+                              <o>
+                                <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                <o n="Value" t="StringValue">
+                                  <v n="Value">""</v>
+                                  <v n="DefaultValue">""</v>
+                                </o>
+                                <v n="Id">4205L</v>
+                                <v n="IdParent">4204L</v>
+                              </o>
+                              <o>
+                                <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                <o n="Value" t="StringValue">
+                                  <v n="Value">""</v>
+                                  <v n="DefaultValue">""</v>
+                                </o>
+                                <v n="Id">4206L</v>
+                                <v n="IdParent">4204L</v>
+                              </o>
+                              <o>
+                                <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                <o n="Value" t="BoolValue">
+                                  <v n="Value">"FALSE"</v>
+                                  <v n="DefaultValue">"FALSE"</v>
+                                </o>
+                                <v n="Id">4207L</v>
+                                <v n="IdParent">4204L</v>
+                              </o>
+                            </l2>
+                            <v n="Id">4204L</v>
+                            <v n="IdParent">4014L</v>
+                          </o>
+                          <o>
+                            <o n="ElementList" t="SFCElementList">
+                              <l2 n="InnerList">
+                                <o t="SFCTransition">
+                                  <v n="VariableName">"Branch5__WaitChange__to__MoveABS"</v>
                                   <n n="EmbeddedTransition" />
                                   <l2 n="EmbeddedTransitionProperties" />
                                   <l2 n="Attributes" cet="SFCAttribute">
@@ -1681,7 +1964,7 @@ END_VAR
                                     <o>
                                       <v n="AttributeId">{a2621e18-7de3-4ea6-ae6d-89e9e0b7befd}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">""</v>
+                                        <v n="Value">"MoveABS_exit"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">4148L</v>
@@ -2053,7 +2336,35 @@ END_VAR
                     </o>
                   </l2>
                 </o>
-                <l2 n="Attributes" />
+                <l2 n="Attributes" cet="SFCAttribute">
+                  <o>
+                    <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                    <o n="Value" t="StringValue">
+                      <v n="Value">""</v>
+                      <v n="DefaultValue">""</v>
+                    </o>
+                    <v n="Id">4156L</v>
+                    <v n="IdParent">9L</v>
+                  </o>
+                  <o>
+                    <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                    <o n="Value" t="StringValue">
+                      <v n="Value">""</v>
+                      <v n="DefaultValue">""</v>
+                    </o>
+                    <v n="Id">4157L</v>
+                    <v n="IdParent">9L</v>
+                  </o>
+                  <o>
+                    <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                    <o n="Value" t="BoolValue">
+                      <v n="Value">"FALSE"</v>
+                      <v n="DefaultValue">"FALSE"</v>
+                    </o>
+                    <v n="Id">4158L</v>
+                    <v n="IdParent">9L</v>
+                  </o>
+                </l2>
                 <v n="Id">9L</v>
                 <v n="IdParent">-1L</v>
               </o>
@@ -2344,6 +2655,372 @@ END_VAR
         </XmlArchive>
       </SFC>
     </Implementation>
+    <Action Name="Act_Home" Id="{76b70dda-cd7f-475a-b235-791ab72c2a92}">
+      <Implementation>
+        <NWL>
+          <XmlArchive>
+            <Data>
+              <o xml:space="preserve" t="NWLImplementationObject">
+                <v n="NetworkListComment">""</v>
+                <v n="DefaultViewMode">"Fbd"</v>
+                <l2 n="NetworkList" cet="Network">
+                  <o>
+                    <v n="ILActive">false</v>
+                    <v n="FBDValid">false</v>
+                    <v n="ILValid">false</v>
+                    <l2 n="ILLines" />
+                    <v n="Comment">""</v>
+                    <v n="Title">""</v>
+                    <v n="Label">""</v>
+                    <v n="OutCommented">false</v>
+                    <l2 n="NetworkItems" cet="BoxTreeAssign">
+                      <o>
+                        <o n="OutputItems" t="OutputItemList">
+                          <l2 n="OutputItems" cet="Operand">
+                            <o>
+                              <v n="Operand">"HomeOut.Done"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">true</v>
+                              <v n="Boolean">false</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">23L</v>
+                            </o>
+                          </l2>
+                        </o>
+                        <o n="Flags" t="Flags">
+                          <v n="Flags">0</v>
+                          <v n="Fixed">false</v>
+                          <v n="Extensible">false</v>
+                        </o>
+                        <o n="RValue" t="BoxTreeBox">
+                          <v n="BoxType">"MC_Home"</v>
+                          <o n="Instance" t="Operand">
+                            <v n="Operand">"Home"</v>
+                            <v n="Type">"MC_Home"</v>
+                            <v n="Comment">""</v>
+                            <v n="SymbolComment">""</v>
+                            <v n="Address">""</v>
+                            <o n="Flags" t="Flags">
+                              <v n="Flags">0</v>
+                              <v n="Fixed">false</v>
+                              <v n="Extensible">false</v>
+                            </o>
+                            <v n="LValue">false</v>
+                            <v n="Boolean">false</v>
+                            <v n="IsInstance">true</v>
+                            <v n="Id">2L</v>
+                          </o>
+                          <o n="OutputItems" t="OutputItemList">
+                            <l2 n="OutputItems" cet="Operand">
+                              <n />
+                              <o>
+                                <v n="Operand">"HomeOut.Busy"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">4L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"HomeOut.Active"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">5L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"HomeOut.CommandAborted"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">6L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"HomeOut.Error"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">7L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"HomeOut.ErrorID"</v>
+                                <v n="Type">"UDINT"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">8L</v>
+                              </o>
+                            </l2>
+                          </o>
+                          <o n="Flags" t="Flags">
+                            <v n="Flags">0</v>
+                            <v n="Fixed">false</v>
+                            <v n="Extensible">false</v>
+                          </o>
+                          <n n="InputFlags" />
+                          <l2 n="InputItems" cet="BoxTreeOperand">
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"Global_Servo.Axis1"</v>
+                                <v n="Type">"AXIS_REF"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">10L</v>
+                              </o>
+                              <v n="Id">9L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"Home.Execute"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">12L</v>
+                              </o>
+                              <v n="Id">11L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"0"</v>
+                                <v n="Type">"INT"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">14L</v>
+                              </o>
+                              <v n="Id">13L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"Home.HomingMode"</v>
+                                <v n="Type">"MC_HomingMode"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">16L</v>
+                              </o>
+                              <v n="Id">15L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">""</v>
+                                <n n="Type" />
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">18L</v>
+                              </o>
+                              <v n="Id">17L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">""</v>
+                                <n n="Type" />
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">20L</v>
+                              </o>
+                              <v n="Id">19L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"home.bCalibrationCam"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">22L</v>
+                              </o>
+                              <v n="Id">21L</v>
+                            </o>
+                          </l2>
+                          <o n="InputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>Axis</v>
+                              <v>Execute</v>
+                              <v>Position</v>
+                              <v>HomingMode</v>
+                              <v>BufferMode</v>
+                              <v>Options</v>
+                              <v>bCalibrationCam</v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>AXIS_REF[REF]</v>
+                              <v>BOOL</v>
+                              <v>LREAL</v>
+                              <v>MC_HomingMode</v>
+                              <v>MC_BufferMode</v>
+                              <v>ST_HomingOptions</v>
+                              <v>BOOL</v>
+                            </l2>
+                          </o>
+                          <o n="OutputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>Done</v>
+                              <v>Busy</v>
+                              <v>Active</v>
+                              <v>CommandAborted</v>
+                              <v>Error</v>
+                              <v>ErrorID</v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>UDINT</v>
+                            </l2>
+                          </o>
+                          <v n="CallType" t="Operator">FunctionBlock</v>
+                          <v n="EN">false</v>
+                          <v n="ENO">false</v>
+                          <n n="STSnippet" />
+                          <v n="ContainsExtensibleInputs">false</v>
+                          <v n="ProvidesSTSnippet">false</v>
+                          <v n="Id">3L</v>
+                        </o>
+                        <v n="Id">24L</v>
+                      </o>
+                    </l2>
+                    <l2 n="Connectors" />
+                    <v n="Id">1L</v>
+                  </o>
+                </l2>
+                <v n="BranchCounter">0</v>
+                <v n="ValidIds">true</v>
+              </o>
+            </Data>
+            <TypeList>
+              <Type n="Boolean">System.Boolean</Type>
+              <Type n="BoxTreeAssign">{9873c309-1f09-4ebf-9078-42d8057ef11b}</Type>
+              <Type n="BoxTreeBox">{acfc6f68-8e3a-4af5-bf81-3dd512095a46}</Type>
+              <Type n="BoxTreeOperand">{9de7f100-1b87-424c-a62e-45b0cfc85ed2}</Type>
+              <Type n="Flags">{668066f2-6069-46b3-8962-8db8d13d7db2}</Type>
+              <Type n="Int32">System.Int32</Type>
+              <Type n="Int64">System.Int64</Type>
+              <Type n="Network">{d9a99d73-b633-47db-b876-a752acb25871}</Type>
+              <Type n="NWLImplementationObject">{25e509de-33d4-4447-93f8-c9e4ea381c8b}</Type>
+              <Type n="Operand">{c9b2f165-48a2-4a45-8326-3952d8a3d708}</Type>
+              <Type n="Operator">{bffb3c53-f105-4e85-aba2-e30df579d75f}</Type>
+              <Type n="OutputItemList">{f40d3e09-c02c-4522-a88c-dac23558cfc4}</Type>
+              <Type n="ParamList">{71496971-9e0c-4677-a832-b9583b571130}</Type>
+              <Type n="String">System.String</Type>
+            </TypeList>
+          </XmlArchive>
+        </NWL>
+      </Implementation>
+    </Action>
     <Action Name="Act_MoveAbs" Id="{6915af91-f4b1-4d40-99ec-2e82ddc50489}">
       <Implementation>
         <NWL>
@@ -3334,15 +4011,27 @@ PowerAxis1.Enable_Negative := TRUE;
 
 
 IF PowerAxis1.Status THEN
-	G_STATE := -1;
+//check the state where the error is produced	
+	CASE Aux_error OF 
+		QrCts.MOVESTATE_MOVABS:
+			G_STATE := QrCts.MOVESTATE_MOVABS;
+		QrCts.MOVESTATE_HOME:
+			G_STATE := QrCts.MOVESTATE_HOME;
+	ELSE
+		G_STATE := -1;
+	END_CASE
+	I_STATE := QrCts.MOVESTATE_ENABLE_F;
 ELSIF PowerAxis1.Error THEN
 	G_STATE := QrCts.MOVESTATE_ERROR;
+	I_STATE := QrCts.MOVESTATE_ENABLE_F;
 END_IF
 
 (* call the power function block *)
 Act_Power();
 Act_Reset();
 Act_MoveAbs();
+
+
 ]]></ST>
       </Implementation>
     </Action>
@@ -3356,10 +4045,12 @@ PowerAxis1.Enable_Negative := TRUE;]]></ST>
     </Action>
     <Action Name="Error_active" Id="{aa255cf8-ca48-4d1d-8627-2660654bd901}">
       <Implementation>
-        <ST><![CDATA[IF Global_Servo.Axis1.Status.Error THEN
+        <ST><![CDATA[IF Global_Servo.Axis1.NcToPlc.ErrorCode <>0 THEN
 	G_STATE := QrCts.MOVESTATE_RESET;	(* axis error requires reset *)
-ELSE
-	G_STATE := QrCts.MOVESTATE_INIT;		(* function block errors don't need a reset *)
+	I_STATE := QrCts.MOVESTATE_ERROR_F;
+//ELSE
+//	G_STATE := QrCts.MOVESTATE_INIT;
+//	I_STATE := QrCts.MOVESTATE_ERROR_F;		(* function block errors don't need a reset *)
 END_IF
 
 
@@ -3369,16 +4060,69 @@ Act_Reset();
 Act_MoveAbs();]]></ST>
       </Implementation>
     </Action>
-    <Action Name="Init_Axis_active" Id="{608179b8-0262-4a68-a08f-58e80770ad5d}">
+    <Action Name="Home_entry" Id="{32fb9a46-1642-4fad-a483-bae60448ec3f}">
       <Implementation>
-        <ST><![CDATA[MoveAbsAxis1.Execute := FALSE;
-Reset.Execute := FALSE;
-G_State := QrCts.MOVESTATE_ENABLE;
+        <ST><![CDATA[
+//start fuction block 
+Home.Execute := TRUE;
+Home.HomingMode := MC_DefaultHoming;
+
+//write the retain state variable 
+Act_Gl_State:=QrCts.MOVESTATE_HOME;
+//read internal variable and write over output variable
+I_STATE := QrCts.MOVESTATE_HOME_I;
+Act_In_State := I_STATE;
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="HomeQr_active" Id="{b5618258-2f10-4510-a97f-b7baa41bad28}">
+      <Implementation>
+        <ST><![CDATA[IF Home.CommandAborted OR Home.Error THEN
+	G_STATE := QrCts.MOVESTATE_ERROR;
+	I_STATE := QrCts.MOVESTATE_ERROR;
+	Aux_error := QrCts.MOVESTATE_HOME;
+	Act_In_State := I_STATE;
+ELSIF Home.Done THEN
+	I_STATE := QrCts.MOVESTATE_HOME_F;
+	//read internal variable and write over output variable
+	Act_In_State := I_STATE;
+	G_STATE := -1;
+	Home.Execute := FALSE;
+END_IF
+
+
 
 (* call the power function block *)
 Act_Power();
 Act_Reset();
-Act_MoveAbs();]]></ST>
+Act_Home();]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="HomeQr_exit" Id="{3fafbdf9-9d7f-430f-9083-ecea0f8230a3}">
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="Init_Axis_active" Id="{608179b8-0262-4a68-a08f-58e80770ad5d}">
+      <Implementation>
+        <ST><![CDATA[
+
+//star variables
+MoveAbsAxis1.Execute := FALSE;
+Reset.Execute := FALSE;
+Home.Execute := FALSE;
+//write the global staus
+G_State := QrCts.MOVESTATE_ENABLE;
+
+
+
+
+(* call the power function block *)
+Act_Power();
+Act_Reset();
+Act_MoveAbs();
+Act_Home();]]></ST>
       </Implementation>
     </Action>
     <Action Name="Init_Axis_entry" Id="{5fd46cfc-1bd1-434f-9105-dd6f5ba24956}">
@@ -3433,21 +4177,40 @@ Act_MoveAbs();]]></ST>
     </Action>
     <Action Name="Init_exit_0" Id="{ed758feb-5b02-4375-b9ea-b9b9faee0165}">
       <Implementation>
-        <ST><![CDATA[G_STATE:=QrCts.MOVESTATE_INIT;]]></ST>
+        <ST><![CDATA[G_STATE:=QrCts.MOVESTATE_INIT;
+
+
+//check is there are some error
+IF Global_Servo.Axis1.NcToPlc.ErrorCode <>0 THEN
+	G_STATE := QrCts.MOVESTATE_RESET;	(* axis error requires reset *)
+	
+//ELSE
+//	G_STATE := QrCts.MOVESTATE_INIT;
+//	I_STATE := QrCts.MOVESTATE_ERROR_F;		(* function block errors don't need a reset *)
+END_IF]]></ST>
       </Implementation>
     </Action>
     <Action Name="MoveABS_active" Id="{bf482580-bca4-4945-86ee-79bf57cd951e}">
       <Implementation>
         <ST><![CDATA[IF MoveAbsAxis1.CommandAborted OR MoveAbsAxis1.Error THEN
+	G_STATE := QrCts.MOVESTATE_ERROR;
 	I_STATE := QrCts.MOVESTATE_ERROR;
+	Aux_error := QrCts.MOVESTATE_MOVABS;
+	Position := Position - Act_Pos;
+	//read internal variable and write over output variable
+	Act_In_State := I_STATE;
 ELSIF MoveAbsAxis1.Done THEN
 	I_STATE := QrCts.MOVESTATE_MOVABS_F;
+	//read internal variable and write over output variable
+	Act_In_State := I_STATE;
+	G_STATE := -1;
+	MoveAbsAxis1.Execute := FALSE;
+	//I_STATE :=-1;
 END_IF
 
 
-//read internal variable and write over output variable
-Act_In_State := I_STATE;
-
+//read actual postion
+Act_Pos := Global_Servo.Axis1.NcToPlc.ActPos;
 
 (* call the power function block *)
 Act_Power();
@@ -3457,10 +4220,13 @@ Act_MoveAbs();]]></ST>
     </Action>
     <Action Name="MoveABS_entry" Id="{9d94e85e-c06d-4c66-9245-d026bb8c50a7}">
       <Implementation>
-        <ST><![CDATA[MoveAbsAxis1.Position := Position;
+        <ST><![CDATA[
+MoveAbsAxis1.Position := Position;
 MoveAbsAxis1.Velocity := Velocity;
 MoveAbsAxis1.BufferMode := MC_Buffered;
 MoveAbsAxis1.Execute := TRUE;
+
+
 
 //write the retain state variable 
 Act_Gl_State:=QrCts.MOVESTATE_MOVABS;
@@ -3471,13 +4237,20 @@ Act_In_State := I_STATE;
 ]]></ST>
       </Implementation>
     </Action>
+    <Action Name="MoveABS_exit" Id="{8591755a-eb2f-49ed-a34a-97f8e644fc9b}">
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Action>
     <Action Name="ResetQ_active" Id="{c6601bd5-2819-48da-a47b-7c01580c8bc3}">
       <Implementation>
         <ST><![CDATA[Reset.Execute := TRUE;
 IF Reset.Done THEN
 	G_STATE := QrCts.MOVESTATE_INIT;
+	I_STATE := QrCts.MOVESTATE_RESET_F;
 ELSIF Reset.Error THEN
 	G_STATE := QrCts.MOVESTATE_INIT; (* can't do anything here *)
+	//I_STATE := QrCts.MOVESTATE_RESET_F;
 END_IF
 
 
@@ -3497,11 +4270,9 @@ State_complete := TRUE;]]></ST>
       <Implementation>
         <ST><![CDATA[//write output variable to indicate that the robot execute the state 
 State_complete := FALSE;
-init_:=FALSE;
 
-G_STATE := -1;
-//rest internat state variable
-I_STATE :=-1;]]></ST>
+
+]]></ST>
       </Implementation>
     </Action>
     <ObjectProperties>
@@ -3600,75 +4371,120 @@ I_STATE :=-1;]]></ST>
       </XmlArchive>
     </ObjectProperties>
     <LineIds Name="QRob_StateMachine.Enable_axis_active">
-      <LineId Id="12" Count="2" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="15" Count="2" />
-      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="7" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="10" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="12" Count="5" />
+      <LineId Id="26" Count="1" />
       <LineId Id="1" Count="0" />
-      <LineId Id="18" Count="3" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Enable_axis_entry">
       <LineId Id="2" Count="2" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Error_active">
-      <LineId Id="2" Count="3" />
+      <LineId Id="2" Count="1" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="4" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="6" Count="5" />
       <LineId Id="1" Count="0" />
-      <LineId Id="7" Count="4" />
-      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="QRob_StateMachine.Home_entry">
+      <LineId Id="12" Count="0" />
+      <LineId Id="4" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="6" Count="5" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="QRob_StateMachine.HomeQr_active">
+      <LineId Id="2" Count="3" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="17" Count="4" />
+    </LineIds>
+    <LineIds Name="QRob_StateMachine.HomeQr_exit">
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Init_Axis_active">
-      <LineId Id="2" Count="0" />
-      <LineId Id="1" Count="0" />
-      <LineId Id="3" Count="0" />
-      <LineId Id="5" Count="0" />
+      <LineId Id="12" Count="2" />
+      <LineId Id="2" Count="1" />
+      <LineId Id="9" Count="1" />
       <LineId Id="4" Count="0" />
-      <LineId Id="6" Count="2" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="5" Count="3" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="11" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Init_Axis_entry">
-      <LineId Id="2" Count="1" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Init_Axis_exit">
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Init_exit_0">
       <LineId Id="1" Count="0" />
+      <LineId Id="3" Count="8" />
+      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_active">
-      <LineId Id="2" Count="0" />
+      <LineId Id="2" Count="1" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="4" Count="1" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="6" Count="2" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="13" Count="2" />
       <LineId Id="1" Count="0" />
-      <LineId Id="4" Count="2" />
-      <LineId Id="8" Count="2" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="12" Count="4" />
-      <LineId Id="11" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_entry">
-      <LineId Id="1" Count="0" />
-      <LineId Id="3" Count="2" />
-      <LineId Id="10" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="7" Count="0" />
       <LineId Id="13" Count="0" />
-      <LineId Id="12" Count="0" />
+      <LineId Id="2" Count="3" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="6" Count="6" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="QRob_StateMachine.MoveABS_exit">
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.ResetQ_active">
-      <LineId Id="2" Count="4" />
+      <LineId Id="2" Count="2" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="5" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="7" Count="5" />
       <LineId Id="1" Count="0" />
-      <LineId Id="8" Count="4" />
-      <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Wrt_FState_entry">
       <LineId Id="2" Count="0" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Wrt_FState_exit">
-      <LineId Id="2" Count="5" />
+      <LineId Id="2" Count="3" />
       <LineId Id="1" Count="0" />
     </LineIds>
   </POU>

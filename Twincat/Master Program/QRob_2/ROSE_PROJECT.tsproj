@@ -3580,12 +3580,13 @@ External Setpoint Generation:
 					<Name>Axis 1</Name>
 					<AxisPara>
 						<General UnitName="°"/>
+						<Velo RefSearch="10" RefSync="10"/>
 						<PositionAreaControl Enable="false"/>
 						<TargetPosControl Enable="false"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
-						<EncPara ScaleFactorNumerator="0.000686648" MaxCount="#xffffffff"/>
+						<EncPara ScaleFactorNumerator="0.000686648" MaxCount="#xffffffff" ReferenceSystem="4"/>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -3836,6 +3837,26 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>VisionRetVarState.Actual_In_State</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_GLV_State</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_In_State</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_POs</Name>
+							<Type>REAL</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>Qrob_control.fuzzy.nRem1</Name>
 							<Type>INT</Type>
 							<InOut>7</InOut>
 						</Var>
@@ -4567,7 +4588,7 @@ Submodule Info: Write General Purpose Registers 2
 			</Device>
 			<Device Id="3" DevType="113" AmsPort="28675" AmsNetId="169.254.8.25.4.1" RemoteName="Profinet_ur5 (Profinet Controller)">
 				<Name>Profinet_ur5 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000102700005c4445564943455c7b43373345453535432d423432382d343632462d383846312d3939343439363642343831327d00000000000000000100000000000000000080615f05f684040000000000000000000000000000010000000000000000000000000000000000000000000000000000</DevData>
+				<DevData>000000000000000000000000102700005c4445564943455c7b43373345453535432d423432382d343632462d383846312d3939343439363642343831327d00000000000000000100130cfea90000ffff80615f05f684040000000000000000000000000000010000000000000000000000000000000000000000000000000000</DevData>
 				<Image Id="6" AddrType="1" ImageType="3" SizeIn="228" SizeOut="490">
 					<Name>Image</Name>
 				</Image>

@@ -6,6 +6,8 @@
 VAR_INPUT
 	
 	aux_cu :REAL;
+	bthome : BOOL;
+	home :	 BOOL;
 	reset : bool;
 	external : BOOL;
     mover_horario:	BOOL;
@@ -28,7 +30,7 @@ VAR_INPUT
 END_VAR
 
 VAR
-	
+	MC_BufferMode :MC_BufferMode;
 	fbPower: MC_Power;
 	Axis1Enabled : BOOL;
 	actual_position : LREAL;
@@ -36,7 +38,7 @@ VAR
 	original_vel :DINT;
 	actual_current  :  LREAL;
 	position_ok :BOOL;
-	home :	 BOOL;
+	
 	mov_abs_ok : BOOL;
 	max_current : BOOL;
 	val_max_current : REAL;
@@ -598,7 +600,7 @@ END_VAR
                         </o>
                         <o>
                           <o n="Operand" t="Operand">
-                            <v n="Operand">"MC_Direct"</v>
+                            <v n="Operand">"MC_DefaultHoming"</v>
                             <v n="Type">"MC_HOMINGMODE"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
@@ -617,8 +619,8 @@ END_VAR
                         </o>
                         <o>
                           <o n="Operand" t="Operand">
-                            <v n="Operand">""</v>
-                            <n n="Type" />
+                            <v n="Operand">"MC_BufferMode"</v>
+                            <v n="Type">"MC_BufferMode"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
                             <v n="Address">""</v>
@@ -655,8 +657,8 @@ END_VAR
                         </o>
                         <o>
                           <o n="Operand" t="Operand">
-                            <v n="Operand">""</v>
-                            <n n="Type" />
+                            <v n="Operand">"bthome"</v>
+                            <v n="Type">"BOOL"</v>
                             <v n="Comment">""</v>
                             <v n="SymbolComment">""</v>
                             <v n="Address">""</v>

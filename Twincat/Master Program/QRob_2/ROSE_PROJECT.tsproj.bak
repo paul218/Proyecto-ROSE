@@ -3580,12 +3580,13 @@ External Setpoint Generation:
 					<Name>Axis 1</Name>
 					<AxisPara>
 						<General UnitName="°"/>
+						<Velo RefSearch="10" RefSync="10"/>
 						<PositionAreaControl Enable="false"/>
 						<TargetPosControl Enable="false"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
-						<EncPara ScaleFactorNumerator="0.000686648" MaxCount="#xffffffff"/>
+						<EncPara ScaleFactorNumerator="0.000686648" MaxCount="#xffffffff" ReferenceSystem="4"/>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -3735,10 +3736,6 @@ External Setpoint Generation:
 							<Type>DINT</Type>
 						</Var>
 						<Var>
-							<Name>Global_Servo.Axis1.NcToPlc</Name>
-							<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
 							<Name>Robot_A.UR_outputs</Name>
 							<Comment><![CDATA[variables para recibir del robot]]></Comment>
 							<Type GUID="{C684178D-BB1D-747C-8FA1-62A7D4C1C21F}">UR_5_T2O_BitRegisters</Type>
@@ -3780,13 +3777,13 @@ External Setpoint Generation:
 							<Name>Robot_S_ur3.UR_float_out</Name>
 							<Type GUID="{161F58AB-8B25-CE60-7894-B70CDD12A115}">UR_7_T2O</Type>
 						</Var>
+						<Var>
+							<Name>Global_Servo.Axis1.NcToPlc</Name>
+							<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>Global_Servo.Axis1.PlcToNc</Name>
-							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
 						<Var>
 							<Name>Robot_A.UR_inputs</Name>
 							<Comment><![CDATA[variables para enviar al robot]]></Comment>
@@ -3800,6 +3797,10 @@ External Setpoint Generation:
 							<Name>Robot_S_ur3.UR_inputs</Name>
 							<Comment><![CDATA[variables para enviar al robot]]></Comment>
 							<Type GUID="{600811DC-F72B-AA4D-9481-B34F8B67EC6D}">UR_9_O2T_Registers</Type>
+						</Var>
+						<Var>
+							<Name>Global_Servo.Axis1.PlcToNc</Name>
+							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="8">
@@ -3837,6 +3838,21 @@ External Setpoint Generation:
 						<Var>
 							<Name>VisionRetVarState.Actual_In_State</Name>
 							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_GLV_State</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_In_State</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_POs</Name>
+							<Type>REAL</Type>
 							<InOut>7</InOut>
 						</Var>
 					</Vars>
@@ -4567,7 +4583,7 @@ Submodule Info: Write General Purpose Registers 2
 			</Device>
 			<Device Id="3" DevType="113" AmsPort="28675" AmsNetId="169.254.8.25.4.1" RemoteName="Profinet_ur5 (Profinet Controller)">
 				<Name>Profinet_ur5 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000102700005c4445564943455c7b43373345453535432d423432382d343632462d383846312d3939343439363642343831327d00000000000000000100000000000000000080615f05f684040000000000000000000000000000010000000000000000000000000000000000000000000000000000</DevData>
+				<DevData>000000000000000000000000102700005c4445564943455c7b43373345453535432d423432382d343632462d383846312d3939343439363642343831327d00000000000000000100130cfea90000ffff80615f05f684040000000000000000000000000000010000000000000000000000000000000000000000000000000000</DevData>
 				<Image Id="6" AddrType="1" ImageType="3" SizeIn="228" SizeOut="490">
 					<Name>Image</Name>
 				</Image>

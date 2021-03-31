@@ -5,7 +5,7 @@
     <CycleTime>1000</CycleTime>
     <Priority>12</Priority>
     <PouCall>
-      <Name>MASTER_CTR</Name>
+      <Name>QRob_StateMachine</Name>
     </PouCall>
     <PouCall>
       <Name>QRob_StateMachine</Name>

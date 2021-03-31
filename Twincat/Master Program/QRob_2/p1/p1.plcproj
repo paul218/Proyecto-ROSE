@@ -104,6 +104,10 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="GVLs\QRob\Variables\QrRetVarState.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="GVLs\Robot Params\Constans\RCts.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
