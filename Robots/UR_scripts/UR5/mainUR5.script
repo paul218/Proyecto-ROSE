@@ -106,8 +106,8 @@ def mainUR5():
   #### FOO_9 CHECKS IF THE SEPARATOR HAS BEEN TAKEN BY THE GRIPPER #####
   ######################################################################
    
-	def CheckGripState():
-		if(gripkit_easy_get_state()==3):
+	def CheckGripState(number):
+		if(gripkit_easy_get_state()==number):
 		  return True
 		else:
 		  return False
@@ -297,11 +297,11 @@ def mainUR5():
 		# close the tool and check if the head is pressed
 	#set_tool_digital_out(1, True)
 		gripkit_easy_grip()
-		var=CheckGripState() #check if the tool has gripped the separator correctly
+		var=CheckGripState(3) #check if the tool has gripped the separator correctly
    	while var!=True:
     	gripkit_easy_release()
 	    gripkit_easy_grip()
-	  	var=CheckGripState()
+	  	var=CheckGripState(3)
 		end
 		#sleep(3.0)
 
@@ -383,6 +383,15 @@ def mainUR5():
 	def UpRobotAs():
 	
 		init_register(3,4,5,5120)
+
+    #Open the tool
+    gripkit_easy_release()
+		var=CheckGripState(1) #check if the tool is open
+   	while var!=True:
+	    gripkit_easy_release()
+	  	var=CheckGripState(1)
+		end
+
 		#Apply force in z axis to up robot
 		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
 		frame = [0,0,0,0,0,0] #tool or base frame
