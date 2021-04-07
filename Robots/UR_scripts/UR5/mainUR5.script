@@ -383,6 +383,8 @@ def mainUR5():
 	def UpRobotAs():
 	
 		init_register(3,4,5,5120)
+		# open the tool 
+		
 		#Apply force in z axis to up robot
 		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
 		frame = [0,0,0,0,0,0] #tool or base frame
