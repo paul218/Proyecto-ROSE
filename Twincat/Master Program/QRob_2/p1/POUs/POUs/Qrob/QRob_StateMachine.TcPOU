@@ -9,6 +9,11 @@ G_STATE : INT := -1;
 //comaper position to stop
 Position : LREAL:= 0;
 Velocity : REAL:=50;
+//torque_set_point AT%Q*:INT;
+//Max_profile_velocity AT%Q*:UDINT := 314572;
+//Modes_operation AT%Q*:USINT:= 8;
+//actual_torque AT%I*:INT ;
+
 
 END_VAR
 VAR_OUTPUT
@@ -4371,18 +4376,7 @@ State_complete := FALSE;
       </XmlArchive>
     </ObjectProperties>
     <LineIds Name="QRob_StateMachine.Enable_axis_active">
-      <LineId Id="2" Count="7" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="10" Count="1" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="12" Count="5" />
-      <LineId Id="26" Count="1" />
+      <LineId Id="2" Count="27" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Enable_axis_entry">
@@ -4390,46 +4384,23 @@ State_complete := FALSE;
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Error_active">
-      <LineId Id="2" Count="1" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="4" Count="1" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="6" Count="5" />
+      <LineId Id="2" Count="11" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Home_entry">
-      <LineId Id="12" Count="0" />
-      <LineId Id="4" Count="1" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="6" Count="5" />
-      <LineId Id="13" Count="0" />
+      <LineId Id="2" Count="10" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.HomeQr_active">
-      <LineId Id="2" Count="3" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="7" Count="1" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="11" Count="1" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="17" Count="4" />
+      <LineId Id="2" Count="17" />
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.HomeQr_exit">
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Init_Axis_active">
-      <LineId Id="12" Count="2" />
-      <LineId Id="2" Count="1" />
-      <LineId Id="9" Count="1" />
-      <LineId Id="4" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="5" Count="3" />
+      <LineId Id="2" Count="15" />
       <LineId Id="1" Count="0" />
-      <LineId Id="11" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Init_Axis_entry">
       <LineId Id="2" Count="0" />
@@ -4439,44 +4410,22 @@ State_complete := FALSE;
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Init_exit_0">
+      <LineId Id="2" Count="9" />
       <LineId Id="1" Count="0" />
-      <LineId Id="3" Count="8" />
-      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_active">
-      <LineId Id="2" Count="1" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="31" Count="1" />
-      <LineId Id="4" Count="1" />
-      <LineId Id="35" Count="1" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="6" Count="2" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="13" Count="2" />
+      <LineId Id="2" Count="22" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_entry">
-      <LineId Id="13" Count="0" />
-      <LineId Id="2" Count="3" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="6" Count="6" />
+      <LineId Id="2" Count="13" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_exit">
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.ResetQ_active">
-      <LineId Id="2" Count="2" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="5" Count="1" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="7" Count="5" />
+      <LineId Id="2" Count="12" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Wrt_FState_entry">

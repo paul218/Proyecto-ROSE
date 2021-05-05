@@ -13,8 +13,5 @@
     <Content Include="UR5 DATA.tcscopex">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="UR5 DATA_1.svdx">
-      <SubType>Content</SubType>
-    </Content>
   </ItemGroup>
 </Project>

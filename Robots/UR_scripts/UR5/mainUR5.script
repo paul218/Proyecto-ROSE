@@ -19,11 +19,11 @@ def mainUR5():
   #######################################################
 
   def set_Speed(vel_ms, vel_rads, acel_ms, acel_rads ): 
-     #default: speed_ms = 0.3 speed_rads = 0.75 accel_mss = 3 accel_radss = 1.2 
-     global speed_ms = vel_ms
-     global speed_rads = vel_rads
-     global accel_mss = acel_ms
-     global accel_radss = acel_rads
+    #default: speed_ms = 0.3 speed_rads = 0.75 accel_mss = 3 accel_radss = 1.2 
+    global speed_ms = vel_ms
+    global speed_rads = vel_rads
+    global accel_mss = acel_ms
+    global accel_radss = acel_rads
   end
 
   #######################################################
@@ -31,8 +31,8 @@ def mainUR5():
   #######################################################
 
   def write_state_int(register, value):
-     write_output_integer_register(register, value)
-     sleep(0.1)
+    write_output_integer_register(register, value)
+    sleep(0.1)
   end
 
   #######################################################
@@ -40,10 +40,10 @@ def mainUR5():
   #######################################################
 
   def read_state_int(register):
-   	 while (read_input_integer_register(register) ==   -1  ):	  	  
-    	  sync()
-     end
-   	 return(read_input_integer_register(register))
+    while (read_input_integer_register(register) ==   -1  ):	  	  
+      sync()
+    end
+    return(read_input_integer_register(register))
   end
 
   #######################################################
@@ -51,9 +51,9 @@ def mainUR5():
   #######################################################
 
   def init_register(register0, register1, register2, value):
-   	 write_state_int(register0, value)
-   	 write_state_int(register1, value)
-   	 write_state_int(register2, value)
+    write_state_int(register0, value)
+    write_state_int(register1, value)
+    write_state_int(register2, value)
   end
 
   #######################################################
@@ -61,12 +61,12 @@ def mainUR5():
   #######################################################
 
   def reset_register(register0, register1, register2, value):
-     write_state_int(register0, value)
-     write_state_int(register1, value)
-   	 write_state_int(register2, value)
-   	 write_state_int(register0, 10)
-   	 write_state_int(register1, 10)
-   	 write_state_int(register2, 10)
+    write_state_int(register0, value)
+    write_state_int(register1, value)
+    write_state_int(register2, value)
+    write_state_int(register0, 10)
+    write_state_int(register1, 10)
+    write_state_int(register2, 10)
   end
 
   #######################################################
@@ -74,9 +74,9 @@ def mainUR5():
   #######################################################
 
   def init_status(register0, register1, register2):
-	 global status0=read_state_int(register0)
-     global status1=read_state_int(register1)
-   	 global status2=read_state_int(register2)
+    global status0=read_state_int(register0)
+    global status1=read_state_int(register1)
+    global status2=read_state_int(register2)
   end
 
   #######################################################
@@ -84,12 +84,14 @@ def mainUR5():
   #######################################################
 
 	def CheckStatus(state):
-	 if (status0==state and status1==state and status2==state or status0==state and status1==state and status2!=state or status0==state and status1!=state and 
+
+	if (status0==state and status1==state and status2==state or status0==state and status1==state and status2!=state or status0==state and status1!=state and
 	 status2==state or status0!=state and status1==state and status2==state):
-	  	 return True
-	 else:
-	  	 return False
-	 end
+	  return True
+	else:
+	  return False
+	end
+
 	end
 
   #######################################################
@@ -97,23 +99,13 @@ def mainUR5():
   #######################################################
 
 	def write_state_bool(register):
-	 write_output_boolean_register(register, True)
-  	 sleep(0.1)
-  	 write_output_boolean_register(register, False)
+	  write_output_boolean_register(register, True)
+  	sleep(0.1)
+  	write_output_boolean_register(register, False)
 	end
 
-  ######################################################################
-  #### FOO_9 CHECKS IF THE SEPARATOR HAS BEEN TAKEN BY THE GRIPPER #####
-  ######################################################################
-   
-	def CheckGripState():
-		if(gripkit_easy_get_state()==3):
-		  return True
-		else:
-		  return False
-		end
-	  end  
 
+  
   ##############################################
   ############### STATE_0 HOMING ###############
   ##############################################
@@ -121,9 +113,9 @@ def mainUR5():
 	def UR5Home():
 		
 	  init_register(3,4,5,500)
-  	  #gripkit_easy_enable()  #ESTO DEBERIA IR EN LA MARCHA DE PREPARACIÓN
+  	#gripkit_easy_enable()  #ESTO DEBERIA IR EN LA MARCHA DE PREPARACIÓN
 	  movej([0.000000, -0.174533, -2.775074, -0.349066, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-  	  reset_register(3,4,5,501)
+  	reset_register(3,4,5,501)
 
 	end
 
@@ -135,8 +127,8 @@ def mainUR5():
 
 	  init_register(3,4,5,510)
 	  movej([0.180484, -1.614237, -2.019210, -1.097497, 1.576100, 3.328193],accel_radss,speed_rads,0,blend_radius_m)
-  	  movel(p[480.49/1000, -145.25/1000, 239.41/1000, 2.229, 2.216, -0.004], accel_mss, speed_ms, 0, blend_radius_m)
-	  reset_register(3,4,5,511)
+  	movel(p[480.49/1000, -145.25/1000, 239.41/1000, 2.229, 2.216, -0.004], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,511)
 		
 	end
   
@@ -148,10 +140,10 @@ def mainUR5():
 	def UR5DropHead():
 
 	  init_register(3,4,5,520)
-  	  movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
 	  movej([-0.382430, -1.654966, -2.063825, -1.011365, 1.578471, 2.765253],accel_radss,speed_rads,0,blend_radius_m)
-  	  movel(p[377.91/1000, -384.22/1000, 87.47/1000, 2.238, 2.229, -0.007], accel_mss, speed_ms, 0, blend_radius_m)
-  	  reset_register(3,4,5,521)
+  	movel(p[377.91/1000, -384.22/1000, 87.47/1000, 2.238, 2.229, -0.007], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,521)
 		
 	end
   
@@ -161,11 +153,11 @@ def mainUR5():
 
 	def UR5Camera2():
 
-  	  init_register(3,4,5,530)
-  	  movej([-0.181619, -1.411765, -2.033627, -1.039257, 1.538940, 1.678820],accel_radss,speed_rads,0,blend_radius_m)
-      movej([0.063264, -1.634060, -2.003714, -1.074618, 1.570793, 0.063264],accel_radss,speed_rads,0,blend_radius_m)
-      movel(p[480.49/1000, -9.68/1000, 239.41/1000, 2.239, -2.204, 0], accel_mss, speed_ms, 0, blend_radius_m)
-      reset_register(3,4,5,531)
+  	init_register(3,4,5,530)
+  	movej([-0.181619, -1.411765, -2.033627, -1.039257, 1.538940, 1.678820],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.063264, -1.634060, -2.003714, -1.074618, 1.570793, 0.063264],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[480.49/1000, -9.68/1000, 239.41/1000, 2.239, -2.204, 0], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,531)
 
 	end
 
@@ -175,12 +167,12 @@ def mainUR5():
 
 	def UR5UpCamera1():
 
-  	  init_register(3,4,5,540)
-  	  UR5Home()
-  	  movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([0.098088, -1.956085, -0.058950, -2.697358, 1.570793, 0.098088],accel_radss,speed_rads,0,blend_radius_m)
-  	  movel(p[429.86/1000, -10.03/1000, 740.66/1000, 2.206, -2.235, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
-  	  reset_register(3,4,5,541)
+  	init_register(3,4,5,540)
+  	UR5Home()
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.098088, -1.956085, -0.058950, -2.697358, 1.570793, 0.098088],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[429.86/1000, -10.03/1000, 740.66/1000, 2.206, -2.235, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,541)
 
 	end
 
@@ -190,11 +182,11 @@ def mainUR5():
 
 	def UR5TakeBuffer():
 
-  	  init_register(3,4,5,550)
-  	  movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
-  	  UR5DropHead()
-  	  reset_register(3,4,5,551)
+  	init_register(3,4,5,550)
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	UR5DropHead()
+  	reset_register(3,4,5,551)
 
 	end
   
@@ -204,14 +196,14 @@ def mainUR5():
 
 	def UR5UpCamera2():
 
-  	  init_register(3,4,5,560)
-  	  movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([0.211928, -1.884634, -0.221391, -2.621276, 1.594272, 3.353305],accel_radss,speed_rads,0,blend_radius_m)
-  	  movel(p[435.17/1000, -146.59/1000, 741.93/1000, 2.202, 2.240, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
-  	  reset_register(3,4,5,561)
+  	init_register(3,4,5,560)
+  	movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.211928, -1.884634, -0.221391, -2.621276, 1.594272, 3.353305],accel_radss,speed_rads,0,blend_radius_m)
+  	movel(p[435.17/1000, -146.59/1000, 741.93/1000, 2.202, 2.240, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
+  	reset_register(3,4,5,561)
 
 	end
 
@@ -221,12 +213,12 @@ def mainUR5():
 
 	def UR5Return():
 
-  	  init_register(3,4,5,570)
-  	  movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
-  	  movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-  	  UR5Home()
-  	  reset_register(3,4,5,571)
+  	init_register(3,4,5,570)
+  	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
+  	UR5Home()
+  	reset_register(3,4,5,571)
 
 	end
 
@@ -283,7 +275,7 @@ def mainUR5():
 
 		write_state_bool(2) #write finish movement
 		
-		# wait move servomotor with calculate angle of nut
+		# wait move servomotot with calculate angle of nut
 		while (not(read_input_boolean_register(2) ==   True  )):
 		  sync()
 		end
@@ -295,15 +287,8 @@ def mainUR5():
 		movel(pos_nut, accel_mss, speed_ms, 0, blend_radius_m)
 		
 		# close the tool and check if the head is pressed
-	#set_tool_digital_out(1, True)
-		gripkit_easy_grip()
-		var=CheckGripState() #check if the tool has gripped the separator correctly
-   	while var!=True:
-    	gripkit_easy_release()
-	    gripkit_easy_grip()
-	  	var=CheckGripState()
-		end
-		#sleep(3.0)
+		set_tool_digital_out(1, True)
+		sleep(3.0)
 
 		write_state_bool(2) #write finish movement
 		reset_register(3,4,5,591)
@@ -338,7 +323,7 @@ def mainUR5():
 		tcp_inst = get_actual_tcp_pose()
 		up_distance = p[0,0,40/1000,0,0,0]
 		pos_up = pose_add (tcp_inst, up_distance)
-    	set_payload(3.89,[-102/1000,6/1000,-17/1000]) #adjust new weight of the tool
+    set_payload(3.89,[-102/1000,6/1000,-17/1000]) #adjust new weight of the tool
 		movel(pos_up, accel_mss, speed_ms, 0, blend_radius_m)
 		
 		write_state_bool(2) #write finish movement

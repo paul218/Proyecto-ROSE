@@ -5,10 +5,16 @@
     <CycleTime>1000</CycleTime>
     <Priority>12</Priority>
     <PouCall>
-      <Name>QRob_StateMachine</Name>
+      <Name>data_robot_ur3</Name>
     </PouCall>
     <PouCall>
-      <Name>QRob_StateMachine</Name>
+      <Name>data_robot_UR5</Name>
+    </PouCall>
+    <PouCall>
+      <Name>Qrob_control</Name>
+    </PouCall>
+    <PouCall>
+      <Name>MASTER_CTR</Name>
     </PouCall>
     <TaskFBGuid>{a447d856-05de-4838-b2d2-92af43dedf70}</TaskFBGuid>
     <Fb_init>{ccc79dc1-96b8-403e-85f7-b9213b3b3f1a}</Fb_init>

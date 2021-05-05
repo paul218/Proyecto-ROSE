@@ -36,9 +36,9 @@ TCP_torque_z : REAL;
 TCP_force : REAL;
 velocity :INT;
 
-velo : REAL;
 
 
+//velocity_degress : REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>

@@ -3732,6 +3732,10 @@ External Setpoint Generation:
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
+							<Name>Qrob_control.actual_torque</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>Global_actual_velocity.actual_velocity</Name>
 							<Type>DINT</Type>
 						</Var>
@@ -3785,6 +3789,18 @@ External Setpoint Generation:
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>
+							<Name>Qrob_control.torque_set_point</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>Qrob_control.Modes_operation</Name>
+							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>Qrob_control.Max_profile_velocity</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
 							<Name>Robot_A.UR_inputs</Name>
 							<Comment><![CDATA[variables para enviar al robot]]></Comment>
 							<Type GUID="{600811DC-F72B-AA4D-9481-B34F8B67EC6D}">UR_9_O2T_Registers</Type>
@@ -3806,8 +3822,28 @@ External Setpoint Generation:
 					<Vars VarGrpType="8">
 						<Name>PlcTask Retains</Name>
 						<Var>
+							<Name>Qrob_control.fuzzy.nRem1</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
 							<Name>GLV_USER_FUN.Value</Name>
 							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_GLV_State</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_In_State</Name>
+							<Type>INT</Type>
+							<InOut>7</InOut>
+						</Var>
+						<Var>
+							<Name>QrRetVarState.Actual_POs</Name>
+							<Type>REAL</Type>
 							<InOut>7</InOut>
 						</Var>
 						<Var>
@@ -3837,26 +3873,6 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>VisionRetVarState.Actual_In_State</Name>
-							<Type>INT</Type>
-							<InOut>7</InOut>
-						</Var>
-						<Var>
-							<Name>QrRetVarState.Actual_GLV_State</Name>
-							<Type>INT</Type>
-							<InOut>7</InOut>
-						</Var>
-						<Var>
-							<Name>QrRetVarState.Actual_In_State</Name>
-							<Type>INT</Type>
-							<InOut>7</InOut>
-						</Var>
-						<Var>
-							<Name>QrRetVarState.Actual_POs</Name>
-							<Type>REAL</Type>
-							<InOut>7</InOut>
-						</Var>
-						<Var>
-							<Name>Qrob_control.fuzzy.nRem1</Name>
 							<Type>INT</Type>
 							<InOut>7</InOut>
 						</Var>
@@ -4127,6 +4143,19 @@ External Setpoint Generation:
 							</OwnerB>
 						</OwnerA>
 					</UnrestoredVarLinks>
+					<UnrestoredVarLinks ImportTime="2021-04-27T18:39:26">
+						<OwnerA Name="InputDst" Prefix="TIPC^p1^p1 Instance" Type="1">
+							<OwnerB Name="TIID^Device 5 (EtherCAT)^Drive 1 (ZeroErr Driver)">
+								<Link VarA="QRob_StateMachine.actual_torque" TypeA="INT" InOutA="0" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="Transmit PDO mapping 0^Torque Actual Value" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+						<OwnerA Name="OutputSrc" Prefix="TIPC^p1^p1 Instance" Type="2">
+							<OwnerB Name="TIID^Device 5 (EtherCAT)^Drive 1 (ZeroErr Driver)">
+								<Link VarA="QRob_StateMachine.Max_profile_velocity" TypeA="UDINT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000008}" VarB="Receive PDO mapping 0^Max profile velocity" RestoreInfo="ANotFound"/>
+								<Link VarA="QRob_StateMachine.torque_set_point" TypeA="INT" InOutA="1" GuidA="{18071995-0000-0000-0000-000000000006}" VarB="Receive PDO mapping 0^Target Torque" RestoreInfo="ANotFound"/>
+							</OwnerB>
+						</OwnerA>
+					</UnrestoredVarLinks>
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
@@ -4147,7 +4176,7 @@ External Setpoint Generation:
 		<Io>
 			<Device Id="1" DevType="113" AmsPort="28673" AmsNetId="169.254.8.25.2.1" RemoteName="Profinet_ur3 (Profinet Controller)">
 				<Name>Profinet_ur3 (Profinet Controller)</Name>
-				<DevData>000000000000000000000000102700005c4445564943455c7b38343539313942412d443931332d343231352d393938342d3437453335454339383637437d00000000000000000100000000000000000080615f05f685040000000000000000000000000000010000000000000000000000000000000000000000000000000000</DevData>
+				<DevData>000000000000000000000000102700005c4445564943455c7b38343539313942412d443931332d343231352d393938342d3437453335454339383637437d00000000000000000100901cfea90000ffff80615f05f685040000000000000000000000000000010000000000000000000000000000000000000000000000000000</DevData>
 				<Image Id="4" AddrType="1" ImageType="3" SizeIn="228" SizeOut="490">
 					<Name>Image</Name>
 				</Image>
@@ -5045,8 +5074,8 @@ Submodule Info: Write General Purpose Registers 2
 					<EtherCAT SlaveType="2" PdiType="#x0e8d" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="47" VendorId="#x5a65726f" ProductCode="#x00029252" RevisionNo="#x00000001" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutStateChange1="2000" TimeoutStateChange2="9000" TimeoutMailbox2="2000" PortPhys="17" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="ZeroErr Driver" Desc="ZeroErr Driver" PortABoxInfo="#x00ffffff">
 						<SyncMan>001080002600010001000000220080008000001026010000</SyncMan>
 						<SyncMan>801080002200010002000000220080008000801022010000</SyncMan>
-						<SyncMan>00110a006400010003000000000000000000001164010000</SyncMan>
-						<SyncMan>00140a002000010004000000000000000000001420010000</SyncMan>
+						<SyncMan>00110c006400010003000000000000000000001164010000</SyncMan>
+						<SyncMan>001410002000010004000000000000000000001420010000</SyncMan>
 						<Fmmu>0000000000000000001100020100000001000000000000000000000000000000</Fmmu>
 						<Fmmu>0000000000000000001400010100000002000000000000000000000000000000</Fmmu>
 						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
@@ -5066,6 +5095,12 @@ Submodule Info: Write General Purpose Registers 2
 							</Entry>
 							<Entry Name="Status word" Index="#x6041">
 								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="Torque Actual Value" Index="#x6077">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="Actual velocity" Index="#x606c">
+								<Type>DINT</Type>
 							</Entry>
 						</Pdo>
 						<Pdo Name="Transmit PDO mapping 1" Index="#x1a01" Flags="#x0010">
@@ -5285,11 +5320,14 @@ Submodule Info: Write General Purpose Registers 2
 							<Entry Name="Target Position" Index="#x607a">
 								<Type>DINT</Type>
 							</Entry>
-							<Entry Name="Digital Outputs" Index="#x60fe">
-								<Type>UDINT</Type>
-							</Entry>
 							<Entry Name="Control word" Index="#x6040">
 								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="Target Torque" Index="#x6071">
+								<Type>INT</Type>
+							</Entry>
+							<Entry Name="Max profile velocity" Index="#x607f">
+								<Type>UDINT</Type>
 							</Entry>
 						</Pdo>
 						<Pdo Name="Receive PDO mapping 1" Index="#x1601" InOut="1" Flags="#x0010">
@@ -5568,13 +5606,14 @@ Submodule Info: Write General Purpose Registers 2
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{00000000-2001-0850-0020-500840000403}" Id="#x02030070"/>
 		<MappingInfo Identifier="{00000000-2001-0850-0020-500860000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-0010-0304-3000-040310000403}" Id="#x02030020"/>
 		<MappingInfo Identifier="{00000000-0020-0304-3000-040321000403}" Id="#x02030050"/>
 		<MappingInfo Identifier="{00000000-0040-0304-5000-040340000403}" Id="#x02030030"/>
 		<MappingInfo Identifier="{00000000-0060-0304-7000-040360000403}" Id="#x02030040"/>
 		<MappingInfo Identifier="{08502001-0010-0500-0020-500830000403}" Id="#x02030060" Watchdog="08000000040000000400000004000000"/>
+		<MappingInfo Identifier="{05000010-0010-0304-3000-040310000403}" Id="#x02030080" Watchdog="00000000000000000000000000000000"/>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Axis 1">
 			<OwnerB Name="TIID^Device 5 (EtherCAT)^Drive 1 (ZeroErr Driver)">
 				<Link VarA="Drive^Inputs^In^nDcOutputTime" VarB="InfoData^DcOutputShift"/>
@@ -5592,6 +5631,12 @@ Submodule Info: Write General Purpose Registers 2
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIPC^p1^p1 Instance">
+			<OwnerB Name="TIID^Device 5 (EtherCAT)^Drive 1 (ZeroErr Driver)">
+				<Link VarA="PlcTask Inputs^Global_actual_velocity.actual_velocity" VarB="Transmit PDO mapping 0^Actual velocity"/>
+				<Link VarA="PlcTask Inputs^Qrob_control.actual_torque" VarB="Transmit PDO mapping 0^Torque Actual Value"/>
+				<Link VarA="PlcTask Outputs^Qrob_control.Max_profile_velocity" VarB="Receive PDO mapping 0^Max profile velocity"/>
+				<Link VarA="PlcTask Outputs^Qrob_control.torque_set_point" VarB="Receive PDO mapping 0^Target Torque"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Profinet_ur3 (Profinet Controller)^uriodev1">
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_JOINS^FLOAT0[0]" VarB="API^Term 4 (3_T2O Joints)^Subterm 6 (3_T2O Joints)^Inputs^T2O Joints[0]"/>
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_JOINS^FLOAT0[1]" VarB="API^Term 4 (3_T2O Joints)^Subterm 6 (3_T2O Joints)^Inputs^T2O Joints[1]"/>
@@ -5669,6 +5714,30 @@ Submodule Info: Write General Purpose Registers 2
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_TCP^FLOAT5[1]" VarB="API^Term 5 (4_T2O TCP)^Subterm 7 (4_T2O TCP)^Inputs^T2O TCP[21]"/>
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_TCP^FLOAT5[2]" VarB="API^Term 5 (4_T2O TCP)^Subterm 7 (4_T2O TCP)^Inputs^T2O TCP[22]"/>
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_TCP^FLOAT5[3]" VarB="API^Term 5 (4_T2O TCP)^Subterm 7 (4_T2O TCP)^Inputs^T2O TCP[23]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT0[0]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[0]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT0[1]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[1]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT0[2]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[2]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT0[3]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[3]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT1[0]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[4]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT1[1]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[5]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT1[2]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[6]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT1[3]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[7]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT2[0]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[8]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT2[1]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[9]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT2[2]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[10]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT2[3]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[11]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT3[0]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[12]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT3[1]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[13]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT3[2]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[14]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT3[3]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[15]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT4[0]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[16]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT4[1]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[17]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT4[2]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[18]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT4[3]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[19]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT5[0]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[20]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT5[1]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[21]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT5[2]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[22]"/>
+				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_float_out^FLOAT5[3]" VarB="API^Term 8 (7_T2O General Purpose Float Registers)^Subterm 10 (7_T2O General Purpose Float Registers)^Inputs^T2O Float Registers[23]"/>
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_outputs^B0" VarB="API^Term 6 (5_T2O General Purpose Bit Registers)^Subterm 8 (5_T2O General Purpose Bit Registers)^Inputs^T2O Bit Registers[0]"/>
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_outputs^B1" VarB="API^Term 6 (5_T2O General Purpose Bit Registers)^Subterm 8 (5_T2O General Purpose Bit Registers)^Inputs^T2O Bit Registers[0]" Size="1" OffsB="1"/>
 				<Link VarA="PlcTask Inputs^Robot_S_ur3.UR_outputs^B10" VarB="API^Term 6 (5_T2O General Purpose Bit Registers)^Subterm 8 (5_T2O General Purpose Bit Registers)^Inputs^T2O Bit Registers[1]" Size="1" OffsB="2"/>

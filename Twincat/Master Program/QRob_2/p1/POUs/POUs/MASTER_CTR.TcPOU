@@ -2223,7 +2223,7 @@ END_VAR
                                                   <v n="IdParent">3882L</v>
                                                 </o>
                                                 <o t="SFCTransition">
-                                                  <v n="VariableName">"DropBench__to__Wrt_FState"</v>
+                                                  <v n="VariableName">"DropBench__to__Ck_Sep_pos"</v>
                                                   <n n="EmbeddedTransition" />
                                                   <l2 n="EmbeddedTransitionProperties" />
                                                   <l2 n="Attributes" cet="SFCAttribute">
@@ -2353,6 +2353,189 @@ END_VAR
                                             </o>
                                           </l2>
                                           <v n="Id">3878L</v>
+                                          <v n="IdParent">3440L</v>
+                                        </o>
+                                        <o t="SFCStep">
+                                          <n n="EmbeddedMainAction" />
+                                          <n n="EmbeddedEntryAction" />
+                                          <n n="EmbeddedExitAction" />
+                                          <l2 n="EmbeddedMainActionProperties" />
+                                          <l2 n="EmbeddedEntryActionProperties" />
+                                          <l2 n="EmbeddedExitActionProperties" />
+                                          <o n="ElementList" t="SFCElementList">
+                                            <l2 n="InnerList" />
+                                          </o>
+                                          <l2 n="Attributes" cet="SFCAttribute">
+                                            <o>
+                                              <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">"Ck_Sep_pos"</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">3964L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">""</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">3965L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                              <o n="Value" t="BoolValue">
+                                                <v n="Value">"FALSE"</v>
+                                                <v n="DefaultValue">"FALSE"</v>
+                                              </o>
+                                              <v n="Id">3966L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{bc882c11-1e91-4dd8-a6b8-2075724ed18b}</v>
+                                              <o n="Value" t="EnumValue">
+                                                <v n="TemplateGuid">{79a4fdd5-c859-4de4-aa8d-c03372c880c2}</v>
+                                                <n n="BaseType" />
+                                                <v n="Value">"0"</v>
+                                                <v n="DefaultValue">"0"</v>
+                                              </o>
+                                              <v n="Id">3967L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{6844a48e-46c2-4cc8-a185-a478f3b99cc0}</v>
+                                              <o n="Value" t="BoolValue">
+                                                <v n="Value">"FALSE"</v>
+                                                <v n="DefaultValue">"FALSE"</v>
+                                              </o>
+                                              <v n="Id">3968L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{62e1754b-7629-4e63-9cec-10ae0c536f1f}</v>
+                                              <o n="Value" t="BoolValue">
+                                                <v n="Value">"FALSE"</v>
+                                                <v n="DefaultValue">"FALSE"</v>
+                                              </o>
+                                              <v n="Id">3969L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{cacf1a68-236e-47c2-b7b1-1cf9199718cb}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">""</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">3970L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{b693554c-1b01-4a8d-afde-9e3a46f7465d}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">""</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">3971L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{700a583f-b4d4-43e4-8c14-629c7cd3bec8}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">"Ck_Sep_pos_active"</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">3972L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{a6b08bd8-b696-47e3-9cbf-7408b61c9ff8}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">""</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">3973L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{a2621e18-7de3-4ea6-ae6d-89e9e0b7befd}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">""</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">3974L</v>
+                                              <v n="IdParent">3963L</v>
+                                            </o>
+                                          </l2>
+                                          <v n="Id">3963L</v>
+                                          <v n="IdParent">3440L</v>
+                                        </o>
+                                        <o t="SFCTransition">
+                                          <v n="VariableName">"Ck_Sep_pos__to__Wrt_FState"</v>
+                                          <n n="EmbeddedTransition" />
+                                          <l2 n="EmbeddedTransitionProperties" />
+                                          <l2 n="Attributes" cet="SFCAttribute">
+                                            <o>
+                                              <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">"False"</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">4001L</v>
+                                              <v n="IdParent">4000L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
+                                              <o n="Value" t="StringValue">
+                                                <v n="Value">""</v>
+                                                <v n="DefaultValue">""</v>
+                                              </o>
+                                              <v n="Id">4002L</v>
+                                              <v n="IdParent">4000L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
+                                              <o n="Value" t="BoolValue">
+                                                <v n="Value">"FALSE"</v>
+                                                <v n="DefaultValue">"FALSE"</v>
+                                              </o>
+                                              <v n="Id">4003L</v>
+                                              <v n="IdParent">4000L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{bc882c11-1e91-4dd8-a6b8-2075724ed18b}</v>
+                                              <o n="Value" t="EnumValue">
+                                                <v n="TemplateGuid">{79a4fdd5-c859-4de4-aa8d-c03372c880c2}</v>
+                                                <n n="BaseType" />
+                                                <v n="Value">"0"</v>
+                                                <v n="DefaultValue">"0"</v>
+                                              </o>
+                                              <v n="Id">4004L</v>
+                                              <v n="IdParent">4000L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{62e1754b-7629-4e63-9cec-10ae0c536f1f}</v>
+                                              <o n="Value" t="BoolValue">
+                                                <v n="Value">"FALSE"</v>
+                                                <v n="DefaultValue">"FALSE"</v>
+                                              </o>
+                                              <v n="Id">4005L</v>
+                                              <v n="IdParent">4000L</v>
+                                            </o>
+                                            <o>
+                                              <v n="AttributeId">{8294df19-5962-4dee-a874-1051dabb0e3e}</v>
+                                              <o n="Value" t="EnumValue">
+                                                <v n="TemplateGuid">{6ecff51c-9b8f-4338-aab0-67c2b31b07e9}</v>
+                                                <n n="BaseType" />
+                                                <v n="Value">"0"</v>
+                                                <v n="DefaultValue">"0"</v>
+                                              </o>
+                                              <v n="Id">4006L</v>
+                                              <v n="IdParent">4000L</v>
+                                            </o>
+                                          </l2>
+                                          <v n="Id">4000L</v>
                                           <v n="IdParent">3440L</v>
                                         </o>
                                       </l2>
@@ -3092,6 +3275,12 @@ UR3_StateMachine(init_:=TRUE, G_STATE:=RCts.UR3CatchSeparator, State_complete=>U
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Action>
+    <Action Name="Ck_Sep_pos_active" Id="{2be05195-fe1e-4182-894b-a1c12f7d15a7}">
+      <Implementation>
+        <ST><![CDATA[//call respective state to machine system
+Vision_StateMachine(init_:=TRUE, G_STATE:=User_Test_Sate, State_complete=>finish_state,Act_Gl_State=>VisionRetVarState.Actual_GLV_State,Act_In_State=>VisionRetVarState.Actual_In_State);]]></ST>
+      </Implementation>
+    </Action>
     <Action Name="DropBench_active" Id="{06657ecd-2b56-47ec-b5ab-6c22c5fb61b3}">
       <Implementation>
         <ST><![CDATA[//call respective state to ur3 robot
@@ -3241,13 +3430,7 @@ UR3_StateMachine(init_:=TRUE, G_STATE:=RCts.UR3Home, State_complete=>UR3FinishSt
       </XmlArchive>
     </ObjectProperties>
     <LineIds Name="MASTER_CTR.Call_MaSta_active">
-      <LineId Id="2" Count="20" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="24" Count="0" />
+      <LineId Id="2" Count="26" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="MASTER_CTR.Call_MaSta_exit">
@@ -3262,6 +3445,10 @@ UR3_StateMachine(init_:=TRUE, G_STATE:=RCts.UR3Home, State_complete=>UR3FinishSt
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="MASTER_CTR.CatchSep_active">
+      <LineId Id="1" Count="0" />
+    </LineIds>
+    <LineIds Name="MASTER_CTR.Ck_Sep_pos_active">
+      <LineId Id="2" Count="0" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="MASTER_CTR.DropBench_active">
