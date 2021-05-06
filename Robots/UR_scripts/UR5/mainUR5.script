@@ -104,8 +104,6 @@ def mainUR5():
   	write_output_boolean_register(register, False)
 	end
 
-<<<<<<< HEAD
-=======
   ######################################################################
   #### FOO_9 CHECKS IF THE SEPARATOR HAS BEEN TAKEN BY THE GRIPPER #####
   ######################################################################
@@ -116,9 +114,7 @@ def mainUR5():
 		else:
 		  return False
 		end
-	end  
->>>>>>> d8a3ec5b15c9050de76b5d61c841a7de31f61fee
-
+	end
   
   ##############################################
   ############### STATE_0 HOMING ###############
@@ -168,6 +164,7 @@ def mainUR5():
 	def UR5Camera2():
 
   	init_register(3,4,5,530)
+    movej(p[377.000/1000, -377.000/1000, 298.000/1000, -2.213, -2.200, 0.000], accel_radss, speed_rads, 0, blend_radius_m)
   	movej([-0.181619, -1.411765, -2.033627, -1.039257, 1.538940, 1.678820],accel_radss,speed_rads,0,blend_radius_m)
   	movej([0.063264, -1.634060, -2.003714, -1.074618, 1.570793, 0.063264],accel_radss,speed_rads,0,blend_radius_m)
   	movel(p[480.49/1000, -9.68/1000, 239.41/1000, 2.239, -2.204, 0], accel_mss, speed_ms, 0, blend_radius_m)
@@ -176,7 +173,7 @@ def mainUR5():
 	end
 
   ###########################################################################################
-  ################ STATE_4 PLACE THE CAMERA ON THE FIRS HEAD TO BE SCREWED  #################
+  ################ STATE_4 PLACE THE CAMERA ON THE FIRST HEAD TO BE SCREWED  #################
   ###########################################################################################
 
 	def UR5UpCamera1():
@@ -184,8 +181,9 @@ def mainUR5():
   	init_register(3,4,5,540)
   	UR5Home()
   	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	movej([0.098088, -1.956085, -0.058950, -2.697358, 1.570793, 0.098088],accel_radss,speed_rads,0,blend_radius_m)
-  	movel(p[429.86/1000, -10.03/1000, 740.66/1000, 2.206, -2.235, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
+  	#movej([0.098088, -1.956085, -0.058950, -2.697358, 1.570793, 0.098088],accel_radss,speed_rads,0,blend_radius_m)
+    movej(p[372.000/1000, -8.245/1000, 755.000/1000, 2.221, -2.221, 0.000], accel_radss, speed_rads, 0, blend_radius_m)
+  	movel(p[402.000/1000, -8.245/1000, 755.000/1000, 2.221, -2.221, 0.000], accel_mss, speed_ms, 0, blend_radius_m)
   	reset_register(3,4,5,541)
 
 	end
@@ -198,14 +196,14 @@ def mainUR5():
 
   	init_register(3,4,5,550)
   	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	movej(p[290.288/1000, -134.298/1000, 431.619/1000, 0.000, 2.932, 0.000],accel_radss,speed_rads,0,blend_radius_m)
   	UR5DropHead()
   	reset_register(3,4,5,551)
 
 	end
   
   ###########################################################################################
-  ################ STATE_6 PLACE THE CAMERA ON THE FIRS HEAD TO BE SCREWED  #################
+  ############### STATE_6 PLACE THE CAMERA ON THE SECOND HEAD TO BE SCREWED  ################
   ###########################################################################################
 
 	def UR5UpCamera2():
@@ -215,8 +213,10 @@ def mainUR5():
   	movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
   	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
   	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	movej([0.211928, -1.884634, -0.221391, -2.621276, 1.594272, 3.353305],accel_radss,speed_rads,0,blend_radius_m)
-  	movel(p[435.17/1000, -146.59/1000, 741.93/1000, 2.202, 2.240, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
+  	#movej([0.211928, -1.884634, -0.221391, -2.621276, 1.594272, 3.353305],accel_radss,speed_rads,0,blend_radius_m)
+  	#movel(p[435.17/1000, -146.59/1000, 741.93/1000, 2.202, 2.240, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
+    movej(p[372.000/1000, -168.763/1000, 750.000/1000, -2.180, -2.217, -0.001], accel_radss, speed_rads, 0, blend_radius_m)
+    movel(p[402.000/1000, -168.763/1000, 750.000/1000, -2.180, -2.217, -0.001], accel_mss, speed_ms, 0, blend_radius_m)
   	reset_register(3,4,5,561)
 
 	end
@@ -301,11 +301,6 @@ def mainUR5():
 		movel(pos_nut, accel_mss, speed_ms, 0, blend_radius_m)
 		
 		# close the tool and check if the head is pressed
-<<<<<<< HEAD
-		set_tool_digital_out(1, True)
-		sleep(3.0)
-=======
-	#set_tool_digital_out(1, True)
 		gripkit_easy_grip()
 		var=CheckGripState(3) #check if the tool has gripped the separator correctly
    	while var!=True:
@@ -314,7 +309,6 @@ def mainUR5():
 	  	var=CheckGripState(3)
 		end
 		#sleep(3.0)
->>>>>>> d8a3ec5b15c9050de76b5d61c841a7de31f61fee
 
 		write_state_bool(2) #write finish movement
 		reset_register(3,4,5,591)
