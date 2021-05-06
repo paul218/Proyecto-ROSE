@@ -286,7 +286,7 @@ def mainUR3():
     movel([3.885666, -1.409790, -2.235272, -2.656978, -0.822123, 4.713486],accel_mss,speed_ms,0,blend_radius_m)
     movej([3.726487, -1.486412, -1.655221, 0.000506, 0.960078, 1.557563],accel_radss,speed_rads,0,blend_radius_m)
     #movel([3.725871, -1.589132, -1.063358, -0.488654, 0.961430, 1.558304],accel_mss,speed_ms,0,blend_radius_m)
-    movel(p[-430.61/1000,-6.48/1000 ,595.35/1000 ,2.211 ,0.056 ,-2.205 ],accel_mss,speed_ms,0,blend_radius_m)    
+    movel(p[-472.430/1000,-0.050/1000 ,598.920/1000 ,-2.202 ,0.014 ,2.203],accel_mss,speed_ms,0,blend_radius_m)    
     reset_register(3,4,5,351)
    
   end
@@ -301,7 +301,7 @@ def mainUR3():
     movel([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_mss,speed_ms,0,blend_radius_m)
     movej([3.754317, -1.506105, -1.849585, 0.214141, 0.945161, -1.583733],accel_radss,speed_rads,0,blend_radius_m)
     #movel([3.690388, -1.599182, -1.031013, -0.511643, 1.022000, -1.570668],accel_mss,speed_ms,0,blend_radius_m)
-    movel(p[-430.31/1000,-15.18/1000 ,591.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
+    movel(p[-472.430/1000,-0.050/1000 ,598.920/1000 ,0.024 ,-1.573 ,-0.024],accel_mss,speed_ms,0,blend_radius_m)
     reset_register(3,4,5,361)
     
   end
