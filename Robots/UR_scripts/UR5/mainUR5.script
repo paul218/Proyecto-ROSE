@@ -152,7 +152,7 @@ def mainUR5():
 	  init_register(3,4,5,520)
   	movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
 	  movej([-0.382430, -1.654966, -2.063825, -1.011365, 1.578471, 2.765253],accel_radss,speed_rads,0,blend_radius_m)
-  	movel(p[377.91/1000, -384.22/1000, 87.47/1000, 2.238, 2.229, -0.007], accel_mss, speed_ms, 0, blend_radius_m)
+  	movel(p[379.05/1000, -370.77/1000, 87.47/1000, 2.219, 2.191, -0.064], accel_mss, speed_ms, 0, blend_radius_m)
   	reset_register(3,4,5,521)
 		
 	end
@@ -183,7 +183,7 @@ def mainUR5():
   	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
   	#movej([0.098088, -1.956085, -0.058950, -2.697358, 1.570793, 0.098088],accel_radss,speed_rads,0,blend_radius_m)
     movej(p[372.000/1000, -8.245/1000, 755.000/1000, 2.221, -2.221, 0.000], accel_radss, speed_rads, 0, blend_radius_m)
-  	movel(p[402.000/1000, -8.245/1000, 755.000/1000, 2.221, -2.221, 0.000], accel_mss, speed_ms, 0, blend_radius_m)
+  	movel(p[388.0/1000, -8.7/1000, 747.2/1000, 2.279, -2.162, 0.000], accel_mss, speed_ms, 0, blend_radius_m)
   	reset_register(3,4,5,541)
 
 	end
@@ -196,7 +196,7 @@ def mainUR5():
 
   	init_register(3,4,5,550)
   	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	movej(p[290.288/1000, -134.298/1000, 431.619/1000, 0.000, 2.932, 0.000],accel_radss,speed_rads,0,blend_radius_m)
+  	movej(p[230.288/1000, -134.298/1000, 431.619/1000, 0.000, 2.932, 0.000],accel_radss,speed_rads,0,blend_radius_m)
   	UR5DropHead()
   	reset_register(3,4,5,551)
 
@@ -211,12 +211,12 @@ def mainUR5():
   	init_register(3,4,5,560)
   	movej([-0.064989, -1.480966, -2.238766, -1.013674, 1.573186, 3.082741],accel_radss,speed_rads,0,blend_radius_m)
   	movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+  	movej(p[230.288/1000, -134.298/1000, 431.619/1000, 0.000, 2.932, 0.000],accel_radss,speed_rads,0,blend_radius_m)
   	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
   	#movej([0.211928, -1.884634, -0.221391, -2.621276, 1.594272, 3.353305],accel_radss,speed_rads,0,blend_radius_m)
   	#movel(p[435.17/1000, -146.59/1000, 741.93/1000, 2.202, 2.240, 0.003], accel_mss, speed_ms, 0, blend_radius_m)
-    movej(p[372.000/1000, -168.763/1000, 750.000/1000, -2.180, -2.217, -0.001], accel_radss, speed_rads, 0, blend_radius_m)
-    movel(p[402.000/1000, -168.763/1000, 750.000/1000, -2.180, -2.217, -0.001], accel_mss, speed_ms, 0, blend_radius_m)
+    movej(p[372.000/1000, -120.763/1000, 749.000/1000, -2.180, -2.217, -0.001], accel_radss, speed_rads, 0, blend_radius_m)
+    movel(p[391.44/1000, -128.50/1000, 747.2/1000, 2.210, 2.177, -0.033], accel_mss, speed_ms, 0, blend_radius_m)
   	reset_register(3,4,5,561)
 
 	end
@@ -229,7 +229,7 @@ def mainUR5():
 
   	init_register(3,4,5,570)
   	movej([0.000013, -1.248457, -0.805313, -2.657065, 1.570785, 1.570809],accel_radss,speed_rads,0,blend_radius_m)
-  	movej([-0.000038, -0.831112, -2.092842, -1.579170, 1.570941, 1.570928],accel_radss,speed_rads,0,blend_radius_m)
+    movej(p[230.288/1000, -134.298/1000, 431.619/1000, 0.000, 2.932, 0.000],accel_radss,speed_rads,0,blend_radius_m)
   	movej([0.000000, -1.064203, -2.682014, 0.011213, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
   	UR5Home()
   	reset_register(3,4,5,571)
