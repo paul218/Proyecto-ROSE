@@ -89,6 +89,18 @@ def mainUR3():
     end
   end
 
+  ######################################################################
+  ## THREAD_1 MAKE SURE THE GRIPPER IS ALWAYS GRIPPING WHEN IT HAS TO ##
+  ######################################################################
+
+  thread AlwaysCloseGripper_thrd():
+			if gripkit_easy_get_state()!=3: #3=gripping
+				gripkit_easy_grip()
+			end
+		#sync()
+		return
+  end #use commands: "start_thrd = run AlwaysCloseGripper_thrd()"   and    "kill start_thrd"  IN order to init and stop the thread execution
+
   ##############################################
   ############### STATE_0 HOMING ###############
   ##############################################

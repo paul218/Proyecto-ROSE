@@ -115,6 +115,20 @@ def mainUR5():
 		  return False
 		end
 	end
+
+  ######################################################################
+  ## THREAD_1 MAKE SURE THE GRIPPER IS ALWAYS GRIPPING WHEN IT HAS TO ##
+  ######################################################################
+
+  	#thread AlwaysCloseGripper(start):
+	#	while start > 0:
+	#		if gripkit_easy_get_state()!=3: # 3=gripping
+	#			gripkit_easy_grip()
+	#		end
+	#	end
+	#	#sync()
+	#	return
+  	#end
   
   ##############################################
   ############### STATE_0 HOMING ###############
