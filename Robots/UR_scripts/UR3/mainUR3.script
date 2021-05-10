@@ -353,6 +353,15 @@ def mainUR3():
   while(True):
     init_status(0,1,2)
 
+   #THREAD CONTROL
+   #if(CheckStatus(33)==True or CheckStatus(34)==True or CheckStatus(35)==True or CheckStatus(36)==True or CheckStatus(37)==True):
+   #   start_thrd = run AlwaysCloseGripper_thrd()
+   #else:
+   #   kill start_thrd
+   #end
+   #END THREAD CONTROL
+
+
    if (CheckStatus(30)==True):
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3Home()
