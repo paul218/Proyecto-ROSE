@@ -342,7 +342,7 @@ def mainUR3():
   ########## STATE_8 FROM THE INSTALLATION AREA IT RETURNS TO HOME WHEN GRIPPER HAS BEEN ROTATED. END OF CICLE  ###########
   #########################################################################################################################
 
-  def UR3Return():
+  def UR3ReturnRotated():
 
     init_register(3,4,5,380)
     gripkit_easy_release()
