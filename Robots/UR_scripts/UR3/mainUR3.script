@@ -337,6 +337,24 @@ def mainUR3():
     reset_register(3,4,5,371)
 
   end
+
+  #########################################################################################################################
+  ########## STATE_8 FROM THE INSTALLATION AREA IT RETURNS TO HOME WHEN GRIPPER HAS BEEN ROTATED. END OF CICLE  ###########
+  #########################################################################################################################
+
+  def UR3Return():
+
+    init_register(3,4,5,380)
+    gripkit_easy_release()
+    movel([4.086059, -1.282155, -1.215030, -0.643324, 0.601059, 1.557347],accel_mss,speed_ms,0,blend_radius_m)
+    movel([4.086059, -1.092619, -2.058744, 0.010854, 0.601059, 1.557347],accel_mss,speed_ms,0,blend_radius_m)
+    movej([4.085990, -1.092576, -2.058790, -0.826937, 1.299223, 1.557357],accel_radss,speed_rads,0,blend_radius_m)
+    movej([4.085990, -1.092576, -2.058790, -0.826937, -1.570796, 0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.054325, -2.211856, 1.125563, -1.308996, -1.570795, -0.000001],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.054326, -2.000864, 1.487369, -1.057302, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    reset_register(3,4,5,381)
+
+  end
   
 
   ##############################################################################################################################
@@ -384,7 +402,7 @@ def mainUR3():
      set_payload(1.54, [4/1000,0,70/1000]) #adjust payload to new weight
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3DropCable()
-   elif (CheckStatus(37)==True):
+   elif (CheckStatus(37)==True or CheckStatus(38)==True):
      set_payload(0.87, [-6/1000,-3/1000,48/1000])
      set_Speed(0.05, 2, 3, 2.4)
      UR3Return()
