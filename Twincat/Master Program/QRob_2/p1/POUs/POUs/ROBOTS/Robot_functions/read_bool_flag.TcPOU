@@ -3,22 +3,32 @@
   <POU Name="read_bool_flag" Id="{4e9c11b2-cc43-48a5-a877-f4ce718a033a}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION read_bool_flag : BOOL
 VAR_INPUT
-	ck0 : BOOL;
-	ck1 : BOOL;
-	ck2 : BOOL;
+
 	state : BOOL;
 END_VAR
 VAR
+	ck0 : BOOL;
+	ck1 : BOOL;
+	ck2 : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF (ck0=state AND ck1=state AND ck2=state) OR (ck0<>state AND ck1=state AND ck2=state) OR (ck0=state AND ck1<>state AND ck2=state) OR (ck0=state AND ck1=state AND ck2<>state) THEN
+      <ST><![CDATA[//Read bit register from Robot to PLC
+ck0 := Robot_UR5.UR_outputs.B0;
+ck1 := Robot_UR5.UR_outputs.B1;
+ck2 := Robot_UR5.UR_outputs.B2;
+
+IF (ck0=state AND ck1=state AND ck2=state) OR (ck0<>state AND ck1=state AND ck2=state) OR (ck0=state AND ck1<>state AND ck2=state) OR (ck0=state AND ck1=state AND ck2<>state) THEN
 read_bool_flag := TRUE;
 ELSE 
 read_bool_flag := FALSE;	
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="read_bool_flag">
+      <LineId Id="41" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="40" Count="0" />
       <LineId Id="25" Count="3" />
       <LineId Id="7" Count="0" />
     </LineIds>

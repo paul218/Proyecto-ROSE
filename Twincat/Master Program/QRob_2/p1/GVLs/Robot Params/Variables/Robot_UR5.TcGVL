@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="Robot_UR5" Id="{03a7664e-0364-4ffc-90c8-3a2492dc759f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+//variables para enviar al robot
+UR_inputs AT%Q* : UR_9_O2T_Registers;
+UR_inputs_2 AT%Q* : UR_10_O2T_Registers;
+
+//variables para recibir del robot
+UR_outputs AT%I*:UR_5_T2O_BitRegisters;
+UR_outputs_int AT%I*:UR_6_T2O_IntRegisters;
+UR_outputs_float AT%I*:UR_7_T2O_FloatRegisters;
+
+UR_TCP AT%I*:UR_4_T2O_TCP;
+
+UR_JOINS AT%I*:UR_3_T2O_Joints;
+
+
+END_VAR 
+
+////variables para enviar al robot
+//UR_inputs AT%Q* : UR_9_O2T_Registers;
+//UR_inputs_2 AT%Q* : UR_10_O2T_Registers;
+////variables para recibir del robot
+//UR_outputs AT%I*:UR_5_T2O_BitRegisters;
+//UR_outputs_int AT%I*:UR_6_T2O_IntRegisters;
+
+//UR_TCP AT%I*:UR_4_T2O_TCP;
+
+//UR_JOINS AT%I*:UR_3_T2O_Joints;
+
+//UR_float_out AT%I*:UR_7_T2O;]]></Declaration>
+  </GVL>
+</TcPlcObject>

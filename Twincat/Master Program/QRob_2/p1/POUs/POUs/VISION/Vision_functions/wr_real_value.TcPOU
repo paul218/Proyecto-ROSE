@@ -16,47 +16,63 @@ END_VAR
 //#####################	WRITE VISION VARIABLES #################(PLC->ROBOT)
 //write the CS.UR5 robot float register to send CX position
 IF  function_state= VCts.CX_VALUE THEN
-Robot_A.UR_inputs.Floats.FLOAT0 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT1 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT2 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT0 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT1 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT2 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send CY position
 ELSIF  function_state= VCts.CY_VALUE THEN
-Robot_A.UR_inputs.Floats.FLOAT3 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT4 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT5 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT3 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT4 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT5 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send NUT_TURN position
 ELSIF  function_state= VCts.NUT_VALUE THEN
-Robot_A.UR_inputs.Floats.FLOAT6 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT7 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT8 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT6 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT7 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT8 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send HEAD_RIGTH_VALUE position
 ELSIF  function_state= VCts.HEAD_RIGTH_VALUE THEN
-Robot_A.UR_inputs.Floats.FLOAT9 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT10 := flip_real(value);
-Robot_A.UR_inputs.Floats.FLOAT11 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT9 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT10 := flip_real(value);
+Robot_UR5.UR_inputs.Floats.FLOAT11 := flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send HEAD_LEFT_VALUE position
 ELSIF  function_state = VCts.HEAD_LEFT_VALUE THEN
-Robot_A.UR_inputs_2.Floats.FLOAT12 := flip_real(value);
-Robot_A.UR_inputs_2.Floats.FLOAT13 := flip_real(value);
-Robot_A.UR_inputs_2.Floats.FLOAT14:= flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT12 := flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT13 := flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT14:= flip_real(value);
 wr_real_value := TRUE;
 //write the CS.UR5 robot float register to send NUT_POS_VALUE position
 ELSIF  function_state = VCts.SEP_POS_VALUE THEN
-Robot_A.UR_inputs_2.Floats.FLOAT12 := flip_real(value);
-Robot_A.UR_inputs_2.Floats.FLOAT13 := flip_real(value);
-Robot_A.UR_inputs_2.Floats.FLOAT14:= flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT12 := flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT13 := flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT14:= flip_real(value);
 wr_real_value := TRUE;
-END_IF]]></ST>
+ELSIF  function_state = Rcts.UR_DATA_SEND THEN
+Robot_UR5.UR_inputs_2.Floats.FLOAT15 := flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT16 := flip_real(value);
+Robot_UR5.UR_inputs_2.Floats.FLOAT17:= flip_real(value);
+wr_real_value := TRUE;
+END_IF
+wr_real_value := FALSE;
+
+
+]]></ST>
     </Implementation>
     <LineIds Name="wr_real_value">
       <LineId Id="95" Count="32" />
       <LineId Id="129" Count="4" />
       <LineId Id="128" Count="0" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="156" Count="1" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="158" Count="0" />
       <LineId Id="7" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="152" Count="1" />
+      <LineId Id="151" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

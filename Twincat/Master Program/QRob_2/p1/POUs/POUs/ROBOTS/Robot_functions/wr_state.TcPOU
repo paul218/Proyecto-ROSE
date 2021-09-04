@@ -15,15 +15,15 @@ END_VAR
 //WRITE FLAGS STATE-MACHINE #################(PLC->ROBOT)
 //write the UR3 robot integer register to set flag states
 IF function_state= RCts.UR3 THEN
-Robot_S_ur3.UR_inputs.Ints.INT0 := flip_int(state);
-Robot_S_ur3.UR_inputs.Ints.INT1 := flip_int(state);
-Robot_S_ur3.UR_inputs.Ints.INT2 := flip_int(state);
+Robot_UR3.UR_inputs.Ints.INT0 := flip_int(state);
+Robot_UR3.UR_inputs.Ints.INT1 := flip_int(state);
+Robot_UR3.UR_inputs.Ints.INT2 := flip_int(state);
 wr_state := TRUE;
 //write the CS.UR5 robot integer register to set flag states
 ELSIF  function_state= RCts.UR5 THEN 
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state);
 wr_state := TRUE;
 END_IF]]></ST>
     </Implementation>

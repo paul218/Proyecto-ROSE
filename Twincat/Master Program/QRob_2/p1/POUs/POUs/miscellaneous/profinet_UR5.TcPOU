@@ -17,14 +17,14 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 //escribir del plc al robot 
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 
 //leer del robot al plc
-ck0 := flip_byte_int(Robot_A.UR_outputs_int.INT3);
-ck1 := flip_byte_int(Robot_A.UR_outputs_int.INT4);
-ck2 := flip_byte_int(Robot_A.UR_outputs_int.INT5);
+ck0 := flip_byte_int(Robot_UR5.UR_outputs_int.INT3);
+ck1 := flip_byte_int(Robot_UR5.UR_outputs_int.INT4);
+ck2 := flip_byte_int(Robot_UR5.UR_outputs_int.INT5);
 
 state0:=state;
 state1:=state;
@@ -35,105 +35,105 @@ state:=-1;
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=511 AND ck1=511 AND ck2=511) OR (ck0<>511 AND ck1=511 AND ck2=511) OR (ck0=511 AND ck1<>511 AND ck2=511) OR (ck0=511 AND ck1=511 AND ck2<>511) THEN
 state:=-1;	
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=521 AND ck1=521 AND ck2=521) OR (ck0<>521 AND ck1=521 AND ck2=521) OR (ck0=521 AND ck1<>521 AND ck2=521) OR (ck0=521 AND ck1=521 AND ck2<>521) THEN
 state:=-1;	
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=531 AND ck1=531 AND ck2=531) OR (ck0<>531 AND ck1=531 AND ck2=531) OR (ck0=531 AND ck1<>531 AND ck2=531) OR (ck0=531 AND ck1=531 AND ck2<>531) THEN
 state:=-1;	
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=541 AND ck1=541 AND ck2=541) OR (ck0<>541 AND ck1=541 AND ck2=541) OR (ck0=541 AND ck1<>541 AND ck2=541) OR (ck0=541 AND ck1=541 AND ck2<>541) THEN
 state:=-1;	
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=551 AND ck1=551 AND ck2=551) OR (ck0<>551 AND ck1=551 AND ck2=551) OR (ck0=551 AND ck1<>551 AND ck2=551) OR (ck0=551 AND ck1=551 AND ck2<>551) THEN
 state:=-1;	
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=561 AND ck1=561 AND ck2=561) OR (ck0<>561 AND ck1=561 AND ck2=561) OR (ck0=561 AND ck1<>561 AND ck2=561) OR (ck0=561 AND ck1=561 AND ck2<>561) THEN
 state:=-1;	
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=571 AND ck1=571 AND ck2=571) OR (ck0<>571 AND ck1=571 AND ck2=571) OR (ck0=571 AND ck1<>571 AND ck2=571) OR (ck0=571 AND ck1=571 AND ck2<>571) THEN
 state:=-1;
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=581 AND ck1=581 AND ck2=581) OR (ck0<>581 AND ck1=581 AND ck2=581) OR (ck0=581 AND ck1<>581 AND ck2=581) OR (ck0=581 AND ck1=581 AND ck2<>581) THEN
 state:=-1;
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=591 AND ck1=591 AND ck2=591) OR (ck0<>591 AND ck1=591 AND ck2=591) OR (ck0=591 AND ck1<>591 AND ck2=591) OR (ck0=591 AND ck1=591 AND ck2<>591) THEN
 state:=-1;
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=5101 AND ck1=5101 AND ck2=5101) OR (ck0<>5101 AND ck1=5101 AND ck2=5101) OR (ck0=5101 AND ck1<>5101 AND ck2=5101) OR (ck0=5101 AND ck1=5101 AND ck2<>5101) THEN
 state:=-1;
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=5111 AND ck1=5111 AND ck2=5111) OR (ck0<>5111 AND ck1=5111 AND ck2=5111) OR (ck0=5111 AND ck1<>5111 AND ck2=5111) OR (ck0=5111 AND ck1=5111 AND ck2<>5111) THEN
 state:=-1;
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);
 ELSIF (ck0=5121 AND ck1=5121 AND ck2=5121) OR (ck0<>5121 AND ck1=5121 AND ck2=5121) OR (ck0=5121 AND ck1<>5121 AND ck2=5121) OR (ck0=5121 AND ck1=5121 AND ck2<>5121) THEN
 state:=-1;
 state0 := -1;
 state1 := -1;
 state2 := -1;
-Robot_A.UR_inputs.Ints.INT0 := flip_int(state0);
-Robot_A.UR_inputs.Ints.INT1 := flip_int(state1);
-Robot_A.UR_inputs.Ints.INT2 := flip_int(state2);	
+Robot_UR5.UR_inputs.Ints.INT0 := flip_int(state0);
+Robot_UR5.UR_inputs.Ints.INT1 := flip_int(state1);
+Robot_UR5.UR_inputs.Ints.INT2 := flip_int(state2);	
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="profinet_UR5">

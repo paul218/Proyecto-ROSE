@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="write_bool_flag" Id="{469482c1-564f-42de-8739-5ba175f383c9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION write_bool_flag : BOOL
+VAR_INPUT
+	value : BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Write bit register from PLC to Robot
+//Flag to send to robot and indicate when the  system finish its process
+
+write_bool_flag := FALSE;
+Robot_UR5.UR_inputs.Bits.B0 := value;
+Robot_UR5.UR_inputs.Bits.B1 := value;
+Robot_UR5.UR_inputs.Bits.B2 := value;
+write_bool_flag := TRUE;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="write_bool_flag">
+      <LineId Id="18" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="15" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

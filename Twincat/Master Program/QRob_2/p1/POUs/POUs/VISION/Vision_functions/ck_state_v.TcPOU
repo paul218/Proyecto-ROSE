@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <POU Name="ck_state_v" Id="{04149043-8498-460e-b3b3-29c278d99752}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION ck_state_v : BOOL
+    <Declaration><![CDATA[FUNCTION ck_state_v : INT
 VAR_INPUT
-	state: INT;
+	
+	data_vision : Vision_int_state;
+    
 END_VAR
 VAR
 	ck0 : INT;
@@ -13,22 +15,34 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
-ck0 := Vision_struct.States.Val1;
-ck1 := Vision_struct.States.Val2;
-ck2 := Vision_struct.States.Val3;
+ck0 := data_vision.Val1;
+ck1 := data_vision.Val2;
+ck2 := data_vision.Val3;
 
 
-IF (ck0=state AND ck1=state AND ck2=state) OR (ck0<>state AND ck1=state AND ck2=state) OR (ck0=state AND ck1<>state AND ck2=state) OR (ck0=state AND ck1=state AND ck2<>state) THEN
-ck_state_v := TRUE;
+//IF (ck0=state AND ck1=state AND ck2=state) OR (ck1=state AND ck2=state) OR (ck0=state AND ck2=state) OR (ck0=state AND ck1=state ) THEN
+IF ck0 = ck1 THEN
+ck_state_v := ck0;	
+ELSIF  ck1 = ck2 THEN 
+ck_state_v := ck1;	
+ELSIF  ck2 = ck0 THEN
+ck_state_v := ck2;	
 ELSE 
-ck_state_v := FALSE;	
+ck_state_v := -1;	
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="ck_state_v">
       <LineId Id="62" Count="1" />
       <LineId Id="66" Count="1" />
       <LineId Id="64" Count="1" />
-      <LineId Id="56" Count="3" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="58" Count="1" />
       <LineId Id="11" Count="0" />
     </LineIds>
   </POU>

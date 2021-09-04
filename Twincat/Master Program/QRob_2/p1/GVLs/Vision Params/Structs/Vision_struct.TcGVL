@@ -16,8 +16,8 @@ VAR_GLOBAL
 //Get_img_sep_pos :Vision_flags;	
 
 //variables to read global and internal state from vision system
-States : Vision_int_state;
-
+States_out : Vision_int_state;
+States_in : Vision_int_state;
 
 //variables to ck  vision process (vision->PLC)  
 //Ck_finish_procees :Vision_flags;

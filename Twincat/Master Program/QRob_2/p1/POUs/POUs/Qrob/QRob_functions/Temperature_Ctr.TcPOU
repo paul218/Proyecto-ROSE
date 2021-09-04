@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="Temperature_Ctr" Id="{cee14709-947c-49ab-a6d8-a97143dd7e34}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Temperature_Ctr
+VAR_INPUT
+	actual_tem : REAL;
+	limit_tem : REAL;
+	th : REAL;
+	Enable : BOOL;	
+	
+	//relief_turn : BOOL := FALSE;	
+   
+	
+END_VAR
+VAR_OUTPUT
+	Power_Fan :BOOL;
+END_VAR
+VAR
+	A : REAL;
+	B : REAL;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF Enable = TRUE THEN 
+	A := limit_tem-th;
+	B := limit_tem +th;
+	
+	IF (actual_tem <= A)  THEN 
+		Power_Fan := FALSE;
+	ELSIF (actual_tem >= B) THEN
+		Power_Fan := TRUE;
+	END_IF
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="Temperature_Ctr">
+      <LineId Id="30" Count="1" />
+      <LineId Id="35" Count="3" />
+      <LineId Id="155" Count="2" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

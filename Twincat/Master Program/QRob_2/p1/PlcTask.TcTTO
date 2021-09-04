@@ -3,18 +3,24 @@
   <Task Name="PlcTask" Id="{7b9b4747-0252-4326-9999-fa085fd42b54}">
     <!--CycleTime in micro seconds.-->
     <CycleTime>1000</CycleTime>
-    <Priority>12</Priority>
-    <PouCall>
-      <Name>data_robot_ur3</Name>
-    </PouCall>
-    <PouCall>
-      <Name>data_robot_UR5</Name>
-    </PouCall>
-    <PouCall>
-      <Name>Qrob_control</Name>
-    </PouCall>
+    <Priority>4</Priority>
     <PouCall>
       <Name>MASTER_CTR</Name>
+    </PouCall>
+    <PouCall>
+      <Name>QRob_StateMachine</Name>
+    </PouCall>
+    <PouCall>
+      <Name>Get_QRob_Pos</Name>
+    </PouCall>
+    <PouCall>
+      <Name>UR5_StateMachine</Name>
+    </PouCall>
+    <PouCall>
+      <Name>UR3_StateMachine</Name>
+    </PouCall>
+    <PouCall>
+      <Name>Vision_StateMachine</Name>
     </PouCall>
     <TaskFBGuid>{a447d856-05de-4838-b2d2-92af43dedf70}</TaskFBGuid>
     <Fb_init>{ccc79dc1-96b8-403e-85f7-b9213b3b3f1a}</Fb_init>

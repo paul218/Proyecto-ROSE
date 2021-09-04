@@ -41,7 +41,7 @@
     <Compile Include="DUTs\UR_6_T2O_IntRegisters\UR_6_T2O_IntRegisters.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\UR_7_T2O\UR_7_T2O.TcDUT">
+    <Compile Include="DUTs\UR_7_T2O_FloatRegisters\UR_7_T2O_FloatRegisters.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\UR_9_O2T_Registers\UR_9_O2T_Registers.TcDUT">
@@ -88,14 +88,6 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="GVLs\miscellaneus\Robot_A.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="GVLs\miscellaneus\Robot_S_ur3.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
     <Compile Include="GVLs\QRob\QrCts.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -109,6 +101,14 @@
       <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="GVLs\Robot Params\Constans\RCts.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\Robot Params\Variables\Robot_UR5.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GVLs\Robot Params\Variables\Robot_UR3.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -189,16 +189,28 @@
     <Compile Include="POUs\POUs\miscellaneous\UR5_robot.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\Qrob\Qrob_control.TcPOU">
+    <Compile Include="POUs\POUs\Qrob\QRob_functions\Get_QRob_Pos.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\POUs\Qrob\QRob_StateMachine.TcPOU">
+    <Compile Include="POUs\POUs\Qrob\QRob_functions\Temperature_Ctr.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\POUs\Qrob\QRob_functions\Qrob_control.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\POUs\Qrob\Qrob_State_Machine\QRob_StateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\POUs\ROBOTS\Robot_functions\ck_state.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\POUs\ROBOTS\Robot_functions\read_bool_flag.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\POUs\ROBOTS\Robot_functions\read_bool_flag_move.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\POUs\ROBOTS\Robot_functions\write_bool_flag.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\POUs\ROBOTS\Robot_functions\wr_GL_STATE.TcPOU">
@@ -237,7 +249,7 @@
     <Folder Include="DUTs\UR_10 _O2T_Registers" />
     <Folder Include="DUTs\Vision Struct" />
     <Folder Include="DUTs\UR_6_T2O_IntRegisters" />
-    <Folder Include="DUTs\UR_7_T2O" />
+    <Folder Include="DUTs\UR_7_T2O_FloatRegisters" />
     <Folder Include="DUTs\UR_4_T2O_TCP" />
     <Folder Include="DUTs\UR_3_T2O_Joints" />
     <Folder Include="DUTs\UR_5_T2O_BitRegisters" />
@@ -262,6 +274,8 @@
     <Folder Include="POUs\POUs\IR_take_img" />
     <Folder Include="POUs\POUs\miscellaneous" />
     <Folder Include="POUs\POUs\Qrob" />
+    <Folder Include="POUs\POUs\Qrob\Qrob_State_Machine" />
+    <Folder Include="POUs\POUs\Qrob\QRob_functions" />
     <Folder Include="POUs\POUs\ROBOTS" />
     <Folder Include="POUs\POUs\ROBOTS\Robot_machine_state" />
     <Folder Include="POUs\POUs\ROBOTS\Robot_functions" />
@@ -275,6 +289,10 @@
     <PlaceholderReference Include="Tc2_ControllerToolbox">
       <DefaultResolution>Tc2_ControllerToolbox, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_ControllerToolbox</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_EtherCAT">
+      <DefaultResolution>Tc2_EtherCAT, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_EtherCAT</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_MC2">
       <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>

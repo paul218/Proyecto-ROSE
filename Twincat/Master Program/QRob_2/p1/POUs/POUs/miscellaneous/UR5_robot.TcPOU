@@ -357,7 +357,7 @@ END_VAR]]></Declaration>
                                 <o>
                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                   <o n="Value" t="StringValue">
-                                    <v n="Value">"Robot_A.UR_outputs.B13"</v>
+                                    <v n="Value">"Robot_UR5.UR_outputs.B13"</v>
                                     <v n="DefaultValue">""</v>
                                   </o>
                                   <v n="Id">3191L</v>
@@ -540,7 +540,7 @@ END_VAR]]></Declaration>
                                 <o>
                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                   <o n="Value" t="StringValue">
-                                    <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                    <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                     <v n="DefaultValue">""</v>
                                   </o>
                                   <v n="Id">2743L</v>
@@ -906,7 +906,7 @@ END_VAR]]></Declaration>
                                 <o>
                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                   <o n="Value" t="StringValue">
-                                    <v n="Value">"Robot_A.UR_outputs.B4"</v>
+                                    <v n="Value">"Robot_UR5.UR_outputs.B4"</v>
                                     <v n="DefaultValue">""</v>
                                   </o>
                                   <v n="Id">2705L</v>
@@ -1521,7 +1521,7 @@ END_VAR]]></Declaration>
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Robot_A.UR_outputs.B1"</v>
+                            <v n="Value">"Robot_UR5.UR_outputs.B1"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">719L</v>
@@ -1893,7 +1893,7 @@ END_VAR]]></Declaration>
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"(NOT centro_ok) AND  Robot_A.UR_outputs.B2"</v>
+                                        <v n="Value">"(NOT centro_ok) AND  Robot_UR5.UR_outputs.B2"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">379L</v>
@@ -2030,7 +2030,7 @@ END_VAR]]></Declaration>
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"centro_ok AND Robot_A.UR_outputs.B2"</v>
+                                        <v n="Value">"centro_ok AND Robot_UR5.UR_outputs.B2"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">465L</v>
@@ -2213,7 +2213,7 @@ END_VAR]]></Declaration>
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                        <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">484L</v>
@@ -2579,7 +2579,7 @@ END_VAR]]></Declaration>
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                        <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">768L</v>
@@ -2945,7 +2945,7 @@ END_VAR]]></Declaration>
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"Robot_A.UR_outputs.B3"</v>
+                                        <v n="Value">"Robot_UR5.UR_outputs.B3"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">962L</v>
@@ -3311,7 +3311,7 @@ END_VAR]]></Declaration>
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"Robot_A.UR_outputs.B3"</v>
+                                        <v n="Value">"Robot_UR5.UR_outputs.B3"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">1247L</v>
@@ -3494,7 +3494,7 @@ END_VAR]]></Declaration>
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"Robot_A.UR_outputs.B4"</v>
+                                        <v n="Value">"Robot_UR5.UR_outputs.B4"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">2267L</v>
@@ -3866,7 +3866,7 @@ END_VAR]]></Declaration>
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"(NOT centro_ok) AND  Robot_A.UR_outputs.B2"</v>
+                                                    <v n="Value">"(NOT centro_ok) AND  Robot_UR5.UR_outputs.B2"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">2119L</v>
@@ -4003,7 +4003,7 @@ END_VAR]]></Declaration>
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"centro_ok AND Robot_A.UR_outputs.B2"</v>
+                                                    <v n="Value">"centro_ok AND Robot_UR5.UR_outputs.B2"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">2134L</v>
@@ -4186,7 +4186,7 @@ END_VAR]]></Declaration>
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                                    <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">2153L</v>
@@ -4552,7 +4552,7 @@ END_VAR]]></Declaration>
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                                    <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">2191L</v>
@@ -4918,7 +4918,7 @@ END_VAR]]></Declaration>
                                                 <o>
                                                   <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                   <o n="Value" t="StringValue">
-                                                    <v n="Value">"Robot_A.UR_outputs.B3"</v>
+                                                    <v n="Value">"Robot_UR5.UR_outputs.B3"</v>
                                                     <v n="DefaultValue">""</v>
                                                   </o>
                                                   <v n="Id">2229L</v>
@@ -5290,7 +5290,7 @@ END_VAR]]></Declaration>
                                                             <o>
                                                               <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                               <o n="Value" t="StringValue">
-                                                                <v n="Value">"(NOT centro_ok) AND  Robot_A.UR_outputs.B2"</v>
+                                                                <v n="Value">"(NOT centro_ok) AND  Robot_UR5.UR_outputs.B2"</v>
                                                                 <v n="DefaultValue">""</v>
                                                               </o>
                                                               <v n="Id">814L</v>
@@ -5427,7 +5427,7 @@ END_VAR]]></Declaration>
                                                             <o>
                                                               <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                               <o n="Value" t="StringValue">
-                                                                <v n="Value">"centro_ok AND Robot_A.UR_outputs.B2"</v>
+                                                                <v n="Value">"centro_ok AND Robot_UR5.UR_outputs.B2"</v>
                                                                 <v n="DefaultValue">""</v>
                                                               </o>
                                                               <v n="Id">829L</v>
@@ -5610,7 +5610,7 @@ END_VAR]]></Declaration>
                                                             <o>
                                                               <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                               <o n="Value" t="StringValue">
-                                                                <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                                                <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                                                 <v n="DefaultValue">""</v>
                                                               </o>
                                                               <v n="Id">848L</v>
@@ -5976,7 +5976,7 @@ END_VAR]]></Declaration>
                                                             <o>
                                                               <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                               <o n="Value" t="StringValue">
-                                                                <v n="Value">"Robot_A.UR_outputs.B3"</v>
+                                                                <v n="Value">"Robot_UR5.UR_outputs.B3"</v>
                                                                 <v n="DefaultValue">""</v>
                                                               </o>
                                                               <v n="Id">2336L</v>
@@ -6342,7 +6342,7 @@ END_VAR]]></Declaration>
                                                             <o>
                                                               <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                               <o n="Value" t="StringValue">
-                                                                <v n="Value">"Robot_A.UR_outputs.B4"</v>
+                                                                <v n="Value">"Robot_UR5.UR_outputs.B4"</v>
                                                                 <v n="DefaultValue">""</v>
                                                               </o>
                                                               <v n="Id">2417L</v>
@@ -6525,7 +6525,7 @@ END_VAR]]></Declaration>
                                                             <o>
                                                               <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                               <o n="Value" t="StringValue">
-                                                                <v n="Value">"Robot_A.UR_outputs.B3"</v>
+                                                                <v n="Value">"Robot_UR5.UR_outputs.B3"</v>
                                                                 <v n="DefaultValue">""</v>
                                                               </o>
                                                               <v n="Id">2436L</v>
@@ -6891,7 +6891,7 @@ END_VAR]]></Declaration>
                                                             <o>
                                                               <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                               <o n="Value" t="StringValue">
-                                                                <v n="Value">"Robot_A.UR_outputs.B13"</v>
+                                                                <v n="Value">"Robot_UR5.UR_outputs.B13"</v>
                                                                 <v n="DefaultValue">""</v>
                                                               </o>
                                                               <v n="Id">2638L</v>
@@ -7263,7 +7263,7 @@ END_VAR]]></Declaration>
                                                                         <o>
                                                                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                                           <o n="Value" t="StringValue">
-                                                                            <v n="Value">"(NOT centro_ok) AND  Robot_A.UR_outputs.B2"</v>
+                                                                            <v n="Value">"(NOT centro_ok) AND  Robot_UR5.UR_outputs.B2"</v>
                                                                             <v n="DefaultValue">""</v>
                                                                           </o>
                                                                           <v n="Id">2490L</v>
@@ -7400,7 +7400,7 @@ END_VAR]]></Declaration>
                                                                         <o>
                                                                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                                           <o n="Value" t="StringValue">
-                                                                            <v n="Value">"centro_ok AND Robot_A.UR_outputs.B2"</v>
+                                                                            <v n="Value">"centro_ok AND Robot_UR5.UR_outputs.B2"</v>
                                                                             <v n="DefaultValue">""</v>
                                                                           </o>
                                                                           <v n="Id">2505L</v>
@@ -7583,7 +7583,7 @@ END_VAR]]></Declaration>
                                                                         <o>
                                                                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                                           <o n="Value" t="StringValue">
-                                                                            <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                                                            <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                                                             <v n="DefaultValue">""</v>
                                                                           </o>
                                                                           <v n="Id">2524L</v>
@@ -7949,7 +7949,7 @@ END_VAR]]></Declaration>
                                                                         <o>
                                                                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                                           <o n="Value" t="StringValue">
-                                                                            <v n="Value">"Robot_A.UR_outputs.B0"</v>
+                                                                            <v n="Value">"Robot_UR5.UR_outputs.B0"</v>
                                                                             <v n="DefaultValue">""</v>
                                                                           </o>
                                                                           <v n="Id">2562L</v>
@@ -8315,7 +8315,7 @@ END_VAR]]></Declaration>
                                                                         <o>
                                                                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                                                           <o n="Value" t="StringValue">
-                                                                            <v n="Value">"Robot_A.UR_outputs.B4"</v>
+                                                                            <v n="Value">"Robot_UR5.UR_outputs.B4"</v>
                                                                             <v n="DefaultValue">""</v>
                                                                           </o>
                                                                           <v n="Id">2600L</v>
@@ -9046,9 +9046,9 @@ vi_get_img_tuerca := True;]]></ST>
     </Action>
     <Action Name="_aCtr_gir_ca_entry" Id="{6badef7f-2aff-4f85-b5da-0017cf53224d}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Floats.FLOAT3 := flip_real(data_to_robot.head_roll_right);
-Robot_A.UR_inputs.Floats.FLOAT4 := flip_real(data_to_robot.head_roll_left);
-Robot_A.UR_inputs.Bits.B0 := TRUE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Floats.FLOAT3 := flip_real(data_to_robot.head_roll_right);
+Robot_UR5.UR_inputs.Floats.FLOAT4 := flip_real(data_to_robot.head_roll_left);
+Robot_UR5.UR_inputs.Bits.B0 := TRUE;
 
 ]]></ST>
       </Implementation>
@@ -9068,7 +9068,7 @@ Robot_A.UR_inputs.Bits.B0 := TRUE;
     </Action>
     <Action Name="_aCtr_gir_ca_exit" Id="{925f140e-d69c-4f0a-885e-621ee159b154}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B0 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B0 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9088,20 +9088,20 @@ Robot_A.UR_inputs.Bits.B0 := TRUE;
       <Implementation>
         <ST><![CDATA[vi_img_ok := FALSE;
 
-Robot_A.UR_inputs.Floats.FLOAT0 := flip_real(cx);
-Robot_A.UR_inputs.Floats.FLOAT1 := flip_real(cy);
-Robot_A.UR_inputs.Floats.FLOAT2 := flip_real(giro);
+Robot_UR5.UR_inputs.Floats.FLOAT0 := flip_real(cx);
+Robot_UR5.UR_inputs.Floats.FLOAT1 := flip_real(cy);
+Robot_UR5.UR_inputs.Floats.FLOAT2 := flip_real(giro);
 
 
 IF ( ABS(cx) < 1) AND ( ABS(cy) < 1) THEN 
-Robot_A.UR_inputs.Bits.B3 := TRUE;
+Robot_UR5.UR_inputs.Bits.B3 := TRUE;
 centro_ok := TRUE;
 ELSE 
-Robot_A.UR_inputs.Bits.B3 := FALSE;
+Robot_UR5.UR_inputs.Bits.B3 := FALSE;
 centro_ok := FALSE;	
 END_IF
 
-Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
+Robot_UR5.UR_inputs.Bits.B2 := TRUE;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9119,7 +9119,7 @@ Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
     </Action>
     <Action Name="_aCtr_pos_2_exit_1_1_1" Id="{c2b52dd7-be97-4c93-9697-de96d05d47fe}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9139,20 +9139,20 @@ Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
       <Implementation>
         <ST><![CDATA[vi_img_ok := FALSE;
 
-Robot_A.UR_inputs.Floats.FLOAT0 := flip_real(cx);
-Robot_A.UR_inputs.Floats.FLOAT1 := flip_real(cy);
+Robot_UR5.UR_inputs.Floats.FLOAT0 := flip_real(cx);
+Robot_UR5.UR_inputs.Floats.FLOAT1 := flip_real(cy);
 
 
 
 IF ( ABS(cx) < 0.5) AND ( ABS(cy) < 0.5) THEN 
-Robot_A.UR_inputs.Bits.B3 := TRUE;
+Robot_UR5.UR_inputs.Bits.B3 := TRUE;
 centro_ok := TRUE;
 ELSE 
-Robot_A.UR_inputs.Bits.B3 := FALSE;
+Robot_UR5.UR_inputs.Bits.B3 := FALSE;
 centro_ok := FALSE;	
 END_IF
 
-Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
+Robot_UR5.UR_inputs.Bits.B2 := TRUE;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9170,7 +9170,7 @@ Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
     </Action>
     <Action Name="_aCtr_pos_c3_exit" Id="{d51d8321-e5fc-4626-b50a-1d098057cc3d}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9190,20 +9190,20 @@ Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
       <Implementation>
         <ST><![CDATA[vi_img_ok := FALSE;
 
-Robot_A.UR_inputs.Floats.FLOAT0 := flip_real(cx);
-Robot_A.UR_inputs.Floats.FLOAT1 := flip_real(cy);
+Robot_UR5.UR_inputs.Floats.FLOAT0 := flip_real(cx);
+Robot_UR5.UR_inputs.Floats.FLOAT1 := flip_real(cy);
 
 
 
 IF ( ABS(cx) < 0.5) AND ( ABS(cy) < 0.5) THEN 
-Robot_A.UR_inputs.Bits.B3 := TRUE;
+Robot_UR5.UR_inputs.Bits.B3 := TRUE;
 centro_ok := TRUE;
 ELSE 
-Robot_A.UR_inputs.Bits.B3 := FALSE;
+Robot_UR5.UR_inputs.Bits.B3 := FALSE;
 centro_ok := FALSE;	
 END_IF
 
-Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
+Robot_UR5.UR_inputs.Bits.B2 := TRUE;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9221,7 +9221,7 @@ Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
     </Action>
     <Action Name="_aCtr_pos_c4_exit" Id="{0d3f0d94-2264-4971-a4b8-5d9de697d443}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9241,20 +9241,20 @@ Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
       <Implementation>
         <ST><![CDATA[vi_img_ok := FALSE;
 
-Robot_A.UR_inputs.Floats.FLOAT0 := flip_real(cx);
-Robot_A.UR_inputs.Floats.FLOAT1 := flip_real(cy);
-Robot_A.UR_inputs.Floats.FLOAT2 := flip_real(giro);
+Robot_UR5.UR_inputs.Floats.FLOAT0 := flip_real(cx);
+Robot_UR5.UR_inputs.Floats.FLOAT1 := flip_real(cy);
+Robot_UR5.UR_inputs.Floats.FLOAT2 := flip_real(giro);
 
 
 IF ( ABS(cx) < 1) AND ( ABS(cy) < 1) THEN 
-Robot_A.UR_inputs.Bits.B3 := TRUE;
+Robot_UR5.UR_inputs.Bits.B3 := TRUE;
 centro_ok := TRUE;
 ELSE 
-Robot_A.UR_inputs.Bits.B3 := FALSE;
+Robot_UR5.UR_inputs.Bits.B3 := FALSE;
 centro_ok := FALSE;	
 END_IF
 
-Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
+Robot_UR5.UR_inputs.Bits.B2 := TRUE;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9272,7 +9272,7 @@ Robot_A.UR_inputs.Bits.B2 := TRUE;]]></ST>
     </Action>
     <Action Name="_aCtr_pos_exit" Id="{afdf3cfc-7faf-407c-9460-b385a465837a}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9758,7 +9758,7 @@ Qrob_control.mover_abs := TRUE;
     <Action Name="_aHome_entry" Id="{d455378b-e6f2-4c4e-86e3-3eba108c6d09}">
       <Implementation>
         <ST><![CDATA[i := FALSE;
-Robot_A.UR_inputs.Bits.B0 := TRUE;
+Robot_UR5.UR_inputs.Bits.B0 := TRUE;
 //POU.EnableAxis1 := True;
 giro :=0;
 //Qrob_control.ajustar_tornillo := FALSE;
@@ -9784,7 +9784,7 @@ giro :=0;
     </Action>
     <Action Name="_aHome_exit" Id="{5321d8cf-929c-4243-8d4d-a3348397546c}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B0 := FALSE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B0 := FALSE;
 iniciar := FALSE;
 Qrob_control.mover_abs := False;]]></ST>
       </Implementation>
@@ -9804,7 +9804,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMov_a_orificio3_exit" Id="{4411de4c-f59b-4388-ac7f-5484da707aa8}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := FALSE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := FALSE;
 
 ]]></ST>
       </Implementation>
@@ -9824,7 +9824,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMov_a_orificio4_exit" Id="{de397a07-c9da-49ab-b7ea-5f2b0874167a}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := FALSE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := FALSE;
 
 ]]></ST>
       </Implementation>
@@ -9844,7 +9844,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMov_a_tor_exit" Id="{b3bc6c24-1bda-4ad7-95ba-1ab58ab559b2}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := FALSE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := FALSE;
 
 ]]></ST>
       </Implementation>
@@ -9864,7 +9864,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMov_a_tor2_exit_1_1" Id="{997279d3-cd92-4895-9445-68709b3e3269}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B2 := FALSE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B2 := FALSE;
 
 ]]></ST>
       </Implementation>
@@ -9884,7 +9884,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMover_cabe_entry" Id="{008cc0ab-8abb-415b-b328-71c5a120f70c}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := True;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := True;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9902,7 +9902,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMover_cabe_exit" Id="{59b99ff1-ca14-4ed0-bf72-a5dd234ae849}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9920,7 +9920,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMover_cabe2_entry_1_1" Id="{39b56a71-f556-4b9d-9cab-45b89a79b32c}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := True;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := True;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -9938,7 +9938,7 @@ Qrob_control.mover_abs := False;]]></ST>
     </Action>
     <Action Name="_aMover_cabe2_exit_1_1" Id="{911fb5b9-386d-4810-af20-9a8e136c35c0}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -10055,65 +10055,65 @@ Qrob_control.detener := FALSE;
     <Action Name="bajar_robot_3_entry" Id="{d9d8038c-a269-41cc-8a3f-4470dab230ab}">
       <Implementation>
         <ST><![CDATA[
-Robot_A.UR_inputs.Bits.B0 := TRUE;]]></ST>
+Robot_UR5.UR_inputs.Bits.B0 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="bajar_robot_3_exit" Id="{642d9cb1-e355-4f37-9a7d-383f37e2909f}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B0 := FALSE;
-Robot_A.UR_inputs.Bits.B10 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B0 := FALSE;
+Robot_UR5.UR_inputs.Bits.B10 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="bajar_robot_entry" Id="{e4c0dbf5-0e0a-4d6b-a7c9-dbf2ee518f98}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B0 := TRUE;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B0 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="bajar_robot_exit" Id="{1dcb9c72-0ad6-40c1-9dc2-284a3f25cdad}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B0 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B0 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Cabe_separador_entry" Id="{cf3e6dd4-f088-49ae-9c10-01323c6b5ba6}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := TRUE;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Cabe_separador_exit" Id="{99aede7a-a449-4b94-b479-7347f4a58801}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Pos_buffer_entry" Id="{0dc12635-c58b-419b-a4ba-a9f80d727d13}">
       <Implementation>
         <ST><![CDATA[
-Robot_A.UR_inputs.Bits.B7 := TRUE;]]></ST>
+Robot_UR5.UR_inputs.Bits.B7 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Pos_buffer_exit" Id="{059b1db5-f51c-46c8-b768-ea3f2a35ab58}">
       <Implementation>
         <ST><![CDATA[
-Robot_A.UR_inputs.Bits.B7 := False;]]></ST>
+Robot_UR5.UR_inputs.Bits.B7 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Step1_entry" Id="{7965ab5f-94b8-414e-9c61-956e59652ea2}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B7 := TRUE;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B7 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Step1_exit" Id="{81f6eb1b-b6fd-4b7d-8616-b5d9cb705615}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B7 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B7 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Subir_herra_entry" Id="{f472e93e-fb4d-4977-ad48-84211f85e07f}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B7 := TRUE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B7 := TRUE;
 Qrob_control.detener := TRUE;
 Qrob_control.detener := FALSE;
 
 
-Robot_A.UR_inputs.Bits.B7 := TRUE;
+Robot_UR5.UR_inputs.Bits.B7 := TRUE;
 Qrob_control.pos_mover_abs := Qrob_control.actual_position -10;
 
 
@@ -10129,30 +10129,30 @@ Qrob_control.mover_abs := TRUE;
     </Action>
     <Action Name="Subir_herra_entry_0" Id="{9fa17653-87d7-4c09-a3d7-1cf7ef23a6c8}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := TRUE;
-Robot_S_ur3.UR_outputs.B6 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := TRUE;
+Robot_UR3.UR_outputs.B6 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Subir_herra_exit" Id="{ac5eda4e-ca59-4ac4-a8d8-c5c6ae533909}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B7 := FALSE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B7 := FALSE;
 Qrob_control.mover_abs := FALSE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Subir_herra_exit_0" Id="{9242a96d-7824-4cb1-8c1f-ef8a61e130fc}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B5 := FALSE;
-Robot_S_ur3.UR_outputs.B6 := True;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B5 := FALSE;
+Robot_UR3.UR_outputs.B6 := True;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Up_cabezal_entry" Id="{2ee65113-8c81-4e63-9a58-b891b386eefd}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B8 := TRUE;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B8 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Up_cabezal_exit" Id="{5ec6b1f3-c3c7-4acf-af2d-bf8709a1579f}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B8 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B8 := False;]]></ST>
       </Implementation>
     </Action>
     <ObjectProperties>

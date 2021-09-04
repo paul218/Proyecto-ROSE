@@ -35,50 +35,60 @@ TCP_torque_z : REAL;
 
 TCP_force : REAL;
 velocity :INT;
-
-
+turn_aux_float : REAL:= 0;
+turn_aux_int : INT := 0;
+qRob_actual_pos : REAL;	
+new_turn : REAL;
 
 //velocity_degress : REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
+qRob_actual_pos := Get_QRob_Pos.actual_position/360;
+turn_aux_int := ABS(REAL_TO_INT(qRob_actual_pos));
+turn_aux_float:= turn_aux_int  - (qRob_actual_pos);
+new_turn := turn_aux_float*(-1)*360;
+
+TCP_pos_x := flip_byte(Robot_UR5.UR_TCP.FLOAT0)*1000;
+TCP_pos_y := flip_byte(Robot_UR5.UR_TCP.FLOAT1)*1000;
+TCP_pos_z := flip_byte(Robot_UR5.UR_TCP.FLOAT2)*1000;
+TCP_pos_rx := (flip_byte(Robot_UR5.UR_TCP.FLOAT3)*180)/3.1415;
+TCP_pos_ry := (flip_byte(Robot_UR5.UR_TCP.FLOAT4)*180)/3.1415;
+TCP_pos_rz := (flip_byte(Robot_UR5.UR_TCP.FLOAT5)*180)/3.1415;
 
 
-TCP_pos_x := flip_byte(Robot_A.UR_TCP.FLOAT0)*1000;
-TCP_pos_y := flip_byte(Robot_A.UR_TCP.FLOAT1)*1000;
-TCP_pos_z := flip_byte(Robot_A.UR_TCP.FLOAT2)*1000;
-TCP_pos_rx := (flip_byte(Robot_A.UR_TCP.FLOAT3)*180)/3.1415;
-TCP_pos_ry := (flip_byte(Robot_A.UR_TCP.FLOAT4)*180)/3.1415;
-TCP_pos_rz := (flip_byte(Robot_A.UR_TCP.FLOAT5)*180)/3.1415;
+TCP_force  := flip_byte(Robot_UR5.UR_TCP.FLOAT18);
 
+TCP_force_x := flip_byte(Robot_UR5.UR_TCP.FLOAT12);
+TCP_force_y := flip_byte(Robot_UR5.UR_TCP.FLOAT13);
+TCP_force_z := flip_byte(Robot_UR5.UR_TCP.FLOAT14);
+TCP_torque_x := flip_byte(Robot_UR5.UR_TCP.FLOAT15);
+TCP_torque_y := flip_byte(Robot_UR5.UR_TCP.FLOAT16);
+TCP_torque_z := flip_byte(Robot_UR5.UR_TCP.FLOAT17);
 
-TCP_force  := flip_byte(Robot_A.UR_TCP.FLOAT18);
-
-TCP_force_x := flip_byte(Robot_A.UR_TCP.FLOAT12);
-TCP_force_y := flip_byte(Robot_A.UR_TCP.FLOAT13);
-TCP_force_z := flip_byte(Robot_A.UR_TCP.FLOAT14);
-TCP_torque_x := flip_byte(Robot_A.UR_TCP.FLOAT15);
-TCP_torque_y := flip_byte(Robot_A.UR_TCP.FLOAT16);
-TCP_torque_z := flip_byte(Robot_A.UR_TCP.FLOAT17);
-
-join_pos_1 := (flip_byte(Robot_A.UR_JOINS.FLOAT0)*180)/3.1415;
-join_pos_2 := (flip_byte(Robot_A.UR_JOINS.FLOAT1)*180)/3.1415;
-join_pos_3 := (flip_byte(Robot_A.UR_JOINS.FLOAT2)*180)/3.1415;
-join_pos_4 := (flip_byte(Robot_A.UR_JOINS.FLOAT3)*180)/3.1415;
-join_pos_5 := (flip_byte(Robot_A.UR_JOINS.FLOAT4)*180)/3.1415;
-join_pos_6 := (flip_byte(Robot_A.UR_JOINS.FLOAT5)*180)/3.1415;
+join_pos_1 := (flip_byte(Robot_UR5.UR_JOINS.FLOAT0)*180)/3.1415;
+join_pos_2 := (flip_byte(Robot_UR5.UR_JOINS.FLOAT1)*180)/3.1415;
+join_pos_3 := (flip_byte(Robot_UR5.UR_JOINS.FLOAT2)*180)/3.1415;
+join_pos_4 := (flip_byte(Robot_UR5.UR_JOINS.FLOAT3)*180)/3.1415;
+join_pos_5 := (flip_byte(Robot_UR5.UR_JOINS.FLOAT4)*180)/3.1415;
+join_pos_6 := (flip_byte(Robot_UR5.UR_JOINS.FLOAT5)*180)/3.1415;
  
-join_torque_1 := flip_byte(Robot_A.UR_float_out.FLOAT0);
-join_torque_2 := flip_byte(Robot_A.UR_float_out.FLOAT1);
-join_torque_3 := flip_byte(Robot_A.UR_float_out.FLOAT2);
-join_torque_4 := flip_byte(Robot_A.UR_float_out.FLOAT3);
-join_torque_5 := flip_byte(Robot_A.UR_float_out.FLOAT4);
-join_torque_6 := flip_byte(Robot_A.UR_float_out.FLOAT5);
+join_torque_1 := flip_byte(Robot_UR5.UR_float_out.FLOAT0);
+join_torque_2 := flip_byte(Robot_UR5.UR_float_out.FLOAT1);
+join_torque_3 := flip_byte(Robot_UR5.UR_float_out.FLOAT2);
+join_torque_4 := flip_byte(Robot_UR5.UR_float_out.FLOAT3);
+join_torque_5 := flip_byte(Robot_UR5.UR_float_out.FLOAT4);
+join_torque_6 := flip_byte(Robot_UR5.UR_float_out.FLOAT5);
 ]]></ST>
     </Implementation>
     <LineIds Name="data_robot_ur5">
-      <LineId Id="242" Count="2" />
+      <LineId Id="289" Count="0" />
+      <LineId Id="242" Count="0" />
+      <LineId Id="284" Count="0" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="244" Count="0" />
       <LineId Id="178" Count="28" />
       <LineId Id="111" Count="0" />
       <LineId Id="35" Count="0" />

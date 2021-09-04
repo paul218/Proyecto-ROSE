@@ -3,7 +3,7 @@
   <GVL Name="GLV_USER_FUN" Id="{10e41103-96e0-4120-ab4a-46571acc69a8}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL RETAIN
-		Value :INT:=-1;
+		Value :INT:=2;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

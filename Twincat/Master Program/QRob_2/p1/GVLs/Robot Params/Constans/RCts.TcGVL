@@ -4,6 +4,12 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL CONSTANT
 
+
+// 
+
+
+   
+
 //############### CS.UR3 CONSTANTS STATES ###################
 //########################################################
 	RESET_STATE:INT:=-1;
@@ -25,6 +31,11 @@ VAR_GLOBAL CONSTANT
 	UR3DropBench_I:INT := 330;
 	UR3DropBench_F:INT := 331;
 	
+	
+	UR3Correct_Insertion :INT:=39;
+	UR3Correct_Insertion_I :INT:=390;
+	UR3Correct_Insertion_F :INT:=391;
+	
 	UR3RotateSeparator:INT := 34;
 	UR3RotateSeparator_I:INT := 340;
 	UR3RotateSeparator_F:INT := 341;
@@ -44,6 +55,9 @@ VAR_GLOBAL CONSTANT
 //############### CS.UR5 CONSTANTS STATES ###################
 //########################################################
  
+
+    UR_DATA_SEND : INT :=-2;
+	
 	UR5:INT:=5;
 	
 	UR5Home:INT := 50;
@@ -79,26 +93,49 @@ VAR_GLOBAL CONSTANT
 	UR5Return_F:INT := 571;
 
 	/// to ck new values
+	UR5CkPosSepator : INT := 69;
+	UR5CkPosSepator_I: INT := 690;
+	UR5CkPosSepator_F: INT := 691;
+	
+	UR5CtrHeadTurnR : INT := 70;
+	UR5CtrHeadTurnR_I : INT := 700;
+	UR5CtrHeadTurnR_F : INT := 701;
+	
+	
+	UR5CtrHeadTurnL : INT := 71;
+	UR5CtrHeadTurnL_I : INT := 710;
+	UR5CtrHeadTurnL_F : INT := 711;
+	
 	
 	UR5CtrCamPos1:INT:=58;
 	UR5CtrCamPos2:INT:=60;
 	UR5CtrCamPos3:INT:=62;
 	UR5CtrCamPos4:INT:=64;
-	
 	UR5CtrCamPos:INT:=582;
 	UR5CtrCamPos_I:INT:=580;
 	UR5CtrCamPos_F:INT:=581;
-	
+
+	UR5MoveToNut:INT:=592;	
+	UR5MoveToNut_I:INT:=590;
+	UR5MoveToNut_F:INT:=591;
 	UR5MoveToNut1:INT:=59;
 	UR5MoveToNut2:INT:=61;
 	UR5MoveToNut3:INT:=63;
 	UR5MoveToNut4:INT:=65;
-	UR5MoveToNut_I:INT:=590;
-	UR5MoveToNut_F:INT:=591;
+	
+	UR5Correct_Insertion :INT:=73;
+	UR5Correct_Insertion_I :INT:=730;
+	UR5Correct_Insertion_F :INT:=731;
+
 	
 	UR5UnScrew:INT:=66;
 	UR5UnScrew_I:INT:=5100;
 	UR5UnScrew_F:INT:=5101;
+	
+	
+	UR5ScrewHigh:INT:=72;
+	UR5ScrewHigh_I:INT:=5130;
+	UR5ScrewHigh_F:INT:=5131;
 	
 	UR5Screw:INT:=67;
 	UR5Screw_I:INT:=5110;

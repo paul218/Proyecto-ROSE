@@ -97,7 +97,8 @@ def mainUR3():
         
     init_register(3,4,5,300)
     gripkit_easy_enable() #ESTO SE DEBE REALIZAR EN LA MARCHA DE PREPARACIÓN (ESTADO_10)
-    movej([3.054326, -2.000864, 1.487369, -1.057302, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.094992, -1.810605, 1.908692, -1.919862, -1.570796, -1.570796],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.147352, -3.119602, 2.589370, -1.658063, -1.570796, -1.540951],accel_radss,speed_rads,0,blend_radius_m)
     reset_register(3,4,5,301)
 
   end
@@ -134,6 +135,11 @@ def mainUR3():
     end
     return row
   end
+
+  #function to start the gripping movements
+  def StartingPoint():
+    movej([3.094992, -1.810605, 1.908692, -1.919862, -1.570796, -1.570796],accel_radss,speed_rads,0,blend_radius_m) #From Home starting point to have no Collisions
+  end
     
   #Select based on the column the reference point
   def GripSeparator(p1, p2, p3, vertical_dist, column, row):
@@ -145,13 +151,14 @@ def mainUR3():
     end
 
     if(column==0):
-      movej(pose_add(p1,p[ 0.0, 0.0, 0.07378, 0.0, 0.0, 0.0]), accel_radss,speed_rads,0,blend_radius_m) #maximum Z high is 0.224970
+      movej(pose_add(p1,p[ 0.0, 0.0, 0.07645, 0.0, 0.0, 0.0]), accel_radss,speed_rads,0,blend_radius_m) #maximum Z high is 0.224970
       movel(pose_add(p1, p[ 0.0, 0.0, -(row*vertical_dist), 0.0, 0.0, 0.0]),accel_mss,speed_ms,0,blend_radius_m)
     elif (column==1):
-      movej(pose_add(p2,p[ 0.0, 0.0, 0.07223, 0.0, 0.0, 0.0]), accel_radss,speed_rads,0,blend_radius_m) #maximum Z high is 0.224970
+      movej(pose_add(p2,p[ 0.0, 0.0, 0.07202, 0.0, 0.0, 0.0]), accel_radss,speed_rads,0,blend_radius_m) #maximum Z high is 0.224970
       movel(pose_add(p2, p[ 0.0, 0.0, -(row*vertical_dist), 0.0, 0.0, 0.0]),accel_mss,speed_ms,0,blend_radius_m)
     else:
-      movej(pose_add(p3,p[ 0.0, 0.0, 0.07232, 0.0, 0.0, 0.0]), accel_radss,speed_rads,0,blend_radius_m) #maximum Z high is 0.224970
+	  movej([d2r(162.98), d2r(-42.27), d2r(20), d2r(-65.67),d2r(-89.10), d2r(249.28)], accel_radss,speed_rads,0,blend_radius_m)
+      movej(pose_add(p3,p[ 0.0, 0.0, 0.07012, 0.0, 0.0, 0.0]), accel_radss,speed_rads,0,blend_radius_m) #maximum Z high is 0.224970
       movel(pose_add(p3, p[ 0.0, 0.0, -(row*vertical_dist), 0.0, 0.0, 0.0]),accel_mss,speed_ms,0,blend_radius_m)
     end
     gripkit_easy_grip()
@@ -161,12 +168,17 @@ def mainUR3():
   #Separator lift function
   def LiftSeparator(p1,p2,p3,column):
     if(column==0):
-      movel(pose_add(p1,p[ 0.0, 0.0, 0.07378, 0.0, 0.0, 0.0]), accel_mss,speed_ms,0,blend_radius_m) #maximum Z high is 0.224970
+      movel(pose_add(p1,p[ 0.0, 0.0, 0.07645, 0.0, 0.0, 0.0]), accel_mss,speed_ms,0,blend_radius_m) #maximum Z high is 0.224970
     elif (column==1):
-      movel(pose_add(p2,p[ 0.0, 0.0, 0.07223, 0.0, 0.0, 0.0]), accel_mss,speed_ms,0,blend_radius_m) #maximum Z high is 0.224970
+      movel(pose_add(p2,p[ 0.0, 0.0, 0.07202, 0.0, 0.0, 0.0]), accel_mss,speed_ms,0,blend_radius_m) #maximum Z high is 0.224970
     else:
-      movel(pose_add(p3,p[ 0.0, 0.0, 0.07232, 0.0, 0.0, 0.0]), accel_mss,speed_ms,0,blend_radius_m) #maximum Z high is 0.224970
+      movel(pose_add(p3,p[ 0.0, 0.0, 0.07012, 0.0, 0.0, 0.0]), accel_mss,speed_ms,0,blend_radius_m) #maximum Z high is 0.224970
     end
+  end
+
+  #function to finish the movement and prepare for the next state
+  def TakenDone():
+    movel([2.692357, -1.636750, 1.446014, -1.340110, -1.559653, -2.088373],accel_mss,speed_ms,0,blend_radius_m)
   end
 
   #function that checks if the separator has been taken by the gripper
@@ -184,9 +196,9 @@ def mainUR3():
     init_register(3,4,5,310)
     vertical_dist = 0.048
       
-    p1=p[ 430.64/1000, 150.43/1000,  154.75/1000, 2.3, -2.141, 0.0]
-    p2=p[ 434.94/1000, 1.81/1000,  152.74/1000, 2.234, -2.229, 0.019]
-    p3=p[ 436.16/1000, -96.79/1000,  152.65/1000, 2.239, -2.236, 0.061]
+    p1=p[ 301.7/1000, 2.47/1000,  148.52/1000, -3.111, -0.106, 0.047]
+    p2=p[ 399.03/1000, 2.47/1000,  152.95/1000, 3.168, 0.108, -0.048]
+    p3=p[ 501.23/1000, -1.5/1000,  154.85/1000, 3.160, 0.047, -0.023]
       
     column=0 #Variable to know which column to go
     row=0    #Variable to know whick row to go
@@ -194,6 +206,7 @@ def mainUR3():
 
     column=CheckColumn(n_separator, column)
     row=CheckRow(n_separator, row)
+    StartingPoint()
     GripSeparator(p1, p2, p3, vertical_dist, column, row)  
     var=CheckGripState()   #check if the tool has gripped the separator correctly
         
@@ -212,6 +225,7 @@ def mainUR3():
     end
   
     LiftSeparator(p1, p2, p3, column)
+    TakenDone()
     if(n_separator>=16):
       n_separator=1
       UR3Home()
@@ -234,13 +248,14 @@ def mainUR3():
   def UR3Move():
   
     init_register(3,4,5,320)
-    movej([2.998650, -1.021017, 0.738274, -1.714088, -1.478468, -0.036128],accel_radss,speed_rads,0,blend_radius_m)
-    movej([2.978753, -1.229933, 0.856782, -1.866280, -1.470963, -0.054454],accel_radss,speed_rads,0,blend_radius_m)
+    movej([2.988822, -1.767962, 1.620961, -1.839686, -1.556895, -0.155324],accel_radss,speed_rads,0,blend_radius_m)
+    movej([2.979812, -1.765817, 1.618682, -2.417750, -1.544040, -0.150884],accel_radss,speed_rads,0,blend_radius_m)
     movej([2.589497, -1.708628, 1.653841, -3.255535, -0.958561, 0.164599],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.130247, -1.492780, 0.402648, -3.655418, -1.605528, 0.017279],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.258313, -1.062730, -1.256914, -3.325443, -1.636010, -0.055664],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.278513, -0.904607, -2.248904, -3.021830, -1.492790, -0.008363],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.262023, -0.967804, -2.228526, -2.979129, -1.509191, 1.564254],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.130248, -1.388060, -0.138405, -3.655418, -1.605528, 0.017279],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.116111, -1.164833, -0.997630, -3.377038, -1.631185, -0.044331],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.555252, -1.496725, -1.310180, -3.440421, -1.734984, -0.036673],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.715545, -1.455491, -1.766061, -3.218178, -1.351089, 1.570397],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.645993, -1.483530, -2.394068, -2.356194, -1.073377, 1.556485],accel_radss,speed_rads,0,blend_radius_m)
     reset_register(3,4,5,321)
         
   end
@@ -252,9 +267,9 @@ def mainUR3():
   def UR3DropBench():
     
     init_register(3,4,5,330)
-    movej([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_radss,speed_rads,0,blend_radius_m)
-    #movel([3.876904, -2.012729, -2.493867, -1.776589, -0.835485, 1.570796],accel_mss,speed_ms,0,blend_radius_m)
-    movel(p[-395.48/1000, -18.43/1000,77.61/1000 , 0.058, -1.522, 0.020],accel_mss,speed_ms,0,blend_radius_m)
+    movej([4.006400, -1.510303, -2.593562, -2.126343, -0.722900, 1.482144],accel_radss,speed_rads,0,blend_radius_m)
+	movel(p[-369.73/1000, -4.05/1000, -22.5/1000, 0.049, -1.546, -0.022], accel_mss, speed_ms, 0, blend_radius_m)
+    #movel([4.006400, -2.819209, -2.513026, -0.897973, -0.722900, 1.482144],accel_mss,speed_ms,0,blend_radius_m)
     reset_register(3,4,5,331)
 
   end
@@ -266,12 +281,11 @@ def mainUR3():
   def UR3RotateSeparator():
 
     init_register(3,4,5,340)
-    movel([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_mss,speed_ms,0,blend_radius_m)
-    movej([3.262021, -0.967785, -2.228611, -3.054326, -1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.248407, -1.027916, -2.205811, -3.016994, -1.584413, 4.712848],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.885666, -1.409790, -2.235272, -2.656978, -0.822123, 4.713486],accel_radss,speed_rads,0,blend_radius_m)
-    movel(p[-395.48/1000,-17.31/1000 ,78.71/1000 , 2.178,0.052 ,-2.249 ],accel_mss,speed_ms,0,blend_radius_m)
-    #movel([3.891802, -1.959047, -2.485370, -1.857349, -0.807927, 4.712484],accel_mss,speed_ms,0,blend_radius_m)
+    movel([4.006400, -1.510303, -2.593562, -2.126343, -0.722900, 1.482144],accel_mss,speed_ms,0,blend_radius_m)
+    movej([3.795340, -1.573014, -2.133618, -2.521679, -0.924609, 1.547197],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.795393, -1.573065, -2.133665, -2.521652, -0.924675, 4.618141],accel_radss,speed_rads,0,blend_radius_m)
+    movel([4.016632, -1.510193, -2.601069, -2.110944, -0.702844, 4.618216],accel_mss,speed_ms,0,blend_radius_m)
+    movel([4.016406, -2.820647, -2.519967, -0.881393, -0.703267, 4.618366],accel_mss,speed_ms,0,blend_radius_m)
     reset_register(3,4,5,341)
     
   end
@@ -283,10 +297,9 @@ def mainUR3():
   def UR3RotateDropCable():
     
     init_register(3,4,5,350)
-    movel([3.885666, -1.409790, -2.235272, -2.656978, -0.822123, 4.713486],accel_mss,speed_ms,0,blend_radius_m)
-    movej([3.726487, -1.486412, -1.655221, 0.000506, 0.960078, 1.557563],accel_radss,speed_rads,0,blend_radius_m)
-    #movel([3.725871, -1.589132, -1.063358, -0.488654, 0.961430, 1.558304],accel_mss,speed_ms,0,blend_radius_m)
-    movel(p[-430.61/1000,-6.48/1000 ,595.35/1000 ,2.211 ,0.056 ,-2.205 ],accel_mss,speed_ms,0,blend_radius_m)    
+    movel([4.016632, -1.510193, -2.601069, -2.110944, -0.702844, 4.618216],accel_mss,speed_ms,0,blend_radius_m)
+    movej([3.692001, -1.540558, -1.606126, -3.107601, -1.029469, 4.652141],accel_radss,speed_rads,0,blend_radius_m)
+    movel([3.692179, -1.570168, -1.310572, -3.373567, -1.029072, 4.651610],accel_mss,speed_ms,0,blend_radius_m)  
     reset_register(3,4,5,351)
    
   end
@@ -298,13 +311,16 @@ def mainUR3():
   def UR3DropCable():
 
     init_register(3,4,5,360)
-    movel([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_mss,speed_ms,0,blend_radius_m)
-    movej([3.754317, -1.506105, -1.849585, 0.214141, 0.945161, -1.583733],accel_radss,speed_rads,0,blend_radius_m)
-    #movel([3.690388, -1.599182, -1.031013, -0.511643, 1.022000, -1.570668],accel_mss,speed_ms,0,blend_radius_m)
-    movel(p[-430.31/1000,-15.18/1000 ,591.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
+    #movel([4.006400, -1.510303, -2.593562, -2.126343, -0.722900, 1.482144],accel_mss,speed_ms,0,blend_radius_m)
+	movel(p[-369.73/1000, -4.05/1000, 141.75/1000, 0.049, -1.546, -0.022], accel_mss, speed_ms, 0, blend_radius_m)
+    movej(p[ -432.20/1000, -3.97/1000,  311.159/1000, 0.061, -1.565, -0.020],accel_radss,speed_rads,0,blend_radius_m)
+    movel(p[ -432.20/1000, -3.97/1000,  372.71/1000, 0.061, -1.565, -0.020],accel_mss,speed_ms,0,blend_radius_m)
+	movel(p[ -432.20/1000, -0.23/1000,  420.7/1000, 0.061, -1.565, -0.020],accel_mss,speed_ms,0,blend_radius_m)#pos nave cables
     reset_register(3,4,5,361)
     
   end
+
+
 
   ###########################################################################################
   ########## STATE_7 FROM THE INSTALLATION AREA IT RETURNS TO HOME. END OF CICLE  ###########
@@ -314,17 +330,34 @@ def mainUR3():
 
     init_register(3,4,5,370)
     gripkit_easy_release()
-    movel(p[-362.18/1000,-15.18/1000 ,591.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
-    movel(p[-362.18/1000,-15.18/1000 ,451.52/1000 ,0.058 ,-1.573 ,0.040 ],accel_mss,speed_ms,0,blend_radius_m)
-    #movej([3.816544, -1.404091, -1.502819, -0.234683, 0.895845, -1.570796],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.816511, -1.409004, -2.225469, -0.257611, 0.895878, -1.570796],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.816511, -1.409004, -2.225469, -0.257611, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    movej(p[ -397.55/1000, 20.48/1000,  372.71/1000, 0.061, -1.565, -0.020],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.905349, -1.325927, -1.537286, -2.346595, -0.807913, 1.553518],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.054325, -2.211856, 1.125563, -1.308996, -1.570795, -0.000001],accel_radss,speed_rads,0,blend_radius_m)
-    movej([3.054326, -2.000864, 1.487369, -1.057302, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.054326, -1.758070, 1.649162, -1.483530, -1.570796, 0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    UR3Home()
     reset_register(3,4,5,371)
 
   end
+
+
   
+  
+  ###########################################################################################################################
+  ########## STATE_8 FROM THE INSTALLATION AREA IT RETURNS TO HOME WHEN SEPARATOR HAS BEEN ROTATED. END OF CICLE  ###########
+  ###########################################################################################################################
+
+  def UR3ReturnRotated():
+
+    init_register(3,4,5,380)
+    gripkit_easy_release()
+    movel([3.763104, -1.402023, -1.464506, -3.428350, -0.949983, 4.717974],accel_mss,speed_ms,0,blend_radius_m)
+    movej([3.905349, -1.325927, -1.537286, -2.346595, -0.807913, 1.553518],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.054325, -2.211856, 1.125563, -1.308996, -1.570795, -0.000001],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.054326, -1.758070, 1.649162, -1.483530, -1.570796, 0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    UR3Home()
+    reset_register(3,4,5,381)
+
+  end
 
   ##############################################################################################################################
   ##############################################################################################################################
@@ -363,10 +396,15 @@ def mainUR3():
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3DropCable()
    elif (CheckStatus(37)==True):
-     set_payload(0.87, [-6/1000,-3/1000,48/1000])
+     set_payload(0.87, [-6/1000,-3/1000,48/1000]) #adjust payload to empty weight
      set_Speed(0.05, 2, 3, 2.4)
      UR3Return()
-     separator_count=separator_count+1    
+     separator_count=separator_count+1
+   elif (CheckStatus(38)==True):
+     set_payload(0.87, [-6/1000,-3/1000,48/1000]) #adjust payload to empty weight
+     set_Speed(0.05, 2, 3, 2.4)
+     UR3ReturnRotated()
+     separator_count=separator_count+1     
    end
   end
 end

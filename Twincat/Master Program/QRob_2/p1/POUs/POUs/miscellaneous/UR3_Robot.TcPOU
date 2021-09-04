@@ -344,7 +344,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Robot_S_ur3.UR_outputs.B0"</v>
+                            <v n="Value">"Robot_UR3.UR_outputs.B0"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">93L</v>
@@ -527,7 +527,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Robot_S_ur3.UR_outputs.B1"</v>
+                            <v n="Value">"Robot_UR3.UR_outputs.B1"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">113L</v>
@@ -893,7 +893,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Robot_S_ur3.UR_outputs.B2"</v>
+                            <v n="Value">"Robot_UR3.UR_outputs.B2"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">566L</v>
@@ -1442,7 +1442,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Robot_A.UR_outputs.B20"</v>
+                            <v n="Value">"Robot_UR5.UR_outputs.B20"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">612L</v>
@@ -1625,7 +1625,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Robot_S_ur3.UR_outputs.B4"</v>
+                            <v n="Value">"Robot_UR3.UR_outputs.B4"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">70L</v>
@@ -1991,7 +1991,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Robot_A.UR_outputs.B60"</v>
+                            <v n="Value">"Robot_UR5.UR_outputs.B60"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">380L</v>
@@ -2448,7 +2448,7 @@ data_to_robot.head_roll_left := turn;
     </Action>
     <Action Name="_ahome_entry" Id="{71ce866c-fa91-4c36-a857-c17e1612e479}">
       <Implementation>
-        <ST><![CDATA[Robot_S_ur3.UR_inputs.Bits.B0 := TRUE;
+        <ST><![CDATA[Robot_UR3.UR_inputs.Bits.B0 := TRUE;
 ]]></ST>
       </Implementation>
       <ObjectProperties>
@@ -2467,7 +2467,7 @@ data_to_robot.head_roll_left := turn;
     </Action>
     <Action Name="_ahome_exit" Id="{4747ef67-74d2-486c-9203-4c28f94e5182}">
       <Implementation>
-        <ST><![CDATA[Robot_S_ur3.UR_inputs.Bits.B0 := False;]]></ST>
+        <ST><![CDATA[Robot_UR3.UR_inputs.Bits.B0 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -2485,7 +2485,7 @@ data_to_robot.head_roll_left := turn;
     </Action>
     <Action Name="_ahome_r_entry" Id="{5d59ec00-15a9-4251-87e9-db795aa72728}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B27 := TRUE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B27 := TRUE;
 regresar := False;]]></ST>
       </Implementation>
       <ObjectProperties>
@@ -2504,7 +2504,7 @@ regresar := False;]]></ST>
     </Action>
     <Action Name="_ahome_r_exit" Id="{70df0f93-16aa-447b-acff-d27f0ef73eae}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B27 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B27 := False;]]></ST>
       </Implementation>
       <ObjectProperties>
         <XmlArchive>
@@ -2560,7 +2560,7 @@ regresar := False;]]></ST>
     </Action>
     <Action Name="_asubir_sep_entry" Id="{835eb47f-8faf-41ce-8056-9d07ce7d7020}">
       <Implementation>
-        <ST><![CDATA[Robot_S_ur3.UR_inputs.Bits.B20 := TRUE;
+        <ST><![CDATA[Robot_UR3.UR_inputs.Bits.B20 := TRUE;
 
 ]]></ST>
       </Implementation>
@@ -2580,7 +2580,7 @@ regresar := False;]]></ST>
     </Action>
     <Action Name="_asubir_sep_exit" Id="{974f9616-705a-4b20-8dbb-738e80ec17f0}">
       <Implementation>
-        <ST><![CDATA[Robot_S_ur3.UR_inputs.Bits.B20 := FALSE;
+        <ST><![CDATA[Robot_UR3.UR_inputs.Bits.B20 := FALSE;
 ]]></ST>
       </Implementation>
       <ObjectProperties>
@@ -2611,12 +2611,12 @@ data_to_robot.head_roll_right := turn;]]></ST>
     </Action>
     <Action Name="girar_sep_entry" Id="{76c39167-d352-4e45-9816-aad54382be21}">
       <Implementation>
-        <ST><![CDATA[Robot_S_ur3.UR_inputs.Bits.B0 := TRUE;]]></ST>
+        <ST><![CDATA[Robot_UR3.UR_inputs.Bits.B0 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="girar_sep_exit" Id="{dc96bd1e-fa34-4679-9311-270a1aaa7e08}">
       <Implementation>
-        <ST><![CDATA[Robot_S_ur3.UR_inputs.Bits.B0 := False;]]></ST>
+        <ST><![CDATA[Robot_UR3.UR_inputs.Bits.B0 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Init_UR5_entry" Id="{1e8f29fe-fc49-4c67-9e0f-db1c1848fa7f}">
@@ -2631,12 +2631,12 @@ data_to_robot.head_roll_right := turn;]]></ST>
     </Action>
     <Action Name="Pos_subir_ok_entry" Id="{cd034212-a1b0-4d5f-b99d-ca0c1afbf9de}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B20 := TRUE;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B20 := TRUE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Pos_subir_ok_exit" Id="{f71d015b-6f4b-4eb9-8bf9-44dee863e6b3}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B20 := False;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B20 := False;]]></ST>
       </Implementation>
     </Action>
     <ObjectProperties>

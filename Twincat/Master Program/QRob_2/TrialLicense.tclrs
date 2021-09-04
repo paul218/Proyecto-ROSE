@@ -1,50 +1,14 @@
 <?xml version="1.0"?>
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
-		<SystemId>{1252D9BB-6432-B796-1404-30884C88E185}</SystemId>
-		<IssueTime>2021-04-27T15:33:00</IssueTime>
-		<ExpireTime>2021-05-05T00:00:00</ExpireTime>
-		<LicenseKey>5671b3a8ca2962af1fb1843387236686ddf943e0d95f2228f3ca66c1bdeec03f4f8639955d6657b6a9cae7005ae9f0bcc7e34a6f20e7b95a21e3d0bbde8502c12914434fe571f97ad55793dff1a8da4ff9c53acce6c0fbfd41c78c528a6b633f1a3229032c0fe60a1729bbd2a119f473731774aac3e5f76b529edc08ebe22ab61c30de71ce2f4b6aa36ce79ba167dda79b780e7d9f9b631169b12c32827e2c75c33072eb2f2f860b1f8feb15d794903c6afc27837acc86fa6fdf20fa736650be38b13a422e44fc38b9cee59d79227b741b8e8f573ef995be13eafa0420dbcda971a26f696ce14a315084627739689f0d3fdd43252fb8ecf60a6f6a43ecaeddf4</LicenseKey>
-		<License>
-			<LicenseId>{56ADDFFF-32FF-4DC7-A432-0D2D8413616A}</LicenseId>
-			<Name>TC3 Profinet IO-Device</Name>
-			<OrderNo>TF6270</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{EA2D2277-B540-4BF0-A581-CF62D3140F06}</LicenseId>
-			<Name>TC3 Profinet Controller</Name>
-			<OrderNo>TF6271</OrderNo>
-			<Instances>2</Instances>
-		</License>
-		<License>
-			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
-			<Name>TC3 ADS</Name>
-			<OrderNo>TC1000</OrderNo>
-		</License>
+		<SystemId>{AD12296C-F15F-F57E-277E-BD93F64782F2}</SystemId>
+		<IssueTime>2021-09-03T15:53:00</IssueTime>
+		<ExpireTime>2021-09-11T00:00:00</ExpireTime>
+		<LicenseKey>d9522f6839427579f893311e0f36ad7ae2db429eee24d411db6a530efdafa303daed00dfe32adb1987aa6ec637f4f76cee34f4152cdea91a5104a031961dcbc582f644c86495dfc67de7b95117e3b7fb7f970a0834f0972c34b3066d5a7d612e3e8c5b7ca3b32d006e358d5105c81d82b3fe66867cef4fd07620d145cc82ff328cdde2da814c1f3cab7ab6a5d0162563bef554a181a0a28e718cace1b2f7aab303269da009d0df8078d995a3178cd240e71b9efa4b92876910c7a1ad35df7447ffe74a84fcd7dccec74eba7754b1e4860057c815f9ff09fbfd5ae8575e5d1682633781703f0fbea3226f7ef621e04f66cca9e6ba1c07d28ddd8568b39a69d637</LicenseKey>
 		<License>
 			<LicenseId>{777F1598-583B-4503-99BB-7C02E0ABD97E}</LicenseId>
 			<Name>TC3 Controller Toolbox</Name>
 			<OrderNo>TF4100</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{A19036CF-A53B-4E3A-99FF-023EF5C4798B}</LicenseId>
-			<Name>TC3 NC PTP Axis</Name>
-			<Instances>10</Instances>
-		</License>
-		<License>
-			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
-			<Name>TC3 PLC</Name>
-			<OrderNo>TC1200</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{520DE751-9DB6-47CB-8240-BD5C466E7E64}</LicenseId>
-			<Name>TC3 NC PTP</Name>
-			<OrderNo>TF5000</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{3FF18E97-7754-401B-93FB-70544DE28A13}</LicenseId>
-			<Name>TC3 IO</Name>
-			<OrderNo>TC1100</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>

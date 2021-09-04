@@ -16,13 +16,13 @@ END_VAR
     <Implementation>
       <ST><![CDATA[//leer del robot al plc
 IF robot=3 THEN
-ck0 := flip_byte_int(Robot_S_ur3.UR_outputs_int.INT3);
-ck1 := flip_byte_int(Robot_S_ur3.UR_outputs_int.INT4);
-ck2 := flip_byte_int(Robot_S_ur3.UR_outputs_int.INT5);
+ck0 := flip_byte_int(Robot_UR3.UR_outputs_int.INT3);
+ck1 := flip_byte_int(Robot_UR3.UR_outputs_int.INT4);
+ck2 := flip_byte_int(Robot_UR3.UR_outputs_int.INT5);
 ELSIF robot=5 THEN
-ck0 := flip_byte_int(Robot_A.UR_outputs_int.INT3);
-ck1 := flip_byte_int(Robot_A.UR_outputs_int.INT4);
-ck2 := flip_byte_int(Robot_A.UR_outputs_int.INT5);
+ck0 := flip_byte_int(Robot_UR5.UR_outputs_int.INT3);
+ck1 := flip_byte_int(Robot_UR5.UR_outputs_int.INT4);
+ck2 := flip_byte_int(Robot_UR5.UR_outputs_int.INT5);
 END_IF
 
 IF (ck0=state AND ck1=state AND ck2=state) OR (ck0<>state AND ck1=state AND ck2=state) OR (ck0=state AND ck1<>state AND ck2=state) OR (ck0=state AND ck1=state AND ck2<>state) THEN

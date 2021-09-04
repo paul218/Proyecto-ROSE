@@ -5,6 +5,8 @@
 VAR_GLOBAL CONSTANT
 	
 	//constans to exec respective function into vision system
+	
+	RESET : INT :=-1;
 	CX_VALUE:INT:=1;
 	CY_VALUE:INT:=2;
 	NUT_VALUE:INT:=3;

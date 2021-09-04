@@ -332,7 +332,7 @@ END_VAR
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"Robot_S_ur3.UR_outputs.B1"</v>
+                                        <v n="Value">"Robot_UR3.UR_outputs.B1"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">188L</v>
@@ -802,7 +802,7 @@ END_VAR
                                     <o>
                                       <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                                       <o n="Value" t="StringValue">
-                                        <v n="Value">"Robot_A.UR_outputs.B1"</v>
+                                        <v n="Value">"Robot_UR5.UR_outputs.B1"</v>
                                         <v n="DefaultValue">""</v>
                                       </o>
                                       <v n="Id">169L</v>
@@ -1478,26 +1478,26 @@ END_VAR
     <Action Name="Step2_entry" Id="{3e95e87f-e532-42fa-b7cf-c206a94d0d10}">
       <Implementation>
         <ST><![CDATA[vi_get_img_cabezal_dere := TRUE;
-Robot_S_ur3.UR_inputs.Bits.B1 := False;]]></ST>
+Robot_UR3.UR_inputs.Bits.B1 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Step2_exit" Id="{e565ee66-68a9-4612-a693-858af2dda7e8}">
       <Implementation>
         <ST><![CDATA[vi_get_img_cabezal_dere := FALSE;
-Robot_S_ur3.UR_inputs.Bits.B1 := TRUE;
+Robot_UR3.UR_inputs.Bits.B1 := TRUE;
 head_ok := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Step3_entry" Id="{4c9b0646-b72f-472b-9d6e-f28482a9fde3}">
       <Implementation>
         <ST><![CDATA[vi_get_img_nut := TRUE;
-Robot_A.UR_inputs.Bits.B1 := False;]]></ST>
+Robot_UR5.UR_inputs.Bits.B1 := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="Step3_exit" Id="{9f3625b9-9377-40f9-87be-58253f8253d4}">
       <Implementation>
         <ST><![CDATA[vi_get_img_nut := FALSE;
-Robot_A.UR_inputs.Bits.B1 := TRUE;
+Robot_UR5.UR_inputs.Bits.B1 := TRUE;
 nut_ok := False;]]></ST>
       </Implementation>
     </Action>

@@ -1,0 +1,935 @@
+def hito4_v2():
+  set_gravity([0.0, 0.0, 9.82])
+  set_tcp(p[-0.07337,-0.00262,0.08499,0.0,0.0,0.0])
+  set_payload(3.59, [-0.091, -0.002, -0.027])
+  set_standard_analog_input_domain(0, 1)
+  set_standard_analog_input_domain(1, 1)
+  set_tool_analog_input_domain(0, 1)
+  set_tool_analog_input_domain(1, 1)
+  set_analog_outputdomain(0, 0)
+  set_analog_outputdomain(1, 0)
+  set_input_actions_to_default()
+  step_count_fef0222d_7c4f_4ff9_b05a_ebb779cdea4b = 0.0
+  thread Step_Counter_Thread_387de1ec_3be9_4d56_ba06_18979cf84897():
+    while (True):
+      step_count_fef0222d_7c4f_4ff9_b05a_ebb779cdea4b = step_count_fef0222d_7c4f_4ff9_b05a_ebb779cdea4b + 1.0
+      sync()
+    end
+  end
+  run Step_Counter_Thread_387de1ec_3be9_4d56_ba06_18979cf84897()
+  set_safety_mode_transition_hardness(1)
+  set_tool_communication(False, 115200, 0, 1, 1.5, 3.5)
+  set_tool_output_mode(0)
+  set_tool_digital_output_mode(0, 1)
+  set_tool_digital_output_mode(1, 1)
+  set_tool_voltage(24)
+  # begin: URCap Installation Node
+  #   Source: GRIPKIT-Easy by Weiss Robotics, 1.0.0, Weiss Robotics GmbH & Co. KG
+  #   Type: GRIPKIT-Easy
+  set_tool_output_mode(0)
+  set_tool_digital_output_mode(0, 1)
+  set_tool_digital_output_mode(1, 1)
+  set_tool_voltage(24)
+  GRIPKIT_EASY_IDLE_ERROR = 0
+  GRIPKIT_EASY_RELEASED = 1
+  GRIPKIT_EASY_NO_PART = 2
+  GRIPKIT_EASY_HOLDING = 3
+  gripkit_easy_monitor_enabled = False
+  def gripkit_easy_get_state():
+    if (get_tool_digital_in(0) == False and get_tool_digital_in(1) == False):
+      return GRIPKIT_EASY_IDLE_ERROR
+    elif (get_tool_digital_in(0) == True and get_tool_digital_in(1) == False):
+      return GRIPKIT_EASY_RELEASED
+    elif (get_tool_digital_in(0) == False and get_tool_digital_in(1) == True):
+      return GRIPKIT_EASY_NO_PART
+    elif (get_tool_digital_in(0) == True and get_tool_digital_in(1) == True):
+      return GRIPKIT_EASY_HOLDING
+    end
+  end
+  thread gripkit_easy_monitor_thread():
+    socket_open("127.0.0.1", 29999, "internal")
+    textmsg("GRIPKIT-Easy: Monitor thread up and running")
+    while (True):
+      if (gripkit_easy_monitor_enabled == True and gripkit_easy_get_state() != GRIPKIT_EASY_HOLDING):
+        gripkit_easy_monitor_enabled = False
+        socket_send_line("pause", "internal")
+        popup("Part lost. Stop the program?", "GRIPKIT-Easy Error", warning=False, error=True, blocking=True)
+      end
+      sleep(0.01)
+    end
+  end
+  def gripkit_easy_enable():
+    if (get_tool_digital_out(0) == False):
+      set_tool_digital_out(0, True)
+      set_tool_digital_out(1, False)
+      loop_cnt = 0
+      while (True):
+        if (get_tool_digital_in(0) == True and get_tool_digital_in(1) == False):
+          break
+        elif (loop_cnt > 500):
+          popup("Timeout while enabling gripper", "GRIPKIT-Easy Error", warning=False, error=True, blocking=True)
+          break
+        else:
+          loop_cnt = loop_cnt + 1
+          sleep(0.01)
+        end
+      end
+    end
+  end
+  def gripkit_easy_disable():
+    if (get_tool_digital_out(0) == True):
+      gripkit_easy_monitor_enabled = False
+      set_tool_digital_out(0, False)
+      loop_cnt = 0
+      while (True):
+        if (get_tool_digital_in(0) == False and get_tool_digital_in(1) == False):
+          break
+        elif (loop_cnt > 500):
+          popup("Timeout while disabling gripper", "GRIPKIT-Easy Error", warning=False, error=True, blocking=True)
+          break
+        else:
+          loop_cnt = loop_cnt + 1
+          sleep(0.01)
+        end
+      end
+    end
+  end
+  def gripkit_easy_grip():
+    if (get_tool_digital_out(0) == True):
+      if (get_tool_digital_out(1) == False):
+        set_tool_digital_out(1, True)
+        loop_cnt = 0
+        while (True):
+          if (get_tool_digital_in(1) == True):
+            if (get_tool_digital_in(0) == True):
+              textmsg("GRIPKIT-Easy: Part detected. Starting grip monitoring.")
+              gripkit_easy_monitor_enabled = True
+            end
+            break
+          elif (loop_cnt > 500):
+            popup("Timeout while gripping part", "GRIPKIT-Easy Error", warning=False, error=True, blocking=True)
+            break
+          else:
+            loop_cnt = loop_cnt + 1
+            sleep(0.01)
+          end
+        end
+      end
+    else:
+      popup("Gripper is disabled. Please enable first.", "GRIPKIT-Easy Error", warning=False, error=True, blocking=True)
+    end
+  end
+  def gripkit_easy_release():
+    if (get_tool_digital_out(0) == True):
+      if (get_tool_digital_out(1) == True):
+        gripkit_easy_monitor_enabled = False
+        set_tool_digital_out(1, False)
+        loop_cnt = 0
+        while (True):
+          if (get_tool_digital_in(0) == True and get_tool_digital_in(1) == False):
+            break
+          elif (loop_cnt > 500):
+            popup("Timeout while releasing part", "GRIPKIT-Easy Error", warning=False, error=True, blocking=True)
+            break
+          else:
+            loop_cnt = loop_cnt + 1
+            sleep(0.01)
+          end
+        end
+      end
+    else:
+      popup("Gripper is disabled. Please enable first.", "GRIPKIT-Easy Error", warning=False, error=True, blocking=True)
+    end
+  end
+  gripkit_easy_monitor_handle = run gripkit_easy_monitor_thread()
+  # end: URCap Installation Node
+  $ 1 "AntesDeIniciar"
+  $ 2 "Script: mainUR5.script"
+  
+  
+  #Var to save global tcp
+  global_tcp = p[-0.082500, -0.001000, 0.071500, 0,0,0]
+  global float_value = 0
+  gripkit_easy_enable()
+  global drop_head = p[0,0, 0, 0, 0,0]
+  
+  def mainUR5():
+  
+    #Global Parameters
+    global blend_radius_m = 0.001
+  
+    #Global parameters  between cam and tcp
+    global dx_nut = 1.64
+    global dy_nut = 108.57
+    global dz_nut = 71.31
+  
+  
+    global dx_hole = -2.63
+    global dy_hole = 108.41
+    global dz_hole = 39.21
+  
+    # Var to know the pictures taked in UR5CkPosSepatorC
+    global pic_pose_sep = 0
+  
+    #Var to save global tcp
+    global_tcp = p[-0.082500, -0.001000, 0.071500, 0 , 0, 0]
+  
+    ##############################################################################################################################
+    ##############################################################################################################################
+    ##################################################### STATES & FUNCTIONS #####################################################
+    ##############################################################################################################################
+    ##############################################################################################################################
+  
+    #######################################################
+    ############### FOO_1 SET DESIRED SPEED ###############
+    #######################################################
+  
+    def set_Speed(vel_ms, vel_rads, acel_ms, acel_rads ):
+      #default: speed_ms = 0.3 speed_rads = 0.75 accel_mss = 3 accel_radss = 1.2
+      global speed_ms = vel_ms
+      global speed_rads = vel_rads
+      global accel_mss = acel_ms
+      global accel_radss = acel_rads
+    end
+  
+    #######################################################
+    ############# FOO_2 WRITE IN REGISTER INT #############
+    #######################################################
+  
+    def write_state_int(register, value):
+      write_output_integer_register(register, value)
+      sleep(0.1)
+    end
+  
+    #######################################################
+    ############# FOO_3 READ IN REGISTER INT ##############
+    #######################################################
+  
+    def read_state_int(register):
+      while (read_input_integer_register(register) ==   -1  ):
+        sync()
+      end
+      return(read_input_integer_register(register))
+    end
+  
+    #######################################################
+    ############# FOO_4 INITIALIZE REGISTER ###############
+    #######################################################
+  
+    def init_register(register0, register1, register2, value):
+      write_state_int(register0, value)
+      write_state_int(register1, value)
+      write_state_int(register2, value)
+    end
+  
+    #######################################################
+    ################ FOO_5 RESET REGISTER #################
+    #######################################################
+  
+    def reset_register(register0, register1, register2, value):
+      write_state_int(register0, value)
+      write_state_int(register1, value)
+      write_state_int(register2, value)
+      write_state_int(register0, 10)
+      write_state_int(register1, 10)
+      write_state_int(register2, 10)
+    end
+  
+    #######################################################
+    ############### FOO_6 INITIALIZE STATUS ###############
+    #######################################################
+  
+    def init_status(register0, register1, register2):
+      global status0=read_state_int(register0)
+      global status1=read_state_int(register1)
+      global status2=read_state_int(register2)
+    end
+  
+    #######################################################
+    ######## FOO_7 CHECK STATUS RECEIVED FROM PLC #########
+    #######################################################
+  
+  	def CheckStatus(state):
+  
+  		if (status0==state and status1==state and status2==state or status0==state and status1==state and status2!=state or status0==state and status1!=state and
+  		 status2==state or status0!=state and status1==state and status2==state):
+  		  return True
+  		else:
+  		  return False
+  		end
+  
+  	end
+  
+    #######################################################
+    ############# FOO_8 WRITE, READ AND RESET IN REGISTER BOOL ############
+    #######################################################
+  
+  	def write_state_bool(register0,register1,register2):
+  	  write_output_boolean_register(register0, True)
+  	  write_output_boolean_register(register1, True)
+  	  write_output_boolean_register(register2, True)
+  	end
+  
+  
+  	def reset_state_bool(register0,register1,register2):
+  	  	write_output_boolean_register(register0, False)
+  		write_output_boolean_register(register1, False)
+  		write_output_boolean_register(register2, False)
+  
+  	end
+  
+  	def read_state_bool(r0,r1,r2, state):
+  
+  
+  		register0 = read_input_boolean_register(r0)
+  		register1 = read_input_boolean_register(r1)
+  		register2 = read_input_boolean_register(r2)
+  
+  		if ((register0==state and register1==state and register2==state) or
+  		    (register0==state and register1==state and register2!=state) or
+  			(register0==state and register1!=state and register2==state) or
+  			(register0!=state and register1==state and register2==state)):
+  			return True
+  		else:
+  			return False
+  		end
+  	end
+  
+  
+    ######################################################################
+    #### FOO_9 CHECKS IF THE SEPARATOR HAS BEEN TAKEN BY THE GRIPPER #####
+    ######################################################################
+  
+  
+     	def CheckGripState(number):
+  		if(gripkit_easy_get_state()==number):
+  		  return True
+  		else:
+  		  return False
+  		end
+  	end
+  
+  
+  	######################################################################
+    #### FOO_10 READ AND CHECK VALUES PLC-VISION SYSTEM #####
+    ######################################################################
+  
+    ##check if two of tree values are the same, to avoid bad variables intercahnages between vision system- plc and robot
+    ##return true to indicate that the variables are correct
+  
+  
+      def read_float_values(register0, register1, register2):
+  		 Val1 = read_input_float_register(register0)
+  		 Val2 = read_input_float_register(register1)
+  		 Val3 = read_input_float_register(register2)
+  
+  		 float_value = 0
+  
+  		 if Val2 == Val3:
+  			float_value = Val2
+  			return True
+  		elif Val1 == Val3:
+  			float_value = Val1
+  			return True
+  		elif Val1 == Val2:
+  			float_value = Val2
+  			return True
+  		elif (Val1 == Val2 and Val1 == Val3 and Val2 == Val3):
+  			float_value = Val2
+  			return True
+  		else:
+  			float_value = -1
+  			return False
+  
+  		end
+  
+  
+    end
+  
+    ######################################################################
+    ## THREAD_1 MAKE SURE THE GRIPPER IS ALWAYS GRIPPING WHEN IT HAS TO ##
+    ######################################################################
+  
+    	#thread AlwaysCloseGripper(start):
+  	  #while(True):
+  	#	if gripkit_easy_get_state()!=3: #3=gripping
+  	#		gripkit_easy_grip()
+  	#	end
+  	#	sync()
+  	#  end
+    	#end	#use commands: "start_thrd = run AlwaysCloseGripper_thrd()"   and    "kill start_thrd"  IN order to init and stop the thread execution
+  
+    ##############################################
+    ############### STATE_0 HOMING ###############
+    ##############################################
+  
+  	def UR5Home():
+  
+  	  init_register(3,4,5,500)
+    	gripkit_easy_enable()  #ESTO DEBERIA IR EN LA MARCHA DE PREPARACIÓN
+  	  movej([0.000000, -0.174533, -2.775074, -0.349066, 1.570796, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
+    	reset_register(3,4,5,501)
+  
+  	end
+  
+    #########################################################################
+    ############### STATE_1 PLACE THE CAMERA ON THE FIRST HEAD ##############
+    #########################################################################
+  
+  	def UR5Camera1():
+  
+  	  init_register(3,4,5,510)
+      movej([-0.000001, -0.174533, -2.775074, -0.349065, 1.570797, 1.570796],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.069464, -0.799535, -2.673321, -1.170069, 1.557881, 1.600641],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.231982, -1.497769, -2.397802, -0.820452, 1.569986, 3.397634],accel_radss,speed_rads,0,blend_radius_m)
+    	reset_register(3,4,5,511)
+  
+  	end
+  
+  
+    ########################################################################
+    ####################### STATE_2 GO TO THE BUFFER #######################
+    ########################################################################
+  
+  	def UR5DropHead():
+  
+  	  init_register(3,4,5,520)
+  	  #set tcp after ctr_nut
+  	  set_tcp(global_tcp)
+    	movej([-0.079655, -1.322085, -2.567424, -0.844223, 1.573142, 3.068075],accel_radss,speed_rads,0,blend_radius_m)
+      movel([-0.471629, -1.562246, -2.371740, -0.798547, 1.573882, 2.676085],accel_mss,speed_ms,0,blend_radius_m)
+  
+  	set_Speed(0.05, 0.75, 1, 1.2)
+  	movel(p[267.07/1000, -369.31/1000, 125.52/1000, 2.238, 2.231, -0.011], accel_mss, speed_ms, 0, blend_radius_m)
+  
+  	#gripkit_easy_release()
+  	#var=CheckGripState(1) #check if the tool is open
+  
+    	reset_register(3,4,5,521)
+  
+  	end
+  
+    ###################################################################
+    ########## STATE_3 PLACE THE CAMERA ON THE SECOND HEAD  ###########
+    ###################################################################
+  
+  	def UR5Camera2():
+  
+    	init_register(3,4,5,530)
+      movej([-0.294304, -1.431164, -2.396163, -0.903647, 1.576685, 2.661407],accel_radss,speed_rads,0,blend_radius_m)
+      movej([-0.242601, -1.081755, -2.590243, -1.052608, 1.574985, 1.364673],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.090976, -1.419510, -2.326645, -0.966237, 1.570793, 0.090976],accel_radss,speed_rads,0,blend_radius_m)
+  	#movel(p[370.62/1000, -15.45/1000, 146.38/1000, 2.238, 2.231, -0.011], accel_mss, speed_ms, 0, blend_radius_m)
+  	movel(p[367.4/1000, -13.48/1000, 146.97/1000, 2.179, -2.263, -0.030], accel_mss, speed_ms, 0, blend_radius_m)
+    	reset_register(3,4,5,531)
+  
+  	end
+  
+    ###########################################################################################
+    ################ STATE_4 PLACE THE CAMERA ON THE FIRST HEAD TO BE SCREWED  #################
+    ###########################################################################################
+  
+  	def UR5UpCamera1():
+  
+    	init_register(3,4,5,540)
+  		#set tcp after ctr_nut
+  	  set_tcp(global_tcp)
+  	  movej(p[367.4/1000, -13.48/1000, 146.97/1000, 2.179, -2.263, -0.030], accel_radss,speed_rads,0,blend_radius_m)
+    	movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
+      movej(p[297.65/1000, -17.08/1000, 528.73/1000, 2.244, -2.199, -0.030],accel_radss,speed_rads,0,blend_radius_m)
+    	reset_register(3,4,5,541)
+  
+  	end
+  
+  
+    ###########################################################################################
+    ############## STATE_5 GOES DOWN FROM THE SCREWING TO THE BUFFER POSITION  ################
+    ###########################################################################################
+  
+  	def UR5TakeBuffer():
+  
+    	init_register(3,4,5,550)
+    	movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.114668, -0.430573, -2.101027, -2.007478, 1.547060, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.068591, -0.020420, -2.584134, -1.623156, 1.570796, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
+      movej([-0.076969, -0.860622, -2.748894, -1.065873, 1.573414, 0.929562],accel_radss,speed_rads,0,blend_radius_m)
+    	UR5DropHead()
+    	reset_register(3,4,5,551)
+  
+  	end
+  
+    ###########################################################################################
+    ############### STATE_6 PLACE THE CAMERA ON THE SECOND HEAD TO BE SCREWED  ################
+    ###########################################################################################
+  
+  	def UR5UpCamera2():
+  
+    	init_register(3,4,5,560)
+    	movel([-0.079655, -1.322085, -2.567424, -0.844223, 1.573142, 3.068075],accel_mss,speed_ms,0,blend_radius_m)
+      movej([-0.076969, -0.860622, -2.748894, -1.065873, 1.573414, 0.929562],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.068591, -0.020420, -2.584134, -1.623156, 1.570796, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.114668, -0.430573, -2.101027, -2.007478, 1.547060, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
+      movej(p[297.92/1000, -128.53/1000, 526.47/1000, 2.199, 2.244, 0.000],accel_radss,speed_rads,0,blend_radius_m)
+    	reset_register(3,4,5,561)
+  
+  	end
+  
+  
+    ###########################################################################################
+    ########## STATE_7 FROM THE INSTALLATION AREA IT RETURNS TO HOME. END OF CICLE  ###########
+    ###########################################################################################
+  
+  	def UR5Return():
+  
+    	init_register(3,4,5,570)
+    	movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
+      movej([0.114668, -0.430573, -2.101027, -2.007478, 1.547060, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
+      movej([-0.076969, -0.860622, -2.748894, -1.065873, 1.573414, 0.929562],accel_radss,speed_rads,0,blend_radius_m)
+      UR5Home()
+      movej([0.058643, 0.046251, -2.850123, -1.694540, 3.083473, 1.753881],accel_radss,speed_rads,0,blend_radius_m)
+    	reset_register(3,4,5,571)
+  
+  	end
+  
+  
+    #######################################################
+    ####### STATE_8_0 CHECK CORRECT SEPARATOR POSITION ########
+    #######################################################
+  
+    def UR5CkPosSepator():
+  
+  		init_register(3,4,5,690)
+  
+  
+  
+  		#asig diferents values to take diferents pictures
+  		x = [0,6,-6,4,-4,3,-3]
+  		y = [0,6,-6,4,-4,3,-3]
+  		z= [0,3,-3,2,-2,1,-1]
+  
+  
+  		# move robot
+  		data = p[ (x[pic_pose_sep]/1000),(y[pic_pose_sep]/1000),(z[pic_pose_sep]/1000),0,0,0] # trasform to position variable in base coordinates
+  		tcp_inst= get_actual_tcp_pose () # get the actual tcp positions.
+  		pos_calculate = pose_add (tcp_inst, data )
+  		movel(pos_calculate, accel_mss, speed_ms, 0, blend_radius_m)
+  		stopl(2)
+  		#stopj(0.2)
+  
+  		# count how many pic are taken
+  		pic_pose_sep = pic_pose_sep +1
+  
+  		if pic_pose_sep == 7:
+  		   movel(p[374.64/1000, -127.61/1000, 148.75/1000, 2.240, 2.202, 0.00], accel_mss, speed_ms, 0, blend_radius_m)
+  		   pic_pose_sep = 0
+  		end
+  
+  
+  		reset_register(3,4,5,691)
+  
+  
+  
+    end
+  
+    #######################################################
+    ####### STATE_8_1 CONTROL RIGHT HEAD ROTATION ########
+    #######################################################
+  
+    def CtrHeadTurn(n_cam):
+  	  if n_cam == 1:
+  		aux_I = 700
+  		aux_F = 701
+  		read_float_values(9,10,11)
+  	 elif n_cam == 2:
+  		aux_I = 710
+  		aux_F = 711
+  		r0 = 12
+  		r1 = 13
+  		r2 = 14
+  		read_float_values(12,13,14)
+  	  end
+  
+  	  init_register(3,4,5,aux_I)
+  	  # picth value deviation from plc and vision system
+    	  turn_head = float_value
+  
+  	  ## added 61 mm to Z-axis TCP to compensate the level between the nut and socket wrench heigth
+  	  data = p[ 0,0,61/1000,0,0,0] # trasform to position variable in base coordinates
+  	  pos_calculate = pose_add (global_tcp, data )
+  	  set_tcp(p[pos_calculate[0],pos_calculate[1], pos_calculate[2],2.3134, -2.1255, 0.0])
+  
+  	  #turn the desviaton between head separator and tool robot
+  	  data = p[ 0,0,0,0,-d2r(turn_head),0] # trasform to position variable in base coordinates
+  	  tcp_inst= get_actual_tcp_pose () # get the actual tcp positions.
+  	  pos_calculate = pose_add (tcp_inst, data )
+  	  movel(pos_calculate, accel_mss, speed_ms, 0, blend_radius_m)
+  	  stopl(2)
+  
+  	  #set_tcp(global_tcp)
+  	  reset_register(3,4,5,aux_F)
+  
+      end
+    #######################################################
+    ####### STATE_8 CONTROL TO CENTER CAM OVER NUT ########
+    #######################################################
+  
+  	def CtrCamPos(x_s, y_s):
+  
+  		init_register(3,4,5,580)
+  
+  		#x_s: direction of x_axis
+  		#y_s: direction of y_axis
+  
+  		read_float_values(0,1,2) # x-axis deviation
+  		cx = float_value
+  		read_float_values(3,4,5) # y-axis deviation
+  		cy = float_value
+  
+  		x = x_s*(cx/1000)
+  		y = y_s*(cy/1000)
+  		data_vision = p[ x,y,0,0,0,0] # trasform to position variable in base coordinates
+  		tcp_inst = get_actual_tcp_pose () # get the actual tcp positions.
+  		pos_calculate = pose_add (tcp_inst, data_vision )
+  		movel(pos_calculate, accel_mss, speed_ms, 0, blend_radius_m)
+  
+  
+  		#set_tcp(global_tcp)
+  		reset_register(3,4,5,581)
+  
+  	end
+  
+    #######################################################
+    ########### STATE_9 MOVE TO NUT AND DOWN ##############
+    #######################################################
+  
+  	def MoveToNut(x_s,y_s,n_cam):
+  
+  		init_register(3,4,5,590)
+  		#set_tcp(global_tcp)
+  		#dx,dy,dz, distance between optical cam center and nut center
+  
+  		if n_cam == 1 or n_cam ==2:
+  			dx = dx_nut
+  			dy = dy_nut
+  			dz = dz_nut
+  		elif n_cam == 3 or n_cam == 4:
+  			dx = dx_hole
+  			dy = dy_hole
+  			dz = dz_hole
+  		end
+  
+  		tcp_inst = get_actual_tcp_pose()
+  		tcp_to_optical_center = p[x_s*(dx/1000),y_s*(dy/1000),0,0,0,0]
+  		pos_nut = pose_add(tcp_inst, tcp_to_optical_center)
+  		movel(pos_nut ,accel_mss, speed_ms, 0, blend_radius_m)
+  
+  		#move tcp-tool to inside nut
+  		set_Speed(0.05, 0.75, 1.5, 1.2)
+  		tcp_inst = get_actual_tcp_pose()
+  		tcp_to_nut = p[0,0,-dz/1000,0,0,0]
+  		pos_nut = pose_add (tcp_inst, tcp_to_nut)
+  		movel(pos_nut, accel_mss, speed_ms, 0, blend_radius_m)
+  
+  
+  		# close the tool and check if the head is pressed
+  		gripkit_easy_grip()
+  		#set_tool_digital_out(0, True)
+  		#set_tool_digital_out(1, True)
+  		sleep(3.0)
+  		#var=CheckGripState(3) #check if the tool has gripped the separator correctly
+  		reset_register(3,4,5,591)
+  	end
+  
+    #######################################################
+    ############ STATE_10 UNSCREW AND UP TOOL #############
+    #######################################################
+  
+  	def UnScrew():
+  		init_register(3,4,5,5100)
+  		gripkit_easy_grip()
+  		CheckGripState(3)
+  		#Apply force in z axis to up robot
+  		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
+  		frame = p[0,0,0,0,0,0] #tool or base frame
+  		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
+  		wrench = [0, 0, 0.5, 0, 0, 0] # force to apply
+  		type = 2 #kind or force mode
+  		zero_ftsensor()
+  
+  		force_mode(frame, selection , wrench, type, limits)
+  
+  		Qrob_finish  = read_state_bool(0,1,2, True)
+  		# wait to servomotor finish to unscrew
+  		while (not( Qrob_finish )):
+  		  Qrob_finish  = read_state_bool(0,1,2, True)
+  		  sync()
+  		end
+  
+  				# kill force mode
+  		end_force_mode()
+  
+  		#wait qrob finish 3 turn of segurity
+  		# Up the robot
+  		sleep(1)
+  		tcp_inst = get_actual_tcp_pose()
+  		up_distance = p[0,0,30/1000,0,0,0]
+  		pos_up = pose_add (tcp_inst, up_distance)
+  		set_payload(3.89,[-102/1000,6/1000,-17/1000]) #adjust new weight of the tool
+  		set_Speed(0.05, 0.75, 1.5, 1.2)
+  		movel(pos_up, accel_mss, speed_ms, 0, blend_radius_m)
+  
+  
+  
+  		reset_register(3,4,5,5101)
+  	end
+  
+  	#######################################################
+  	############ STATE_11 MOVE TO NUT AND DOWN ############
+  	#######################################################
+  
+  	def Screw():
+  		init_register(3,4,5,5110)
+  
+  		#Apply force in z axis to down robot
+  		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
+  		frame = p[0,0,0,0,0,0] #tool or base frame
+  		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
+  		wrench = [0, 0, -10, 0, 0, 0] # force to apply
+  		type = 2 #kind or force mode
+  		zero_ftsensor()
+  
+  		force_mode(frame, selection , wrench, type, limits)
+  
+  		Qrob_finish  = read_state_bool(0,1,2, True)
+  		# wait to servomotor finish to unscrew
+  		while (not( Qrob_finish )):
+  		  Qrob_finish  = read_state_bool(0,1,2, True)
+  		  sync()
+  		end
+  
+  		# kill force mode
+  		end_force_mode()
+  
+  		reset_register(3,4,5,5111)
+  	end
+  
+  
+  		#######################################################
+  	############ STATE_72 ScrewHigh ############
+  	#######################################################
+  
+  	def ScrewHigh(high):
+  		init_register(3,4,5,5130)
+  
+  		#Apply force in z axis to down robot
+  		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
+  		frame = p[0,0,0,0,0,0] #tool or base frame
+  		selection = [0, 0, 1, 0, 0, 1] #[x,y,z,x,ry,rz]
+  		wrench = [0, 0, -10, 0, 0, 0] # force to apply
+  		type = 2 #kind or force mode
+  		zero_ftsensor()
+  
+  		force_mode(frame, selection , wrench, type, limits)
+  
+  		Qrob_finish  = read_state_bool(0,1,2, True)
+  		# wait to servomotor finish to unscrew
+  		while (not( Qrob_finish )):
+  		  Qrob_finish  = read_state_bool(0,1,2, True)
+  		  sync()
+  		end
+  
+  		# kill force mode
+  		end_force_mode()
+  
+  		reset_register(3,4,5,5131)
+  	end
+  
+  	#######################################################
+  	########## STATE_12 UP ROBOT AFTER TO SCREW ###########
+  	#######################################################
+  	def UpRobotAs():
+  
+  		init_register(3,4,5,5120)
+  
+  		drop_head = get_actual_tcp_pose()
+  
+  		#Open the tool
+  		gripkit_easy_release()
+  		var=CheckGripState(1) #check if the tool is open
+  
+  		#free drive to quit remanent forces
+  
+  		#freedrive_mode()
+  		#sleep(2)
+  		#end_freedrive_mode()
+  
+  
+  		#Apply force in z axis to up robot
+  		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
+  		frame = p[0,0,0,0,0,0] #tool or base frame
+  		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
+  		wrench = [0, 0, 25, 0, 0, 0] # force to apply
+  		type = 2 #kind or force mode
+  		sleep(0.02)
+  		zero_ftsensor()
+  
+  		force_mode(frame, selection , wrench, type, limits)
+  
+  		# Up the robot
+  		tcp_inst = get_actual_tcp_pose()
+  		up_distance = p[0,0,30/1000,0,0,0]
+  		global pos_up = pose_add (tcp_inst, up_distance)
+          #set_payload(,[,,]) #back to normal tool weight
+  
+  
+  
+  		global move_thread_flag =0
+  		thread move_thread():
+  			enter_critical
+  			move_thread_flag = 1
+  			movel(pos_up, accel_mss, speed_ms)
+  			move_thread_flag = 2
+  			exit_critical
+  		end
+  
+  		move_thread_flag = 0
+  		move_thread_han = run move_thread()
+  		while (True):
+  			sleep(1.0E-10)
+  			if (move_thread_flag > 1):
+  				join move_thread_han
+  				break
+  			end
+  			sync()
+  		end
+  		end_force_mode()
+  		stopl(5.0)
+  
+  
+  		reset_register(3,4,5,5121)
+  
+  	end
+  
+  
+    ##############################################################################################################################
+    ##############################################################################################################################
+    ##################################################### MAIN PROGRAMME #########################################################
+    ##############################################################################################################################
+    ##############################################################################################################################
+  
+    set_tcp(global_tcp)
+    #set_payload(,[,,])
+    #set_Speed(0.3, 0.75, 3, 1.2)
+    #vel_ms, vel_rads, acel_ms, acel_rads
+  
+    #State-Machine
+    while(True):
+      init_status(0,1,2)
+  
+     if (CheckStatus(50)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5Home()
+  
+     elif (CheckStatus(51)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5Camera1()
+  
+     elif (CheckStatus(52)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5DropHead()
+  
+     elif (CheckStatus(53)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5Camera2()
+  
+     elif (CheckStatus(54)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5UpCamera1()
+  
+     elif (CheckStatus(55)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5TakeBuffer()
+  
+     elif (CheckStatus(56)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5UpCamera2()
+  
+     elif (CheckStatus(57)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UR5Return()
+  
+     elif (CheckStatus(69)==True):
+      set_Speed(0.05, 0.30, 1.5, 0.6)
+      UR5CkPosSepator()
+  
+  ####################
+     elif (CheckStatus(58)==True or CheckStatus(64)==True):
+      set_Speed(0.05, 0.75, 0.25, 1.2)
+      CtrCamPos(-1,-1) #58==Camera1 position & 64==UpCamera2 position
+  
+  
+     elif (CheckStatus(60)==True or CheckStatus(62)==True ):
+      set_Speed(0.05, 0.75, 0.25, 1.2)
+      CtrCamPos(1,1) #60==Camera2 position & 62==UpCamera1 position
+  
+  ####################
+     elif (CheckStatus(59)==True ):
+  		set_Speed(0.1, 0.75, 3, 1.2)
+  		MoveToNut(-1,-1,1) #59==Camera1 position
+  
+  	elif (CheckStatus(65)==True):
+  		set_Speed(0.1, 0.75, 3, 1.2)
+  		MoveToNut(-1,-1,4) # 65==UpCamera2 position
+  
+     elif (CheckStatus(61)==True ):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      MoveToNut(1,1,2) #61==Camera2 position
+  
+     elif ( CheckStatus(63)==True ):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      MoveToNut(1,1,3) #63==UpCamera1 position
+  
+  ####################
+  
+     elif (CheckStatus(66)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      UnScrew()
+  
+     elif (CheckStatus(67)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      Screw()
+  
+     elif (CheckStatus(72)==True):
+      set_Speed(0.1, 0.75, 3, 1.2)
+      ScrewHigh()
+  
+  
+     elif (CheckStatus(68)==True):
+      set_Speed(0.7, 0.75, 0.1, 1.2)
+      UpRobotAs()
+  
+     elif	(CheckStatus(70)==True):
+  	   set_Speed(0.1, 0.75, 3, 1.2)
+  	   CtrHeadTurn(1)
+  
+  
+     elif	(CheckStatus(71)==True):
+  	   set_Speed(0.1, 0.75, 3, 1.2)
+  	   CtrHeadTurn(2)
+  
+     end
+    end
+  end
+  while (True):
+    $ 3 "Programa de robot"
+    $ 21 "Fuerza"
+    sleep(0.02)
+    zero_ftsensor()
+    force_mode(tool_pose(), [0, 0, 1, 0, 0, 1], [0.0, 0.0, 15.0, 0.0, 0.0, 0.0], 2, [0.1, 0.1, 0.15, 0.3490658503988659, 0.3490658503988659, 3.141592653589793])
+    $ 22 "Esperar: 100.0" "noBreak"
+    sleep(100.0)
+    end_force_mode()
+    stopl(5.0)
+  end
+end

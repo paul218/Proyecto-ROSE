@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <POU Name="Vision_StateMachine" Id="{f93bb11a-f5cd-40ad-a452-b50656e25a24}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK  Vision_StateMachine
+    <Declaration><![CDATA[PROGRAM  Vision_StateMachine
+//PROGRAM Vision_StateMachine
 VAR
 //var to get struct data from ck_real_value function
 cx_vision_data : ck_real_flag_data;
@@ -16,12 +17,15 @@ sep_rot_left_data :ck_real_flag_data;
 
 //internal aux state
 I_STATE : INT:=-1;
+	Val1: INT;
 END_VAR
 
 VAR_INPUT
 init_: BOOL:= FALSE;
 //global aux state
 G_STATE: INT:=-1;
+
+Aux_State_val :INT := -1;
 
 END_VAR
 
@@ -138,7 +142,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{a6b08bd8-b696-47e3-9cbf-7408b61c9ff8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"Init_entry"</v>
+                            <v n="Value">""</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">16L</v>
@@ -1948,8 +1952,8 @@ END_VAR
                             <v n="Value">"true"</v>
                             <v n="DefaultValue">""</v>
                           </o>
-                          <v n="Id">3374L</v>
-                          <v n="IdParent">3373L</v>
+                          <v n="Id">4226L</v>
+                          <v n="IdParent">4225L</v>
                         </o>
                         <o>
                           <v n="AttributeId">{7d894980-aeea-405c-a0f6-e2b26429c58f}</v>
@@ -1957,8 +1961,8 @@ END_VAR
                             <v n="Value">""</v>
                             <v n="DefaultValue">""</v>
                           </o>
-                          <v n="Id">3375L</v>
-                          <v n="IdParent">3373L</v>
+                          <v n="Id">4227L</v>
+                          <v n="IdParent">4225L</v>
                         </o>
                         <o>
                           <v n="AttributeId">{01580b27-6378-448b-8ecb-0e4b795b58d6}</v>
@@ -1966,8 +1970,8 @@ END_VAR
                             <v n="Value">"FALSE"</v>
                             <v n="DefaultValue">"FALSE"</v>
                           </o>
-                          <v n="Id">3376L</v>
-                          <v n="IdParent">3373L</v>
+                          <v n="Id">4228L</v>
+                          <v n="IdParent">4225L</v>
                         </o>
                         <o>
                           <v n="AttributeId">{bc882c11-1e91-4dd8-a6b8-2075724ed18b}</v>
@@ -1977,8 +1981,8 @@ END_VAR
                             <v n="Value">"0"</v>
                             <v n="DefaultValue">"0"</v>
                           </o>
-                          <v n="Id">3377L</v>
-                          <v n="IdParent">3373L</v>
+                          <v n="Id">4229L</v>
+                          <v n="IdParent">4225L</v>
                         </o>
                         <o>
                           <v n="AttributeId">{62e1754b-7629-4e63-9cec-10ae0c536f1f}</v>
@@ -1986,8 +1990,8 @@ END_VAR
                             <v n="Value">"FALSE"</v>
                             <v n="DefaultValue">"FALSE"</v>
                           </o>
-                          <v n="Id">3378L</v>
-                          <v n="IdParent">3373L</v>
+                          <v n="Id">4230L</v>
+                          <v n="IdParent">4225L</v>
                         </o>
                         <o>
                           <v n="AttributeId">{8294df19-5962-4dee-a874-1051dabb0e3e}</v>
@@ -1997,11 +2001,11 @@ END_VAR
                             <v n="Value">"0"</v>
                             <v n="DefaultValue">"0"</v>
                           </o>
-                          <v n="Id">3379L</v>
-                          <v n="IdParent">3373L</v>
+                          <v n="Id">4231L</v>
+                          <v n="IdParent">4225L</v>
                         </o>
                       </l2>
-                      <v n="Id">3373L</v>
+                      <v n="Id">4225L</v>
                       <v n="IdParent">5L</v>
                     </o>
                     <o t="SFCJump">
@@ -2361,22 +2365,26 @@ END_VAR
     <Action Name="CkHeadRot_active" Id="{79483949-fdb1-43c7-85b0-66a3b8676161}">
       <Implementation>
         <ST><![CDATA[
+
+Aux_State_val := ck_state_v( Vision_struct.States_in);
 //read register from robot and chek is can read 2 or more correct values 
-IF ck_state_v(VCts.SeparatorRot_R_I) THEN
+IF Aux_State_val = VCts.SeparatorRot_R_I THEN
 	 I_STATE:= VCts.SeparatorRot_R_I;
 
 //verifies that the vision system has completed its task
-ELSIF ck_state_v(VCts.SeparatorRot_R_F) THEN
+ELSIF Aux_State_val = VCts.SeparatorRot_R_F THEN
+	
 	//read the values processed by the vision system and send to robot
 	sep_rot_rigth_data := ck_real_value(Vision_struct.Head_rigth_value);
 	//check if all values are correct
-	IF sep_rot_rigth_data.Flag THEN
+	//IF sep_rot_rigth_data.Flag THEN
 		//write variables from PLC to CS.UR5 Robot
-		IF wr_real_value(VCts.HEAD_RIGTH_VALUE,sep_rot_rigth_data.Value) THEN
-			I_STATE := VCts.SeparatorRot_R_F;
+		//IF wr_real_value(VCts.HEAD_RIGTH_VALUE,sep_rot_rigth_data.Value) THEN
+		wr_real_value(VCts.HEAD_RIGTH_VALUE,sep_rot_rigth_data.Value);
+		I_STATE := VCts.SeparatorRot_R_F;
 
-		END_IF
-	END_IF
+		//END_IF
+	//END_IF
 	
 END_IF
 
@@ -2402,26 +2410,33 @@ wr_state_v(RCts.RESET_STATE);
 //reset Global state variable
 G_STATE := -1;
 I_STATE :=-1;
-]]></ST>
+
+//reset flags vision system to PLC
+Vision_struct.States_in.Val1 := -1;
+Vision_struct.States_in.Val2 := -1;
+Vision_struct.States_in.Val3 := -1;]]></ST>
       </Implementation>
     </Action>
     <Action Name="CkHeadRot_L_active" Id="{711619a1-95dc-453c-8399-d35c9e24aa1f}">
       <Implementation>
         <ST><![CDATA[
+
+Aux_State_val := ck_state_v( Vision_struct.States_in);
 //read register from robot and chek is can read 2 or more correct values 
-IF ck_state_v(VCts.SeparatorRot_L_I) THEN
+IF Aux_State_val = VCts.SeparatorRot_L_I THEN
 	 I_STATE:= VCts.SeparatorRot_L_I;
 //verifies that the vision system has completed its task
-ELSIF ck_state_v(VCts.SeparatorRot_L_F) THEN
+ELSIF Aux_State_val = VCts.SeparatorRot_L_F THEN
 	//read the values processed by the vision system and send to robot
 	sep_rot_left_data := ck_real_value(Vision_struct.Head_left_value);
 	//check if all values are correct
-	IF sep_rot_left_data.Flag THEN
+	//IF sep_rot_left_data.Flag THEN
 		//write variables from PLC to CS.UR5 Robot
-		IF wr_real_value(VCts.HEAD_LEFT_VALUE,sep_rot_left_data.Value) THEN
+		//IF wr_real_value(VCts.HEAD_LEFT_VALUE,sep_rot_left_data.Value) THEN
+		    wr_real_value(VCts.HEAD_LEFT_VALUE,sep_rot_left_data.Value);
 			I_STATE := VCts.SeparatorRot_L_F;
-		END_IF
-	END_IF
+		//END_IF
+	//END_IF
 	
 END_IF
 
@@ -2445,29 +2460,40 @@ Act_Gl_State:=VCts.SeparatorRot_L;]]></ST>
 wr_state_v(RCts.RESET_STATE);
 //reset Global state variable
 G_STATE := -1;
-]]></ST>
+I_STATE :=-1;
+
+//reset flags vision system to PLC
+Vision_struct.States_in.Val1 := -1;
+Vision_struct.States_in.Val2 := -1;
+Vision_struct.States_in.Val3 := -1;]]></ST>
       </Implementation>
     </Action>
     <Action Name="CkHole_active" Id="{1c91934e-b1c9-4f07-a4c3-8849aee832cd}">
       <Implementation>
-        <ST><![CDATA[//read register from robot and chek is can read 2 or more correct values 
-IF ck_state_v(VCts.SeparatorHole_I) THEN
+        <ST><![CDATA[
+Aux_State_val := ck_state_v( Vision_struct.States_in);
+//read register from robot and chek is can read 2 or more correct values 
+IF Aux_State_val = VCts.SeparatorHole_I THEN
 	 I_STATE:= VCts.SeparatorHole_I;
 //verifies that the vision system has completed its task
-ELSIF ck_state_v(VCts.SeparatorHole_F) THEN
+ELSIF Aux_State_val = VCts.SeparatorHole_F THEN
 	//read the values processed by the vision system and send to robot
 	cx_vision_data := ck_real_value(Vision_struct.Cx_value_hole);
 	cy_vision_data := ck_real_value(Vision_struct.Cy_value_hole);
+	
 	//check if all values are correct
-	IF cx_vision_data.Flag AND cy_vision_data.Flag THEN
-		//write variables from PLC to CS.UR5 Robot
-		IF wr_real_value(VCts.CX_VALUE,cx_vision_data.Value) THEN
-			IF wr_real_value(VCts.CY_VALUE,cy_vision_data.Value) THEN				
-						I_STATE := VCts.SeparatorNut_F;
-			END_IF
+//	IF cx_vision_data.Flag AND cy_vision_data.Flag THEN
+//		//write variables from PLC to CS.UR5 Robot
+//		IF wr_real_value(VCts.CX_VALUE,cx_vision_data.Value) THEN
+//			IF wr_real_value(VCts.CY_VALUE,cy_vision_data.Value) THEN				
+//						I_STATE := VCts.SeparatorHole_F;
+//			END_IF
 		
-		END_IF
-	END_IF
+//		END_IF
+//	END_IF
+	wr_real_value(VCts.CX_VALUE,cx_vision_data.Value);
+	wr_real_value(VCts.CY_VALUE,cy_vision_data.Value);
+	I_STATE := VCts.SeparatorHole_F;
 	
 END_IF
 
@@ -2482,10 +2508,10 @@ Act_In_State := I_STATE;
     <Action Name="CkHole_entry" Id="{ee9a1cea-e91f-4e21-b1ae-6ae94fbf405e}">
       <Implementation>
         <ST><![CDATA[//start the vision system
-wr_state_v(Vcts.SeparatorNut);
+wr_state_v(Vcts.SeparatorHole);
 
 //write the retain state variable 
-Act_Gl_State:=VCts.SeparatorNut;]]></ST>
+Act_Gl_State:=VCts.SeparatorHole;]]></ST>
       </Implementation>
     </Action>
     <Action Name="CkHole_exit" Id="{15f08814-3d85-42b8-8bef-93215c40194e}">
@@ -2494,34 +2520,47 @@ Act_Gl_State:=VCts.SeparatorNut;]]></ST>
 wr_state_v(RCts.RESET_STATE);
 //reset Global state variable
 G_STATE := -1;
-]]></ST>
+I_STATE :=-1;
+
+
+//reset flags vision system to PLC
+Vision_struct.States_in.Val1 := -1;
+Vision_struct.States_in.Val2 := -1;
+Vision_struct.States_in.Val3 := -1;]]></ST>
       </Implementation>
     </Action>
     <Action Name="CkNut_active" Id="{a76c4aea-c03d-4f2e-a27c-e3588e7a8d51}">
       <Implementation>
         <ST><![CDATA[
-
+Aux_State_val := ck_state_v( Vision_struct.States_in);
 //read register from robot and chek is can read 2 or more correct values 
-IF ck_state_v(VCts.SeparatorNut_I) THEN
+IF Aux_State_val = VCts.SeparatorNut_I THEN
 	 I_STATE:= VCts.SeparatorNut_I;
 //verifies that the vision system has completed its task
-ELSIF ck_state_v(VCts.SeparatorNut_F) THEN
+ELSIF Aux_State_val = VCts.SeparatorNut_F  THEN
 	//read the values processed by the vision system and send to robot
 	cx_vision_data := ck_real_value(Vision_struct.Cx_value_nut);
 	cy_vision_data := ck_real_value(Vision_struct.Cy_value_nut);
 	nut_turn_data := ck_real_value(Vision_struct.Nut_turn_value);
 	//check if all values are correct
-	IF cx_vision_data.Flag AND cy_vision_data.Flag AND nut_turn_data.Flag THEN
+	//IF cx_vision_data.Flag AND cy_vision_data.Flag AND nut_turn_data.Flag THEN
 		//write variables from PLC to CS.UR5 Robot
-		IF wr_real_value(VCts.CX_VALUE,cx_vision_data.Value) THEN
-			IF wr_real_value(VCts.CY_VALUE,cy_vision_data.Value) THEN
-				IF wr_real_value(VCts.NUT_VALUE,nut_turn_data.Value) THEN
-						I_STATE := VCts.SeparatorNut_F;
-				END_IF
-			END_IF
+		//I_STATE := VCts.SeparatorNut_F;
+		wr_real_value(VCts.CX_VALUE,cx_vision_data.Value);
+		wr_real_value(VCts.CY_VALUE,cy_vision_data.Value);
+		wr_real_value(VCts.NUT_VALUE,nut_turn_data.Value);
+		I_STATE := VCts.SeparatorNut_F;
 		
-		END_IF
-	END_IF
+		//IF wr_real_value(VCts.CX_VALUE,cx_vision_data.Value) THEN
+		//	IF wr_real_value(VCts.CY_VALUE,cy_vision_data.Value) THEN
+			//	IF wr_real_value(VCts.NUT_VALUE,nut_turn_data.Value) THEN
+			//			I_STATE := VCts.SeparatorNut_F;
+			//	END_IF
+			//END_IF
+		
+		//END_IF
+		
+	//END_IF
 	
 END_IF
 
@@ -2542,37 +2581,49 @@ Act_Gl_State:=VCts.SeparatorNut;]]></ST>
     </Action>
     <Action Name="CkNut_exit" Id="{d8ded961-8fc2-4dab-9fb9-edf8d208d7d5}">
       <Implementation>
-        <ST><![CDATA[//write reset state variables to visiom system.
+        <ST><![CDATA[
+//write reset state variables to visiom system.
 wr_state_v(RCts.RESET_STATE);
 //reset Global state variable
 G_STATE := -1;
-]]></ST>
+//rest internat state variable
+I_STATE :=-1;
+
+//reset flags vision system to PLC
+Vision_struct.States_in.Val1 := -1;
+Vision_struct.States_in.Val2 := -1;
+Vision_struct.States_in.Val3 := -1;]]></ST>
       </Implementation>
     </Action>
     <Action Name="CkPosSep_active" Id="{5eb9aaf2-ba77-4c72-8011-fd3d40ba003d}">
       <Implementation>
         <ST><![CDATA[
+Aux_State_val := ck_state_v( Vision_struct.States_in);
 //read register from robot and chek is can read 2 or more correct values 
-IF ck_state_v(VCts.SeparatorPos_I) THEN
+IF Aux_State_val = VCts.SeparatorPos_I THEN
 	 I_STATE:= VCts.SeparatorPos_I;
 	
 //verifies that the vision system has completed its task
-ELSIF ck_state_v(VCts.SeparatorPos_F) THEN
+ELSIF  Aux_State_val = VCts.SeparatorPos_F THEN
+	//I_STATE := VCts.SeparatorPos_F;
 	//read the values processed by the vision system and send to robot
 	sep_pos_data := ck_real_value(Vision_struct.Pos_sep);
 	//check if all values are correct
-	IF sep_pos_data.Flag THEN
+	//IF sep_pos_data.Flag THEN
 		//write variables from PLC to CS.UR5 Robot
-		IF wr_real_value(VCts.SEP_POS_VALUE,sep_pos_data.Value) THEN
-			I_STATE := VCts.SeparatorPos_F;
-	
-		END_IF
-	END_IF
+		//IF wr_real_value(VCts.SEP_POS_VALUE,sep_pos_data.Value) THEN
+		wr_real_value(VCts.SEP_POS_VALUE,sep_pos_data.Value);
+		I_STATE := VCts.SeparatorPos_F;
+
+		//END_IF
+	//END_IF
 	
 END_IF
 
 //read internal variable and write over output variable
-Act_In_State := I_STATE;]]></ST>
+Act_In_State := I_STATE;
+
+]]></ST>
       </Implementation>
     </Action>
     <Action Name="CkPosSep_entry" Id="{90dd64f5-3a3d-4fd1-ac87-8dfd3a83d6a7}">
@@ -2597,16 +2648,15 @@ wr_state_v(RCts.RESET_STATE);
 //reset Global state variable
 G_STATE := -1;
 //rest internat state variable
-I_STATE :=-1;]]></ST>
-      </Implementation>
-    </Action>
-    <Action Name="Init_entry" Id="{3914e7b7-2735-4d32-afc2-e796baedcd53}">
-      <Implementation>
-        <ST><![CDATA[//write output variable to indicate that the robot execute the state 
-State_complete := FALSE;
-init_:=FALSE;
-G_STATE := -1;
-I_STATE :=-1;]]></ST>
+I_STATE :=-1;
+
+//reset flags vision system to PLC
+Vision_struct.States_in.Val1 := -1;
+Vision_struct.States_in.Val2 := -1;
+Vision_struct.States_in.Val3 := -1;
+
+
+]]></ST>
       </Implementation>
     </Action>
     <Action Name="Wrt_FState_entry" Id="{1d35addc-fc6f-4851-a277-1b750685bb69}">
@@ -2619,7 +2669,7 @@ State_complete := TRUE;]]></ST>
       <Implementation>
         <ST><![CDATA[//write output variable to indicate that the robot execute the state 
 State_complete := FALSE;
-init_:=FALSE;
+//init_:=FALSE;
 
 G_STATE := -1;
 //rest internat state variable
@@ -2722,125 +2772,97 @@ I_STATE :=-1;]]></ST>
       </XmlArchive>
     </ObjectProperties>
     <LineIds Name="Vision_StateMachine.CkHeadRot_active">
-      <LineId Id="20" Count="3" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="24" Count="8" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="33" Count="2" />
+      <LineId Id="2" Count="8" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="11" Count="5" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="17" Count="8" />
       <LineId Id="1" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="41" Count="1" />
-      <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_entry">
-      <LineId Id="2" Count="0" />
-      <LineId Id="13" Count="3" />
-      <LineId Id="11" Count="0" />
+      <LineId Id="2" Count="4" />
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_exit">
-      <LineId Id="10" Count="4" />
+      <LineId Id="2" Count="8" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_L_active">
-      <LineId Id="20" Count="15" />
+      <LineId Id="22" Count="1" />
+      <LineId Id="2" Count="11" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="14" Count="7" />
       <LineId Id="1" Count="0" />
-      <LineId Id="37" Count="1" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="56" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_L_entry">
-      <LineId Id="13" Count="3" />
-      <LineId Id="11" Count="0" />
+      <LineId Id="2" Count="3" />
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_L_exit">
-      <LineId Id="11" Count="3" />
+      <LineId Id="2" Count="8" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHole_active">
+      <LineId Id="28" Count="1" />
       <LineId Id="2" Count="7" />
-      <LineId Id="58" Count="4" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="66" Count="2" />
-      <LineId Id="17" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="10" Count="9" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="20" Count="7" />
       <LineId Id="1" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="69" Count="3" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="19" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHole_entry">
       <LineId Id="2" Count="3" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHole_exit">
-      <LineId Id="2" Count="3" />
+      <LineId Id="2" Count="9" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkNut_active">
-      <LineId Id="26" Count="7" />
-      <LineId Id="43" Count="1" />
-      <LineId Id="34" Count="4" />
-      <LineId Id="45" Count="1" />
-      <LineId Id="48" Count="1" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="39" Count="3" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="51" Count="3" />
-      <LineId Id="50" Count="0" />
+      <LineId Id="2" Count="14" />
+      <LineId Id="33" Count="4" />
+      <LineId Id="17" Count="15" />
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkNut_entry">
-      <LineId Id="15" Count="3" />
-      <LineId Id="12" Count="0" />
+      <LineId Id="2" Count="3" />
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkNut_exit">
-      <LineId Id="8" Count="3" />
+      <LineId Id="2" Count="5" />
       <LineId Id="1" Count="0" />
+      <LineId Id="9" Count="3" />
+      <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkPosSep_active">
-      <LineId Id="19" Count="3" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="35" Count="4" />
-      <LineId Id="41" Count="1" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="40" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="1" Count="0" />
-      <LineId Id="26" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="2" Count="13" />
       <LineId Id="25" Count="0" />
+      <LineId Id="16" Count="7" />
+      <LineId Id="1" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="28" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkPosSep_entry">
-      <LineId Id="2" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="12" Count="0" />
+      <LineId Id="2" Count="8" />
       <LineId Id="1" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="14" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkPosSep_exit">
-      <LineId Id="14" Count="5" />
-      <LineId Id="12" Count="0" />
-    </LineIds>
-    <LineIds Name="Vision_StateMachine.Init_entry">
-      <LineId Id="2" Count="1" />
-      <LineId Id="1" Count="0" />
-      <LineId Id="4" Count="1" />
+      <LineId Id="23" Count="10" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="34" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.Wrt_FState_entry">
       <LineId Id="2" Count="0" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.Wrt_FState_exit">
-      <LineId Id="2" Count="1" />
+      <LineId Id="2" Count="5" />
       <LineId Id="1" Count="0" />
-      <LineId Id="7" Count="2" />
-      <LineId Id="6" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

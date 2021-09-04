@@ -12,9 +12,9 @@ END_VAR
     <Implementation>
       <ST><![CDATA[wr_state_v := FALSE;
 //WRITE FLAGS STATE-MACHINE #################(PLC->VISION SYSTEM)
-Vision_struct.States.Val1:=state;
-Vision_struct.States.Val2:=state;
-Vision_struct.States.Val3:=state;
+Vision_struct.States_out.Val1:=state;
+Vision_struct.States_out.Val2:=state;
+Vision_struct.States_out.Val3:=state;
 wr_state_v := TRUE;
 ]]></ST>
     </Implementation>

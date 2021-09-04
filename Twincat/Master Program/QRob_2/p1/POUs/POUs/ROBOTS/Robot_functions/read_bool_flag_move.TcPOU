@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="read_bool_flag_move" Id="{34bedff2-c3a5-4c7e-a2ce-6ad952c4da19}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION read_bool_flag_move : BOOL
+VAR_INPUT
+
+	state : BOOL;
+END_VAR
+VAR
+	ck0 : BOOL;
+	ck1 : BOOL;
+	ck2 : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Read bit register from Robot to PLC
+ck0 := Robot_UR5.UR_outputs.B3;
+ck1 := Robot_UR5.UR_outputs.B4;
+ck2 := Robot_UR5.UR_outputs.B5;
+
+IF (ck0=state AND ck1=state AND ck2=state) OR (ck0<>state AND ck1=state AND ck2=state) OR (ck0=state AND ck1<>state AND ck2=state) OR (ck0=state AND ck1=state AND ck2<>state) THEN
+read_bool_flag_move := TRUE;
+ELSE 
+read_bool_flag_move := FALSE;	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="read_bool_flag_move">
+      <LineId Id="41" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="25" Count="3" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

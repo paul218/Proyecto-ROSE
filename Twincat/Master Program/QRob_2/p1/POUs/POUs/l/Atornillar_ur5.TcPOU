@@ -1499,7 +1499,7 @@ END_VAR]]></Declaration>
     <Action Name="Alivio_torque_exit" Id="{64633a47-3658-49c4-83c7-e5bbedb36308}">
       <Implementation>
         <ST><![CDATA[
-Robot_A.UR_inputs.Bits.B10 := FALSE;
+Robot_UR5.UR_inputs.Bits.B10 := FALSE;
 //Qrob_control.ajustar_tornillo := FALSE;
 //Qrob_control.torque_relief := FALSE;
 Qrob_control.mover_abs := FALSE;
@@ -1536,7 +1536,7 @@ Qrob_control.mover_abs := FALSE;
     <Action Name="Enviar_dato_entry" Id="{d8023a6b-cbe1-40ee-ac5f-a207eb6d2fcf}">
       <Implementation>
         <ST><![CDATA[
-Robot_A.UR_inputs.Bits.B7 := TRUE;
+Robot_UR5.UR_inputs.Bits.B7 := TRUE;
 Global_servo.Atornillado_ok :=TRUE;]]></ST>
       </Implementation>
     </Action>
@@ -1565,14 +1565,14 @@ Qrob_control.mover_abs := FALSE;
     <Action Name="Init_exit" Id="{4eeb8cc2-9ddd-4456-b285-f1e02411c6aa}">
       <Implementation>
         <ST><![CDATA[
-Robot_A.UR_inputs.Bits.B7 := FALSE;
-Robot_A.UR_inputs.Bits.B8 := FALSE;
+Robot_UR5.UR_inputs.Bits.B7 := FALSE;
+Robot_UR5.UR_inputs.Bits.B8 := FALSE;
 Iniciar := False;]]></ST>
       </Implementation>
     </Action>
     <Action Name="wait_1_entry" Id="{6dd96752-8a7c-4775-8821-c58dcda5a48e}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B10 := TRUE;
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B10 := TRUE;
 Qrob_control.detener := TRUE;
 Qrob_control.detener := FALSE;
 Qrob_control.mover_abs := FALSE;
@@ -1581,7 +1581,7 @@ Qrob_control.mover_abs := FALSE;
     </Action>
     <Action Name="wait_1_exit" Id="{272cbecc-0615-48f3-a23f-ddd2624b83ba}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B10 := FALSE;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B10 := FALSE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="wait_2_entry" Id="{73326cc6-fcad-433a-b7aa-6984c2635ad3}">
@@ -1592,12 +1592,12 @@ Qrob_control.detener := TRUE;
 Qrob_control.detener := FALSE;
 Qrob_control.mover_abs := FALSE;
 
-Robot_A.UR_inputs.Bits.B7 := True;]]></ST>
+Robot_UR5.UR_inputs.Bits.B7 := True;]]></ST>
       </Implementation>
     </Action>
     <Action Name="wait_2_exit" Id="{4db9faa5-6b6d-46b1-9412-eeb31fd3663a}">
       <Implementation>
-        <ST><![CDATA[Robot_A.UR_inputs.Bits.B7 := FALSE;]]></ST>
+        <ST><![CDATA[Robot_UR5.UR_inputs.Bits.B7 := FALSE;]]></ST>
       </Implementation>
     </Action>
     <ObjectProperties>
