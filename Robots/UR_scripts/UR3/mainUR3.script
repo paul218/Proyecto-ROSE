@@ -89,6 +89,19 @@ def mainUR3():
     end
   end
 
+  ######################################################################
+  ## THREAD_1 MAKE SURE THE GRIPPER IS ALWAYS GRIPPING WHEN IT HAS TO ##
+  ######################################################################
+
+  thread AlwaysCloseGripper_thrd():
+    while(True):
+      if gripkit_easy_get_state()!=3: #3=gripping
+          gripkit_easy_grip()
+      end
+      sync()
+     end
+  end #use commands: "start_thrd = run AlwaysCloseGripper_thrd()"   and    "kill start_thrd"  IN order to init and stop the thread execution
+
   ##############################################
   ############### STATE_0 HOMING ###############
   ##############################################
@@ -297,9 +310,16 @@ def mainUR3():
   def UR3RotateDropCable():
     
     init_register(3,4,5,350)
+<<<<<<< HEAD
     movel([4.016632, -1.510193, -2.601069, -2.110944, -0.702844, 4.618216],accel_mss,speed_ms,0,blend_radius_m)
     movej([3.692001, -1.540558, -1.606126, -3.107601, -1.029469, 4.652141],accel_radss,speed_rads,0,blend_radius_m)
     movel([3.692179, -1.570168, -1.310572, -3.373567, -1.029072, 4.651610],accel_mss,speed_ms,0,blend_radius_m)  
+=======
+    movel([3.885666, -1.409790, -2.235272, -2.656978, -0.822123, 4.713486],accel_mss,speed_ms,0,blend_radius_m)
+    movej([3.726487, -1.486412, -1.655221, 0.000506, 0.960078, 1.557563],accel_radss,speed_rads,0,blend_radius_m)
+    #movel([3.725871, -1.589132, -1.063358, -0.488654, 0.961430, 1.558304],accel_mss,speed_ms,0,blend_radius_m)
+    movel(p[-472.430/1000,-0.050/1000 ,598.920/1000 ,-2.202 ,0.014 ,2.203],accel_mss,speed_ms,0,blend_radius_m)    
+>>>>>>> f22cb63e4ae80d34c03a3f99a4faca3843d8850d
     reset_register(3,4,5,351)
    
   end
@@ -311,11 +331,18 @@ def mainUR3():
   def UR3DropCable():
 
     init_register(3,4,5,360)
+<<<<<<< HEAD
     #movel([4.006400, -1.510303, -2.593562, -2.126343, -0.722900, 1.482144],accel_mss,speed_ms,0,blend_radius_m)
 	movel(p[-369.73/1000, -4.05/1000, 141.75/1000, 0.049, -1.546, -0.022], accel_mss, speed_ms, 0, blend_radius_m)
     movej(p[ -432.20/1000, -3.97/1000,  311.159/1000, 0.061, -1.565, -0.020],accel_radss,speed_rads,0,blend_radius_m)
     movel(p[ -432.20/1000, -3.97/1000,  372.71/1000, 0.061, -1.565, -0.020],accel_mss,speed_ms,0,blend_radius_m)
 	movel(p[ -432.20/1000, -0.23/1000,  420.7/1000, 0.061, -1.565, -0.020],accel_mss,speed_ms,0,blend_radius_m)#pos nave cables
+=======
+    movel([3.885552, -1.409786, -2.235269, -2.656987, -0.822353, 1.576655],accel_mss,speed_ms,0,blend_radius_m)
+    movej([3.754317, -1.506105, -1.849585, 0.214141, 0.945161, -1.583733],accel_radss,speed_rads,0,blend_radius_m)
+    #movel([3.690388, -1.599182, -1.031013, -0.511643, 1.022000, -1.570668],accel_mss,speed_ms,0,blend_radius_m)
+    movel(p[-472.430/1000,-0.050/1000 ,598.920/1000 ,0.024 ,-1.573 ,-0.024],accel_mss,speed_ms,0,blend_radius_m)
+>>>>>>> f22cb63e4ae80d34c03a3f99a4faca3843d8850d
     reset_register(3,4,5,361)
     
   end
@@ -339,7 +366,27 @@ def mainUR3():
 
   end
 
+<<<<<<< HEAD
 
+=======
+  #########################################################################################################################
+  ########## STATE_8 FROM THE INSTALLATION AREA IT RETURNS TO HOME WHEN GRIPPER HAS BEEN ROTATED. END OF CICLE  ###########
+  #########################################################################################################################
+
+  def UR3ReturnRotated():
+
+    init_register(3,4,5,380)
+    gripkit_easy_release()
+    movel([4.086059, -1.282155, -1.215030, -0.643324, 0.601059, 1.557347],accel_mss,speed_ms,0,blend_radius_m)
+    movel([4.086059, -1.092619, -2.058744, 0.010854, 0.601059, 1.557347],accel_mss,speed_ms,0,blend_radius_m)
+    movej([4.085990, -1.092576, -2.058790, -0.826937, 1.299223, 1.557357],accel_radss,speed_rads,0,blend_radius_m)
+    movej([4.085990, -1.092576, -2.058790, -0.826937, -1.570796, 0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.054325, -2.211856, 1.125563, -1.308996, -1.570795, -0.000001],accel_radss,speed_rads,0,blend_radius_m)
+    movej([3.054326, -2.000864, 1.487369, -1.057302, -1.570796, -0.000000],accel_radss,speed_rads,0,blend_radius_m)
+    reset_register(3,4,5,381)
+
+  end
+>>>>>>> f22cb63e4ae80d34c03a3f99a4faca3843d8850d
   
   
   ###########################################################################################################################
@@ -373,6 +420,15 @@ def mainUR3():
   while(True):
     init_status(0,1,2)
 
+   #THREAD CONTROL
+   #if(CheckStatus(33)==True or CheckStatus(34)==True or CheckStatus(35)==True or CheckStatus(36)==True or CheckStatus(37)==True):
+   #   start_thrd = run AlwaysCloseGripper_thrd()
+   #else:
+   #   kill start_thrd
+   #end
+   #END THREAD CONTROL
+
+
    if (CheckStatus(30)==True):
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3Home()
@@ -395,8 +451,13 @@ def mainUR3():
      set_payload(1.54, [4/1000,0,70/1000]) #adjust payload to new weight
      set_Speed(0.05, 0.75, 3, 1.2)
      UR3DropCable()
+<<<<<<< HEAD
    elif (CheckStatus(37)==True):
      set_payload(0.87, [-6/1000,-3/1000,48/1000]) #adjust payload to empty weight
+=======
+   elif (CheckStatus(37)==True or CheckStatus(38)==True):
+     set_payload(0.87, [-6/1000,-3/1000,48/1000])
+>>>>>>> f22cb63e4ae80d34c03a3f99a4faca3843d8850d
      set_Speed(0.05, 2, 3, 2.4)
      UR3Return()
      separator_count=separator_count+1
