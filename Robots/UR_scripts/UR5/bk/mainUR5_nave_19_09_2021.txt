@@ -10,10 +10,10 @@ gripkit_easy_enable()
 global Camera_ck_position_Sepa = p[376/1000,-130/1000 ,167.40/1000,2.215, 2.228, 0 ]
 global Camera1 = p[376/1000, -130.92/1000, 142/1000, 2.212, 2.236, -0.020]
 global DropHead = p[268.75/1000, -365.08/1000, 115.06/1000, 2.206, 2.237, 0]
-global buffer_position = p[271.48/1000, -366.43/1000, 85.38/1000, 2.196, 2.255, -0.0004]
+global buffer_position = p[271.48/1000, -369.02/1000, 85.38/1000, 2.196, 2.255, -0.0004]
 global Camera2 = p[362.75/1000, -14.75/1000, 137.24/1000, 2.232, -2.211, 0]
 global Camera1Up = p[321.86/1000, -17.30/1000, 530.53/1000, 2.232, -2.211, 0]
-global Camera2Up = p[340.06/1000, -134.8/1000, 530.53/1000, 2.181, 2.285, 0]
+global Camera2Up = p[338.54/1000, -130.92/1000, 538.8/1000, 2.228, 2.235, -0.023]
 
 
 
@@ -24,12 +24,12 @@ global blend_radius_m = 0.001
 #Global parameters  between cam and tcp tool v2_
 global dx_nut_left = 0.35
 global dy_nut_left = 107.99
-global dz_nut_left = 64.64 #61.17
+global dz_nut_left = 61.17
 
 
 global dx_nut_rigth = 0.35
 global dy_nut_rigth = 107.99
-global dz_nut_rigth = 64.64
+global dz_nut_rigth = 61.17
 
 
 global dx_hole = 0.35
@@ -55,23 +55,6 @@ def mainUR5():
   ##################################################### STATES & FUNCTIONS #####################################################
   ##############################################################################################################################
   ##############################################################################################################################
-
-  #######################################################
-  ############### FOO_0 TIMER ###############
-  #######################################################
-
-	global timer_val = 0
-	global timer_is_counting = False
-	thread Timer_Thread():
-		while (True):
-		  if (timer_is_counting):
-			timer_val = timer_val + get_steptime()
-		  end
-		  sync()
-		end
-  end
-
-
 
   #######################################################
   ############### FOO_1 SET DESIRED SPEED ###############
@@ -328,7 +311,6 @@ def mainUR5():
 	 end
 	sync() 
 	end 
-	
 	end_force_mode()
 	
 	   
@@ -362,11 +344,10 @@ def mainUR5():
 	
 	#set tcp after ctr_nut
 	set_tcp(global_tcp)
-	sleep(0.5)
 	movej(p[367.4/1000, -13.48/1000, 146.97/1000, 2.179, -2.263, -0.030], accel_radss,speed_rads,0,blend_radius_m) 
   	movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
     movej(p[297.65/1000, -17.08/1000, 528.73/1000, 2.244, -2.199, -0.030],accel_radss,speed_rads,0,blend_radius_m)#altura 523.43
-	movel(Camera1Up, accel_mss/2, speed_ms/2)
+	movel(Camera1Up, accel_mss, speed_ms, 0, blend_radius_m)
 	
   	reset_register(3,4,5,541)
 
@@ -379,72 +360,75 @@ def mainUR5():
 
 	def UR5TakeBuffer():
 	
-		init_register(3,4,5,550)
-		
-		#reset the flags
+	init_register(3,4,5,550)
+	
+	#movej(p[284.5/1000, -14.136/1000, 574.324/1000, -2.245, 2.166, 0.097],accel_radss,speed_rads,0,blend_radius_m)
+	movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
+    movej([0.114668, -0.430573, -2.101027, -2.007478, 1.547060, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
+    movej([0.068591, -0.020420, -2.584134, -1.623156, 1.570796, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
+    movej([-0.076969, -0.860622, -2.748894, -1.065873, 1.573414, 0.929562],accel_radss,speed_rads,0,blend_radius_m)
+  	movej([-0.079655, -1.322085, -2.567424, -0.844223, 1.573142, 3.068075],accel_radss,speed_rads,0,blend_radius_m)
+	movel(p[267.04/1000, -366.65/1000, 134/1000, 2.237, 2.232, -0.035], accel_mss, speed_ms)
+ 
+	#check if  tool insert correctly
+	#vars to ck continuously
+	global collision_flag = 0	
+	zero_ftsensor()	
+	#sleep(0.1)
+
+	#move fine position
+	movel(buffer_position,  accel_mss/4, speed_ms/4)
+	
+	#down with force to ensure proper insertion 
+	#Apply force in z axis to down robot
+	limits = [2/1000, 2/1000, 10/1000, 0.34, 0.34, 0.34] #limits or move velocity
+	frame = tool_pose() #tool or base frame
+	selection = [1, 1, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
+	wrench = [0, 0, 5, 0, 0, 0] # force to apply
+	type = 2 #kind or force mode
+	zero_ftsensor()				
+	force_mode(frame, selection , wrench, type, limits)
+	
+    #waits until the key enters into the nut
+	while (True):
+	 actual_pos = get_actual_tcp_pose ()
+	 z_pos = actual_pos[2]
+	 if z_pos <= 75/1000:
+	  break	
+	 end
+	sync() 
+	end 
+	end_force_mode()
+	
+	
+	
+	#set forces to compare 
+	global force_UR5 = 10 
+	global force_UR3 = -10 
+	global id_get_Force = run get_Force()
+	
+	sleep(2)
+	
+	# get the flag value
+	if collision_flag == 1:
+		write_state_bool(0,1,2)
+		sleep(0.5)
+	elif collision_flag == 0:
 		reset_state_bool(0,1,2)
-		
-		#movej(p[284.5/1000, -14.136/1000, 574.324/1000, -2.245, 2.166, 0.097],accel_radss,speed_rads,0,blend_radius_m)
-		movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
-		movej([0.114668, -0.430573, -2.101027, -2.007478, 1.547060, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
-		movej([0.068591, -0.020420, -2.584134, -1.623156, 1.570796, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
-		movej([-0.076969, -0.860622, -2.748894, -1.065873, 1.573414, 0.929562],accel_radss,speed_rads,0,blend_radius_m)
-		movej([-0.079655, -1.322085, -2.567424, -0.844223, 1.573142, 3.068075],accel_radss,speed_rads,0,blend_radius_m)
-		movel(p[267.04/1000, -366.65/1000, 134/1000, 2.237, 2.232, -0.035], accel_mss, speed_ms)
-	 
-		#check if  tool insert correctly
-		#vars to ck continuously
-		global collision_flag = 0	
-		zero_ftsensor()	
-		#sleep(0.1)
+		sleep(0.5)
+		#Continue normaly is all is correct 
+		# close the tool and check if the head is pressed
+		gripkit_easy_grip()
+		CheckGripState(3) #wait to the tool has gripped the separator correctly
+	
+	end	
+	
 
-		#move fine position
-		movel(buffer_position,  accel_mss/4, speed_ms/4)
-		
-		#down with force to ensure proper insertion 
-		#Apply force in z axis to down robot
-		limits = [2/1000, 2/1000, 20/1000, 0.34, 0.34, 0.34] #limits or move velocity
-		frame = p[0,0,0,0,0,0] # base frame
-		selection = [1, 1, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
-		wrench = [0, 0, -10, 0, 0, 0] # force to apply
-		type = 2 #kind or force mode
-		zero_ftsensor()				
-		force_mode(frame, selection , wrench, type, limits)
-		
-		#start timer to check the execution
-		timer_val = 0
-		timer_is_counting = True
-		id_Timer_Thread = run Timer_Thread()
-		
-		#waits until the key enters into the nut
-		while (True):
-			 actual_pos = get_actual_tcp_pose ()
-			 z_pos = actual_pos[2]
-			 if z_pos <= 75/1000:	 
-				reset_state_bool(0,1,2)
-				sleep(0.5)
-				#Continue normaly is all is correct 
-				# close the tool and check if the head is pressed
-				gripkit_easy_grip()
-				CheckGripState(3) #wait to the tool has gripped the separator correctly
-				break
-			end
-			
-			if  timer_val > 10:
-				write_state_bool(0,1,2)
-				break
-			 end
-			sync() 
-		end 
-
-		end_force_mode()
-		#reset timer
-		kill id_Timer_Thread    
-		timer_is_counting = False
-		
-		#reset state variables
-		reset_register(3,4,5,551)
-
+    kill id_get_Force    
+	
+  	reset_register(3,4,5,551)
+	sleep(0.5)
+	reset_state_bool(0,1,2)
 	end
   
   ###########################################################################################
@@ -460,10 +444,9 @@ def mainUR5():
     movej([0.068591, -0.020420, -2.584134, -1.623156, 1.570796, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
     movej([0.114668, -0.430573, -2.101027, -2.007478, 1.547060, 0.523599],accel_radss,speed_rads,0,blend_radius_m)
     movej([0.020342, -0.907042, -1.576383, -2.245466, 1.571112, 1.591136],accel_radss,speed_rads,0,blend_radius_m)
-	#fine tune point
-    movel(Camera2Up, accel_mss/2, speed_ms/2)
+    movep(Camera2Up, accel_mss, speed_ms)
 	
-  	reset_register(3,4,5,561) 
+  	reset_register(3,4,5,561)
 
 	end
 
@@ -513,8 +496,7 @@ def mainUR5():
 	  if n_cam == 1:
 	  
 	  	#return to last pose UR5Camera1 after checv separator position
-		movel(Camera1, 0.5/2, 0.05/2, 0, blend_radius_m)
-		sleep(0.5)
+		movel(Camera1, accel_mss, speed_ms, 0, blend_radius_m)
 		aux_I = 700
 		aux_F = 701
 		
@@ -740,8 +722,7 @@ def mainUR5():
 				if (Ur3_z_force > force_detect_UR3_z):
 					 collision_flag = 1
 					break
-				else:	
-					collision_flag = 0
+					
 				end
 				
 			end	 
@@ -799,14 +780,18 @@ def mainUR5():
 				sync()
 			end			
 			Ur3_normal_force = 0
-			Ur3_normal_force = norm(float_value)
+			Ur3_normal_force = float_value
 			
 			#read force from Ur5
-			#UR5_norm_force = force()
+			UR5_norm_force = force()
 			
-			force_detect_UR3_normal = 8
+			force_detect_UR3_normal = 2
+			force_detect_UR5_tool =   30
+
 			if Ur3_normal_force < force_detect_UR3_normal:
+				#if UR5_norm_force < force_detect_UR5_tool:
 				break
+				#end
 			end 
 			sync()
 		end
@@ -1069,13 +1054,19 @@ def mainUR5():
 				end	
 				
 				Ur3_z_force = 0
-				Ur3_z_force = norm(float_value)
+				Ur3_z_force = float_value
 				
-		
-				force_detect_UR3_tool_z = 18
+				#read force from Ur5
+				UR5_force = get_tcp_force()
+				UR5_norm_z = UR5_force[2]
+				
+				force_detect_UR3_tool_z = -20
+				force_detect_UR5_tool_z =  -10
 
-				if Ur3_z_force > force_detect_UR3_tool_z:
+				if Ur3_z_force < force_detect_UR3_tool_z:
+					if UR5_norm_z <  force_detect_UR5_tool_z:
 						break
+					end
 				end 
 				sync()
 			end
@@ -1100,40 +1091,6 @@ def mainUR5():
 		reset_register(3,4,5,5101)
 	end
 	
-	
- #######################################################
-  ############ STATE_10.1 UNSCREW AFTER TAKE BUFFER AND UP TOOL #############
-  #######################################################
-  
-	def UnScrew_Take_buffer():
-		init_register(3,4,5,5100)
-
-		
-		#Apply force in z axis to up robot 
-		limits = [0.1, 0.1, 1/1000, 0.34, 0.34, 0.34] #limits or move velocity
-		frame = tool_pose() #tool or base frame
-		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
-		wrench = [0, 0, 5, 0, 0, 0] # force to apply
-		type = 2 #kind or force mode
-		
-		zero_ftsensor() # clear force sensor
-		#init force mode
-		force_mode(frame, selection , wrench, type, limits)
-		
-		# wait to servomotor finish to unscrew
-		Qrob_finish  = False		
-		while (not( Qrob_finish )):
-		  Qrob_finish  = read_state_bool(0,1,2, True)	
-		  sync()
-		end
-		
-		# kill force mode
-		end_force_mode()	
-
-	
-		reset_register(3,4,5,5101)
-	end
-	
 	#######################################################
 	############ STATE_11 MOVE TO NUT AND DOWN ############
 	#######################################################  
@@ -1142,35 +1099,17 @@ def mainUR5():
 		init_register(3,4,5,5110)
 
 		#Apply force in z axis to down robot
-		limits = [0.1, 0.1, 3/1000, 0.34, 0.34, 0.34] #limits or move velocity
+		limits = [0.1, 0.1, 0.15, 0.34, 0.34, 0.34] #limits or move velocity
 		frame = p[0,0,0,0,0,0] #tool or base frame
 		selection = [0, 0, 1, 0, 0, 0] #[x,y,z,x,ry,rz]
-		wrench = [0, 0, -15, 0, 0, 0] # force to apply
+		wrench = [0, 0, -5, 0, 0, 0] # force to apply
 		type = 2 #kind or force mode
 		zero_ftsensor()
 		
 		force_mode(frame, selection , wrench, type, limits)
 		
-		
-		#wait to torque be the midle to open the tool 
-		Torque_middle  = read_state_bool(0,1,2, True)
+		Qrob_finish  = read_state_bool(0,1,2, True)
 		# wait to servomotor finish to unscrew
-		while (not( Torque_middle )):
-		  Torque_middle  = read_state_bool(0,1,2, True)	
-		  sync()
-		end
-		
-	    #Open the tool
-		gripkit_easy_release()
-		CheckGripState(1) #check if the tool is open
-		
-		#flag to indicate tool is open
-		write_state_bool(0,1,2)
-		sleep(1)
-		reset_state_bool(0,1,2)
-		
-		# wait to servomotor finish to unscrew
-		Qrob_finish  = read_state_bool(0,1,2, True)		
 		while (not( Qrob_finish )):
 		  Qrob_finish  = read_state_bool(0,1,2, True)	
 		  sync()
@@ -1191,13 +1130,13 @@ def mainUR5():
 	def ScrewHigh():
 		init_register(3,4,5,5130)
 		reset_state_bool(0,1,2)
-		sleep(0.5)
+		sleep(0.1)
 
 		#Apply force in z axis to down robot
-		limits = [0.5, 0.5, 20/1000, 3.14, 3.14, 3.14] #limits or move velocity
+		limits = [0.5, 0.5, 0.15, 3.14, 3.14, 3.14] #limits or move velocity
 		frame = tool_pose() #tool 
 		selection = [0, 1, 1, 0, 0, 1] #[x,y,z,x,ry,rz]
-		wrench = [0, 0, 25, 0, 0, 0] # force to apply
+		wrench = [0, 0, 15, 0, 0, 0] # force to apply
 		type = 2 #kind or force mode
 		sleep(0.02)
 		zero_ftsensor()
@@ -1390,12 +1329,8 @@ def mainUR5():
 ####################
    
    elif (CheckStatus(66)==True):
-		set_Speed(0.1, 0.75, 3, 1.2)
-		UnScrew()
-	
-	elif (CheckStatus(77)==True):
-		set_Speed(0.1, 0.75, 3, 1.2)
-		UnScrew_Take_buffer()
+    set_Speed(0.1, 0.75, 3, 1.2)
+    UnScrew()
 	
    elif (CheckStatus(67)==True):
     set_Speed(0.1, 0.75, 3, 1.2)

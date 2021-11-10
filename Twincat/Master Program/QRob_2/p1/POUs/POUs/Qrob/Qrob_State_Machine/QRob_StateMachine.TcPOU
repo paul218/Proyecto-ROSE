@@ -6248,7 +6248,7 @@ END_IF
 
 IF Qrob_torque = Torque THEN 
 	F_tor := TRUE;
-		IF Qrob_velocity <=0  THEN 
+		IF ABS(Qrob_velocity) <=60  THEN 
 			F_vel := TRUE;
 	END_IF
 END_IF
@@ -6604,13 +6604,7 @@ Reset_State := FALSE;
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_active">
-      <LineId Id="36" Count="1" />
-      <LineId Id="2" Count="14" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="18" Count="1" />
-      <LineId Id="21" Count="11" />
+      <LineId Id="2" Count="33" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_entry">
@@ -6618,15 +6612,11 @@ Reset_State := FALSE;
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.MoveABS_exit">
-      <LineId Id="17" Count="1" />
-      <LineId Id="2" Count="12" />
-      <LineId Id="19" Count="3" />
-      <LineId Id="16" Count="0" />
+      <LineId Id="2" Count="19" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.ResetQ_active">
-      <LineId Id="2" Count="19" />
-      <LineId Id="26" Count="3" />
+      <LineId Id="2" Count="23" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="QRob_StateMachine.Sleep_exit">

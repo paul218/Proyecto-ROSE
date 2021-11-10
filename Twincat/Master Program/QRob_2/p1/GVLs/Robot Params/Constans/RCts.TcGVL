@@ -123,14 +123,22 @@ VAR_GLOBAL CONSTANT
 	UR5MoveToNut3:INT:=63;
 	UR5MoveToNut4:INT:=65;
 	
-	UR5Correct_Insertion :INT:=73;
-	UR5Correct_Insertion_I :INT:=730;
-	UR5Correct_Insertion_F :INT:=731;
+	UR5Correct_Insertion :INT:=730;
+	UR5Correct_Insertion_I :INT:=7300;
+	UR5Correct_Insertion_F :INT:=7301;
+	
+	UR5Correct_Insertion_head : INT := 73;
+	UR5Correct_Insertion_buffer : INT := 74;
+	UR5Correct_Insertion_hole : INT := 76;
+	
 
 	
-	UR5UnScrew:INT:=66;
+	UR5UnScrew:INT:=660;
 	UR5UnScrew_I:INT:=5100;
 	UR5UnScrew_F:INT:=5101;
+	
+	UR5UnScrew_head : INT := 66;
+	UR5UnScrew_TakeBuffer : INT := 77;
 	
 	
 	UR5ScrewHigh:INT:=72;
@@ -141,9 +149,12 @@ VAR_GLOBAL CONSTANT
 	UR5Screw_I:INT:=5110;
 	UR5Screw_F:INT:=5111;
 	
-	UR5UpRobotAs:INT:=68;
+	UR5UpRobotAs:INT:=680;
 	UR5UpRobotAs_I:INT:=5120;
 	UR5UpRobotAs_F:INT:=5121;
+	
+	UR5UpRobotAs_screw : INT := 68;
+	UR5UpRobotAs_buffer : INT := 75;
 	
 
 END_VAR]]></Declaration>

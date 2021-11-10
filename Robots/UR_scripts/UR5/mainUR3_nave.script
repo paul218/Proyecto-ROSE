@@ -1,3 +1,10 @@
+
+gripkit_easy_enable()
+
+global DropHead = p[-370.84/1000, -4.03/1000, -21.75/1000, 0.031, -1.540, -0.052]
+global DropCable = p[-398.98/1000, 1.56/1000,  372.71/1000, 0.061, -1.563, -0.022]
+
+
 def mainUR3():
 
   #Global Parameters
@@ -197,7 +204,7 @@ def mainUR3():
     init_register(3,4,5,310)
     vertical_dist = 0.048
       
-    p1=p[ 301.7/1000, 2.47/1000,  148.52/1000, -3.111, -0.106, 0.047]
+    p1=p[ 302.36/1000,2.22/1000,  150.99/1000, 3.167, 0.108, -0.044]
     p2=p[ 399.03/1000, 2.47/1000,  152.95/1000, 3.168, 0.108, -0.048]
     p3=p[ 501.23/1000, -1.5/1000,  154.85/1000, 3.160, 0.047, -0.023]
       
@@ -257,6 +264,7 @@ def mainUR3():
     movej([3.555252, -1.496725, -1.310180, -3.440421, -1.734984, -0.036673],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.715545, -1.455491, -1.766061, -3.218178, -1.351089, 1.570397],accel_radss,speed_rads,0,blend_radius_m)
     movej([3.645993, -1.483530, -2.394068, -2.356194, -1.073377, 1.556485],accel_radss,speed_rads,0,blend_radius_m)
+	movej([4.006400, -1.510303, -2.593562, -2.126343, -0.722900, 1.482144],accel_radss,speed_rads,0,blend_radius_m)
     reset_register(3,4,5,321)
         
   end
@@ -267,10 +275,8 @@ def mainUR3():
 
   def UR3DropBench():
     
-    init_register(3,4,5,330)
-    movej([4.006400, -1.510303, -2.593562, -2.126343, -0.722900, 1.482144],accel_radss,speed_rads,0,blend_radius_m)
-	movel(p[-369.73/1000, -4.05/1000, -22.5/1000, 0.049, -1.546, -0.022], accel_mss, speed_ms, 0, blend_radius_m)
-    #movel([4.006400, -2.819209, -2.513026, -0.897973, -0.722900, 1.482144],accel_mss,speed_ms,0,blend_radius_m)
+    init_register(3,4,5,330) 
+	movel(DropHead, accel_mss,speed_ms,0,blend_radius_m)
     reset_register(3,4,5,331)
 
   end
@@ -323,12 +329,14 @@ def mainUR3():
 
   def UR3DropCable():
 
+	#Up the robot until cable
     init_register(3,4,5,360)
-    #movel([4.006400, -1.510303, -2.593562, -2.126343, -0.722900, 1.482144],accel_mss,speed_ms,0,blend_radius_m)
+	
+
 	movel(p[-369.73/1000, -4.05/1000, 141.75/1000, 0.049, -1.546, -0.022], accel_mss, speed_ms, 0, blend_radius_m)
     movej(p[ -398.98/1000, -3.97/1000,  311.159/1000, 0.061, -1.529, -0.021],accel_radss,speed_rads,0,blend_radius_m)
-    movel(p[ -398.98/1000, -3.97/1000,  372.71/1000, 0.061, -1.529, -0.021],accel_mss,speed_ms,0,blend_radius_m)
-	#movel(p[ -398.98/1000, -0.28/1000,  414.16/1000, 0.061, -1.529, -0.021],accel_mss,speed_ms,0,blend_radius_m)#pos nave cables
+    movel(DropCable,accel_mss,speed_ms,0,blend_radius_m)
+	
     reset_register(3,4,5,361)
     
   end
@@ -351,10 +359,9 @@ def mainUR3():
     end
 	
 	tcp_inst=get_actual_tcp_pose()
-              up_distance = p[0,0,0,0,-0.344,0]
+    up_distance = p[0,0,0,0,-0.344,0]
 	pos_up = pose_add (tcp_inst, up_distance)
-	#movel(pos_up, accel_mss, speed_ms)
-              movej(pos_up, accel_radss,speed_rads)
+    movej(pos_up, accel_radss,speed_rads)
 
 
     p_z = p[0,0,-70/1000, 0,0,0]
@@ -362,11 +369,13 @@ def mainUR3():
     movel(pos_aux, accel_mss, speed_ms)
 
 
-    movej(p[-1.85/1000, 244.35/1000, 751.6/1000, 0.97, -2.924, -3.376],accel_radss,speed_rads,0,blend_radius_m)
-    movej(p[299.37/1000, 119.56/1000, 522.92/1000, 2.435, -2.536, 1.693],accel_radss,speed_rads,0,blend_radius_m)
-    movej(p[266.635/1000, 108.223/1000, 219.158/1000, -2.113, 2.306, -0.025],accel_radss,speed_rads,0,blend_radius_m)
-    UR3Home()
-    reset_register(3,4,5,371)
+    #movej(p[ -0.688413/1000,243.518458/1000,751.593430/1000, -1.054253,  0.247352, -0.567846 ],accel_radss,speed_rads,0,blend_radius_m)
+    #movej(p[201.132649/1000,124.025531/1000,436.890573/1000, -2.202225,  0.938052, -1.386711 ],accel_radss,speed_rads,0,blend_radius_m)
+	#movej(p[123.386261/1000,131.762820/1000,153.793552/1000, -2.943072, -0.008451, -0.938665 ],accel_radss,speed_rads,0,blend_radius_m)
+	movej([3.994186, -1.743758, 0.642979, -2.551497, -1.419476, 0.000000],accel_radss,speed_rads,0,blend_radius_m)
+	movej([3.147352, -2.401399, 1.733112, -2.011317, -1.612335, -0.785398],accel_radss,speed_rads,0,blend_radius_m)
+	movej([3.147352, -3.119602, 2.589370, -1.658063, -1.570796, -1.570796],accel_radss,speed_rads,0,blend_radius_m)
+	reset_register(3,4,5,371)
 
   end
 

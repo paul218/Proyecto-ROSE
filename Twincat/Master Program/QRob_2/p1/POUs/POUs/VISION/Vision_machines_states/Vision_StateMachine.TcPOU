@@ -1949,7 +1949,7 @@ END_VAR
                         <o>
                           <v n="AttributeId">{38391c6d-6d4a-42f8-8ee7-9f45e5adafa8}</v>
                           <o n="Value" t="StringValue">
-                            <v n="Value">"true"</v>
+                            <v n="Value">"Wrt_FState.t &gt;T#100ms"</v>
                             <v n="DefaultValue">""</v>
                           </o>
                           <v n="Id">4226L</v>
@@ -2772,11 +2772,7 @@ I_STATE :=-1;]]></ST>
       </XmlArchive>
     </ObjectProperties>
     <LineIds Name="Vision_StateMachine.CkHeadRot_active">
-      <LineId Id="2" Count="8" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="11" Count="5" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="17" Count="8" />
+      <LineId Id="2" Count="25" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_entry">
@@ -2788,10 +2784,7 @@ I_STATE :=-1;]]></ST>
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_L_active">
-      <LineId Id="22" Count="1" />
-      <LineId Id="2" Count="11" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="14" Count="7" />
+      <LineId Id="2" Count="22" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHeadRot_L_entry">
@@ -2803,14 +2796,7 @@ I_STATE :=-1;]]></ST>
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHole_active">
-      <LineId Id="28" Count="1" />
-      <LineId Id="2" Count="7" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="10" Count="9" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="20" Count="7" />
+      <LineId Id="2" Count="31" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkHole_entry">
@@ -2822,9 +2808,7 @@ I_STATE :=-1;]]></ST>
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkNut_active">
-      <LineId Id="2" Count="14" />
-      <LineId Id="33" Count="4" />
-      <LineId Id="17" Count="15" />
+      <LineId Id="2" Count="35" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkNut_entry">
@@ -2832,29 +2816,20 @@ I_STATE :=-1;]]></ST>
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkNut_exit">
-      <LineId Id="2" Count="5" />
+      <LineId Id="2" Count="10" />
       <LineId Id="1" Count="0" />
-      <LineId Id="9" Count="3" />
-      <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkPosSep_active">
-      <LineId Id="24" Count="0" />
-      <LineId Id="2" Count="13" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="16" Count="7" />
+      <LineId Id="2" Count="25" />
       <LineId Id="1" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="28" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkPosSep_entry">
       <LineId Id="2" Count="8" />
       <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.CkPosSep_exit">
-      <LineId Id="23" Count="10" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="35" Count="1" />
-      <LineId Id="34" Count="0" />
+      <LineId Id="2" Count="13" />
+      <LineId Id="1" Count="0" />
     </LineIds>
     <LineIds Name="Vision_StateMachine.Wrt_FState_entry">
       <LineId Id="2" Count="0" />
